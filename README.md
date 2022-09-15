@@ -13,3 +13,5 @@ Could be written on a pad paper/graphing paper or saved in a file named as Secti
 Project Proposal should also be included in your Github project repository's README.MD.  
 
 Upload your pdf file here or a link to your Github account repository which contains the project proposal in the readme.md.
+
+A Beginners Guide to solving a Rubik's Cube 
