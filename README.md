@@ -22,4 +22,4 @@ I. Navigation Tab for other 4 webpages
 II. Title + summary of the website
 III. A brief history in the world of Cubing 
 IV. Short descriptions + links to services of website 
-V. 
+V. Footer (contact us, trademarks, copyright, references, disclaimers, etc.)
