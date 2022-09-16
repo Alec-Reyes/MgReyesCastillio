@@ -19,6 +19,7 @@ V. Footer (contact us, trademarks, copyright, references, disclaimers, etc.)
 ![Homepage Wireframe](https://user-images.githubusercontent.com/112668440/190531687-b13787b6-6ae7-4206-9ab9-8bc3d4572a36.png)
 
 ### Timer:
+![Timer Wireframe](https://user-images.githubusercontent.com/112668532/190639820-e5bce732-c56f-44b9-9b46-5b64800ed879.png)
 
 ### Notation:
 ![Notation Wireframe](https://user-images.githubusercontent.com/112668532/190628681-10efec11-77fc-4d00-8507-da2252520357.png)
