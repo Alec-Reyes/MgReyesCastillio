@@ -18,6 +18,6 @@ V. Footer (contact us, trademarks, copyright, references, disclaimers, etc.)
 ### Homepage:
 ![lp1r2T---Wireframe-cc-Premium-1](https://user-images.githubusercontent.com/112668440/190531687-b13787b6-6ae7-4206-9ab9-8bc3d4572a36.png)
 
-###Timer:
+### Timer:
 
-###Beginner method:
+### Beginner method:
