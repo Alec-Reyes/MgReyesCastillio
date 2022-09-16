@@ -17,10 +17,13 @@ V. Footer (contact us, trademarks, copyright, references, disclaimers, etc.)
 ## Wireframe:
 
 ### Homepage:
-![Homepage Wireframe](https://user-images.githubusercontent.com/112668440/190531687-b13787b6-6ae7-4206-9ab9-8bc3d4572a36.png)
+![Homepage Wireframe](https://user-images.githubusercontent.com/112668532/190655058-e765e2a2-2647-4a04-9ffb-0412be02a0dd.png)
 
 ### Timer:
-![Timer Wireframe](https://user-images.githubusercontent.com/112668532/190639820-e5bce732-c56f-44b9-9b46-5b64800ed879.png)
+![Timer Wireframe](https://user-images.githubusercontent.com/112668532/190655196-d8dba826-3312-43f6-9f7a-bd3438708488.png)
 
 ### Notation:
-![Notation Wireframe](https://user-images.githubusercontent.com/112668532/190628681-10efec11-77fc-4d00-8507-da2252520357.png)
+![Notation Wireframe](https://user-images.githubusercontent.com/112668532/190655315-5ce29158-13e3-46e3-8cf4-44eed26e91d3.png)
+
+### Navigation Bar:
+![Navigation Bar Wireframe](https://user-images.githubusercontent.com/112668532/190655854-8db5148c-1cd4-4978-82be-4631e5bb13e7.png)
