@@ -1,5 +1,4 @@
-# Title:
-SimplyCube
+# SimplyCube
 
 
 ## Description:
