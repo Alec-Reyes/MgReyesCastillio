@@ -20,7 +20,7 @@ Timer: A timer to check how fast you can solve a Rubik's cube.
 Virtual cube: A usable 3d Rubik's cube rendered in 2d for your visualization and theory-testing. (Not promised)  
 CFOP: A more advanced but faster step-by-step process on the CFOP method.  
 OLL: A list of algorithms for the OLL step of the CFOP method.  
-Pll: A list of algorithms for the PLL step of the CFOP method.  
+PLL: A list of algorithms for the PLL step of the CFOP method.  
 
 ## Wireframe:
 
