@@ -1,20 +1,123 @@
+
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>SimplyCube</title>
-		<meta charset="UTF-8">
-		<meta name="author" content="Lukas Castillo, Alec Reyes">
-		<meta name="keywords" content="Rubik's Cube, Cubing, Speedcubing">
-		<meta name="revised" content="22-09-2022">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Reyes-Castillo">
+  <meta name="keywords" content="html">
+  <meta name="revised" content="22-09-2022">
+  <style>
+    /*src: https://www.deviantart.com/villhelm-e/art/Rubik-s-Cube-Wallpaper204522122*/
+    div.background {
+      padding: 100px;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-image: url("");
+      background-color: rgb(20, 20, 20);
+      text-align: center;
+    }
+    
+    h1.title
+    {
+      font-size: 50px;
+      color: white;
+    }
+  
+    .history-row{
+      margin: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
 
-		<link rel="icon" href="images/icon.ico" type="image/gif">
+    .history-content{
+      border: 6px solid black;
+      border-radius: 10px;
+      padding: 10px 10px;
+      margin: 5px;
+      background-color: white;
+    }
 
-	</head>
+    #footer{
+      padding: 10px;
+      color: white;
+      background-color: rgb(40, 40, 40);
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-content{
+      margin: auto;
+    }
+
+    #body{
+      margin: 8px;
+    }
+
+    body{
+      margin: 0px;
+      background-color: rgb(230, 235, 240);
+    }
+}
+  </style>
+<!--
+1
+2
+3
+4
+5
+6
+7
+8
+9-->
+</head>
 <body>
-  <h1>SimplyCube</h1>
-
-  <div>
-    <p>Description</p>
+  <div class="background">
+    <h1 class="title" style="color:white;">SimplyCube</h1>
+    <h3>your gateway to the cubing world</h3>
+    <br><br>
+    <h2 style="color: white;">
+Welcome to SimplyCube, a beginners guide to solving a Rubik's Cube. This website features the basics of cubing, followed by an easy-to follow tutorial. Once you're ready to take the next level, you can learn about the CFOP method, a more advanced but faster method of solving a Rubik's cube. Not much of a reader? Try our interactive cubing visual software!
+    </h2>
+  </div>
+  
+  <div id="body">
+    <div class="history-row">
+      <div class="history-content">
+        <img src="mockingbird.jpeg"> 
+      </div> 
+    
+      <div class="history-content" style="width: 500px;">
+        <p style="margin: auto;">
+        They next crossed another wood where the leaves were sprinkled with gold, and after that another still, where the leaves glittered with diamonds. At last the Star Gazer perceived a large lake, and on the shores of the lake twelve little boats with awnings, in which were seated twelve princes, who,
+        </p>
+      </div>
+    </div>
+    
+    <div class="history-row">
+      <div class="history-content" style="width: 500px;">
+        <p style="margin: auto;">
+        They next crossed another wood where the leaves were sprinkled with gold, and after that another still, where the leaves glittered with diamonds. At last the Star Gazer perceived a large lake, and on the shores of the lake twelve little boats with awnings, in which were seated twelve princes, who,
+        </p>
+      </div>
+    
+      <div class="history-content">
+        <img src="mockingbird.jpeg"> 
+      </div>
+    </div>
+  </div>
+    
+  <div id="footer">
+    <div class="footer-content">
+      Contact Us: <br>
+      b2026slccastillo@pshs.edu.ph <br>
+      b2026andreyes@pshs.edu.ph
+    </div>
+    <div class="footer-content" style="text-align: center;">
+      Copyright 2022
+    </div>
+    <div class="footer-content" style="text-align: right;">
+      Disclaimer: Temporary text to <br> test formatting
+    </div>
   </div>
 </body>
 </html>
