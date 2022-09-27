@@ -11,7 +11,12 @@
 
 	</head>
 <body>
-  <!-- Sorry for lack of progress I mosty helped alec with the homepage-->
+  <!-- I do not see anything wrong with your code
+       the "sizes" correctly adjusts to the perspective
+       view of the object, but I may be wrong on this..
+       consult with your math teacher for the correct formula...
+  
+  -->
   <canvas width="600px" height="600px" id="c"></canvas>
   
   <form>
@@ -19,10 +24,13 @@
     <input type="text" id="text"><br>
   </form>
   <button id="button">Enter</button>
+  <button id="toggle">Disable controls</button>
   
   <script>
     var camera = {};
     var cube = {};
+
+    let toggled = true;
     
     //rotates point around origin
     //angle is in radian
@@ -121,6 +129,17 @@
          L: [[O, O, O], [O, O, O], [O, O, O]]
         };
 
+        return;
+
+        this.stickers = {
+         U: [["UA1", "UA2", "UA3"], ["UB1", "UB2", "UB3"], ["UC1", "UC2", "UC3"]],
+         D: [["DA1", "DA2", "DA3"], ["DB1", "DB2", "DB3"], ["DC1", "DC2", "DC3"]],
+         F: [["FA1", "FA2", "FA3"], ["FB1", "FB2", "FB3"], ["FC1", "FC2", "FC3"]],
+         B: [["BA1", "BA2", "BA3"], ["BB1", "BB2", "BB3"], ["BC1", "BC2", "BC3"]],
+         R: [["RA1", "RA2", "RA3"], ["RB1", "RB2", "RB3"], ["RC1", "RC2", "RC3"]],
+         L: [["LA1", "LA2", "LA3"], ["LB1", "LB2", "LB3"], ["LC1", "LC2", "LC3"]]
+        };
+
         this.turns = [];
         this.rotation = 0;
       }
@@ -137,9 +156,9 @@
       //         456
       //         789
       //
-      //         123
-      //         456
-      //         789
+      //         987
+      //         654
+      //         321
 
 
       //function used for cycling the stickers for every turn
@@ -177,10 +196,10 @@
         
         for(let c = 0; c < rotations; c++){
           if(turnSymbol == "U") this.cycleStickers([[0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]], ["F", "L", "B", "R"]);
-          else if(turnSymbol == "R") this.cycleStickers([[2, 5, 8], [2, 5, 8], [6, 3, 0], [8, 5, 2]], ["F", "U", "B", "D"]);
-          else if(turnSymbol == "F") this.cycleStickers([[6, 7, 8], [0, 3, 6], [8, 7, 6], [8, 5, 2]], ["U", "R", "D", "L"]);
-          else if(turnSymbol == "B") this.cycleStickers([[0, 1, 2], [6, 3, 0], [2, 1, 0], [2, 5, 8]], ["U", "L", "D", "R"]);
-          else if(turnSymbol == "L") this.cycleStickers([[0, 3, 6], [6, 3, 0], [8, 5, 2], [0, 3, 6]], ["F", "D", "B", "U"]);
+          else if(turnSymbol == "R") this.cycleStickers([[2, 5, 8], [2, 5, 8], [6, 3, 0], [6, 3, 0]], ["F", "U", "B", "D"]);
+          else if(turnSymbol == "F") this.cycleStickers([[6, 7, 8], [0, 3, 6], [6, 7, 8], [8, 5, 2]], ["U", "R", "D", "L"]);
+          else if(turnSymbol == "B") this.cycleStickers([[0, 1, 2], [6, 3, 0], [0, 1, 2], [2, 5, 8]], ["U", "L", "D", "R"]);
+          else if(turnSymbol == "L") this.cycleStickers([[0, 3, 6], [8, 5, 2], [8, 5, 2], [0, 3, 6]], ["F", "D", "B", "U"]);
           else if(turnSymbol == "D") this.cycleStickers([[6, 7, 8], [6, 7, 8], [6, 7, 8], [6, 7, 8]], ["F", "R", "B", "L"]); 
         }
           
@@ -208,9 +227,9 @@
 
         ctx.clearRect(0, 0, camera.width, camera.height);
 
-        function drawFace(face, xS, yS, xI, yI, cI, c){
+        function drawFace(face, xS, yS, xI, yI, cI, c, t){
           let points = [];
-          console.log("drawing face: " + face);
+          console.log("drawing face(" + t + "): " + face);
 
           //gen points
           const diff = [0, 0.05, 0.95, 1];
@@ -257,14 +276,14 @@
         let center = [camera.x, camera.y, camera.z];
 
         //drawFace(this.stickers.U, -1.5, -1.5, 0, 1, 2, 1.5);
-        //drawFace(this.stickers.D, -1.5, -1.5, 0, 1, 2, -1.5);
+        //drawFace(this.stickers.D, -1.5, 1.5, 0, 1, 2, -1.5);
         //drawFace(this.stickers.F, 1.5, -1.5, 2, 1, 0, 1.5);
         //drawFace(this.stickers.B, 1.5, 1.5, 2, 1, 0, -1.5);
         //drawFace(this.stickers.R, 1.5, 1.5, 2, 0, 1, 1.5);
         //drawFace(this.stickers.L, 1.5, -1.5, 2, 0, 1, -1.5);
 
         //UDFBRL
-        let params = [[this.stickers.U, -1.5, -1.5, 0, 1, 2, 1.5], [this.stickers.D, -1.5, -1.5, 0, 1, 2, -1.5], [this.stickers.F, 1.5, -1.5, 2, 1, 0, 1.5], [this.stickers.B, 1.5, 1.5, 2, 1, 0, -1.5], [this.stickers.R, 1.5, 1.5, 2, 0, 1, 1.5], [this.stickers.L, 1.5, -1.5, 2, 0, 1, -1.5]];
+        let params = [[this.stickers.U, -1.5, -1.5, 0, 1, 2, 1.5, "U"], [this.stickers.D, -1.5, 1.5, 0, 1, 2, -1.5, "D"], [this.stickers.F, 1.5, -1.5, 2, 1, 0, 1.5, "F"], [this.stickers.B, 1.5, 1.5, 2, 1, 0, -1.5, "B"], [this.stickers.R, 1.5, 1.5, 2, 0, 1, 1.5, "R"], [this.stickers.L, 1.5, -1.5, 2, 0, 1, -1.5, "L"]];
         let distance = [sqDist(center, [0, 0, 1.5]), sqDist(center, [0, 0, -1.5]), sqDist(center, [1.5, 0, 0]), sqDist(center, [-1.5, 0, 0]), sqDist(center, [0, 1.5, 0]), sqDist(center, [0, -1.5, 0])];
 
         //sort by distance
@@ -285,7 +304,7 @@
 
         //render
         for(let i = 0; i < 6; i++)
-          drawFace(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6]);
+          drawFace(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7]);
       }
     }
 
@@ -303,7 +322,16 @@
         move += value.charAt(i);
       }
       cube.turnFace(move);
+      console.log(JSON.stringify(cube.stickers));
       cube.draw(document.getElementById("c"), camera);
+    }
+
+    function toggleControls(){
+      let button = document.getElementById("toggle");
+      
+      toggled = !toggled;
+      if(toggled) button.innerHTML = "Disable Controls";
+      else button.innerHTML = "Enable Controls";
     }
 
     window.onload = function(){
@@ -321,14 +349,11 @@
       cube = new Cube("");
       cube.draw(document.getElementById("c"), camera);
       document.getElementById("button").onclick = function(){click();};
+      document.getElementById("toggle").onclick = function(){toggleControls();};
     };
 
-    function turnCube(key){
-      
-    }
-
     window.onkeydown = function(e){
-      //return;
+      if(!toggled) return;
       if(e.code == "KeyA") camera.x--;
       else if(e.code == "KeyD") camera.x++;
       else if(e.code == "KeyW") camera.y--;
