@@ -1,123 +1,134 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Reyes-Castillo">
   <meta name="keywords" content="html">
-  <meta name="revised" content="22-09-2022">
-  <style>
-    /*src: https://www.deviantart.com/villhelm-e/art/Rubik-s-Cube-Wallpaper204522122*/
-    div.background {
-      padding: 100px;
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      background-image: url("");
-      background-color: rgb(20, 20, 20);
-      text-align: center;
-    }
-    
-    h1.title
-    {
-      font-size: 50px;
-      color: white;
-    }
-  
-    .history-row{
-      margin: 40px 20px;
-      display: flex;
-      justify-content: center;
-    }
+  <meta name="revised" content="28-09-2022">
 
-    .history-content{
-      border: 6px solid black;
-      border-radius: 10px;
-      padding: 10px 10px;
-      margin: 5px;
-      background-color: white;
-    }
+  <title>SimplyCube</title>
 
-    #footer{
-      padding: 10px;
-      color: white;
-      background-color: rgb(40, 40, 40);
-      display: flex;
-      justify-content: center;
-    }
-
-    .footer-content{
-      margin: auto;
-    }
-
-    #body{
-      margin: 8px;
-    }
-
-    body{
-      margin: 0px;
-      background-color: rgb(230, 235, 240);
-    }
-}
-  </style>
-<!--
-1
-2
-3
-4
-5
-6
-7
-8
-9-->
+  <link rel="icon" type="image/gif" href="images/logo.png">
+  <link rel="stylesheet" type="text/css" href="src/css/home.css">
 </head>
+
 <body>
+  <!--images from https://github.com/tdecker91/visualcube-->
+  <div id="header">
+    <a href="">
+      <img id="home-button" width=30 height=30 src="images/logo.png"></img>
+    </a>
+  </div>
   <div class="background">
-    <h1 class="title" style="color:white;">SimplyCube</h1>
-    <h3>your gateway to the cubing world</h3>
-    <br><br>
-    <h2 style="color: white;">
-Welcome to SimplyCube, a beginners guide to solving a Rubik's Cube. This website features the basics of cubing, followed by an easy-to follow tutorial. Once you're ready to take the next level, you can learn about the CFOP method, a more advanced but faster method of solving a Rubik's cube. Not much of a reader? Try our interactive cubing visual software!
-    </h2>
+    <h1 style="color:white; font-size: 50px;">SimplyCube</h1>
+    <h3 style="color: white;"><i>your gateway to the cubing world</i></h3>
   </div>
-  
-  <div id="body">
-    <div class="history-row">
-      <div class="history-content">
-        <img src="mockingbird.jpeg"> 
-      </div> 
-    
-      <div class="history-content" style="width: 500px;">
-        <p style="margin: auto;">
-        They next crossed another wood where the leaves were sprinkled with gold, and after that another still, where the leaves glittered with diamonds. At last the Star Gazer perceived a large lake, and on the shores of the lake twelve little boats with awnings, in which were seated twelve princes, who,
-        </p>
+
+  <div id="content">
+    <div class="button-row">
+      <div class="button-content">
+        <h2>Beginner Tutorial</h2>
+        <p style="margin-top: 0px;">A step by step tutorial to the beginner method of solving the Rubik's Cube</p>
+      </div>
+      <div class="button-img">
+        <a href="src/beginner.html" >
+          <img src="images/beginner.png" width="200px" height="200px" >
+        </a>
       </div>
     </div>
-    
-    <div class="history-row">
-      <div class="history-content" style="width: 500px;">
-        <p style="margin: auto;">
-        They next crossed another wood where the leaves were sprinkled with gold, and after that another still, where the leaves glittered with diamonds. At last the Star Gazer perceived a large lake, and on the shores of the lake twelve little boats with awnings, in which were seated twelve princes, who,
-        </p>
+    <div class="button-row">
+      <div class="button-img">
+        <a href="src/notation.html" >
+          <img src="images/notation.png" width="200px" height="200px" >
+        </a>
       </div>
-    
-      <div class="history-content">
-        <img src="mockingbird.jpeg"> 
+
+      <div class="button-content">
+        <h2>Notation</h2>
+        <p style="margin-top: 0px;">A list of the offical Rubik's Cube notation which contains what each move is and the symbol representing it.</p>
+      </div>
+    </div>
+    <div class="button-row">
+      <div class="button-content">
+        <h2>CFOP Tutorial</h2>
+        <p style="margin-top: 0px;">A step-by-step process on CFOP, an advanced but faster method of solving the Rubik's Cube.
+</p>
+      </div>
+
+      <div class="button-img">
+        <a href="src/cfop.html" >
+          <img src="images/cfop.png" width="200px" height="200px" >
+        </a>
+      </div>
+    </div>
+    <div class="button-row">
+      <div class="button-img">
+        <a href="src/oll.html" >
+          <img src="images/oll.png" width="200px" height="200px" >
+        </a>
+      </div>
+
+      <div class="button-content">
+        <h2>OLL Algorithms</h2>
+        <p style="margin-top: 0px;">A list of algorithms for the OLL step in CFOP which orients the last layer</p>
+      </div>
+    </div>
+    <div class="button-row">
+      <div class="button-content">
+        <h2>PLL Algorithms</h2>
+        <p style="margin-top: 0px;">A list of algorithms for the PLL step in CFOP which permutates the last layer
+</p>
+      </div>
+
+      <div class="button-img">
+        <a href="src/pll.html" >
+          <img src="images/pll.png" width="200px" height="200px" >
+        </a>
+      </div>
+    </div>
+    <div class="button-row">
+      <div class="button-img">
+        <a href="src/timer.html" >
+          <img src="images/timer.png" width="200px" height="200px" >
+        </a>
+      </div>
+
+      <div class="button-content">
+        <h2>Timer</h2>
+        <p style="margin-top: 0px;">A timer to time your Rubik's cube solves</p>
+      </div>
+    </div>
+    <div class="button-row">
+      <div class="button-content">
+        <h2>Virtual Cube</h2>
+        <p style="margin-top: 0px;">A usable 3d Rubik's cube for your visualization and solve recreations
+</p>
+      </div>
+
+      <div class="button-img">
+        <a href="src/virtual.html" >
+          <img src="images/virtual.png" width="200px" height="200px" >
+        </a>
       </div>
     </div>
   </div>
-    
+
   <div id="footer">
     <div class="footer-content">
-      Contact Us: <br>
+      <h3>Contact Us:</h3>
       b2026slccastillo@pshs.edu.ph <br>
       b2026andreyes@pshs.edu.ph
     </div>
     <div class="footer-content" style="text-align: center;">
-      Copyright 2022
+      <h3>Copyright &copy; 2022</h3>
     </div>
     <div class="footer-content" style="text-align: right;">
-      Disclaimer: Temporary text to <br> test formatting
+      <h3>Other Links:</h3>
+      Temporary text to<br>
+      test formatting
     </div>
   </div>
 </body>
+
 </html>
