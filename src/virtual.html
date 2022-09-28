@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>SimplyCube</title>
-		<meta charset="UTF-8">
-		<meta name="author" content="Lukas Castillo, Alec Reyes">
-		<meta name="keywords" content="Rubik's Cube, Cubing, Speedcubing">
-		<meta name="revised" content="22-09-2022">
 
-		<link rel="icon" href="images/icon.ico" type="image/gif">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Reyes-Castillo">
+  <meta name="keywords" content="html">
+  <meta name="revised" content="28-09-2022">
 
-	</head>
+  <title>Virual Cube - SimplyCube</title>
+
+  <link rel="icon" type="image/gif" href="../images/logo.png">
+</head>
+
 <body>
   <!-- I do not see anything wrong with your code
        the "sizes" correctly adjusts to the perspective
        view of the object, but I may be wrong on this..
        consult with your math teacher for the correct formula...
-  
+    https://github.com/tdecker91/visualcube
   -->
   <canvas width="600px" height="600px" id="c"></canvas>
-  
+
   <form>
     <label>Moves</label><br>
     <input type="text" id="text"><br>
   </form>
   <button id="button">Enter</button>
   <button id="toggle">Disable controls</button>
-  
+
   <script>
     var camera = {};
     var cube = {};
 
     let toggled = true;
-    
+
     //rotates point around origin
     //angle is in radian
-    function rotatePoint(x, y, angle){
+    function rotatePoint(x, y, angle) {
       return [(x * Math.cos(angle) - y * Math.sin(angle)), (y * Math.cos(angle) + x * Math.sin(angle))];
     }
 
     //returnes the squared distance between 2 points
     function sqDist(a, b) {
-      return (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]) + (a[2] - b[2]) * (a[2] - b[2]); 
+      return (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]) + (a[2] - b[2]) * (a[2] - b[2]);
     }
 
     //new convertt3dto2d function
@@ -55,10 +57,10 @@
     //yaw rotates around z
     //pitch rotates around y
     //roll rotates around x
-    
 
-    function c3dto2d(camera, points){
-      let results = [];  
+
+    function c3dto2d(camera, points) {
+      let results = [];
       let fovWidth = Math.tan(camera.fov * Math.PI / 360) * 2;
 
       //converts the camera angles from degrees to radianss  
@@ -66,7 +68,7 @@
       let radPitch = camera.pitch * Math.PI / 180;
       let radRoll = camera.roll * Math.PI / 180;
 
-      points.forEach(function(point){
+      points.forEach(function (point) {
         let rPoint = [0, 0, 0];
 
         //find the point coords relative to the camera
@@ -92,15 +94,15 @@
 
         //calc x
         let x = Math.abs(rPoint[1] / (rPoint[0] == 0 ? 0.001 : rPoint[0])) * (rPoint[1] > 0 ? -1 : 1) * (rPoint[0] >= 0 ? 1 : 100);
-        
+
         x = x * (camera.width / fovWidth) + camera.width / 2;
 
         //calc y
         let y = Math.abs(rPoint[2] / (rPoint[0] == 0 ? 0.001 : rPoint[0])) * (rPoint[2] > 0 ? -1 : 1) * (rPoint[0] >= 0 ? 1 : 100);
-        
+
         y = y * (camera.width / fovWidth) + camera.width / 2;
 
-       // console.log("x: " + x + " y: " + y);
+        // console.log("x: " + x + " y: " + y);
 
         results.push([x, y]);
       });
@@ -109,35 +111,35 @@
     }
 
     //represents a rubiks cube and handles turns and moves
-    class Cube{
-      constructor(scramble){
+    class Cube {
+      constructor(scramble) {
         //colors
         const W = "#ffffff";
-        const G = "#00bb48";
-        const B = "#0046ad";
-        const R = "#b71234";
-        const O = "#ff5800";
-        const Y = "#ffd500";
+        const G = "#00D800";
+        const B = "#0000F2";
+        const R = "#EE0000";
+        const O = "#FFA100";
+        const Y = "#FEFE00";
 
         //white top green front
         this.stickers = {
-         U: [[W, W, W], [W, W, W], [W, W, W]],
-         D: [[Y, Y, Y], [Y, Y, Y], [Y, Y, Y]],
-         F: [[G, G, G], [G, G, G], [G, G, G]],
-         B: [[B, B, B], [B, B, B], [B, B, B]],
-         R: [[R, R, R], [R, R, R], [R, R, R]],
-         L: [[O, O, O], [O, O, O], [O, O, O]]
+          U: [[W, W, W], [W, W, W], [W, W, W]],
+          D: [[Y, Y, Y], [Y, Y, Y], [Y, Y, Y]],
+          F: [[G, G, G], [G, G, G], [G, G, G]],
+          B: [[B, B, B], [B, B, B], [B, B, B]],
+          R: [[R, R, R], [R, R, R], [R, R, R]],
+          L: [[O, O, O], [O, O, O], [O, O, O]]
         };
 
         return;
 
         this.stickers = {
-         U: [["UA1", "UA2", "UA3"], ["UB1", "UB2", "UB3"], ["UC1", "UC2", "UC3"]],
-         D: [["DA1", "DA2", "DA3"], ["DB1", "DB2", "DB3"], ["DC1", "DC2", "DC3"]],
-         F: [["FA1", "FA2", "FA3"], ["FB1", "FB2", "FB3"], ["FC1", "FC2", "FC3"]],
-         B: [["BA1", "BA2", "BA3"], ["BB1", "BB2", "BB3"], ["BC1", "BC2", "BC3"]],
-         R: [["RA1", "RA2", "RA3"], ["RB1", "RB2", "RB3"], ["RC1", "RC2", "RC3"]],
-         L: [["LA1", "LA2", "LA3"], ["LB1", "LB2", "LB3"], ["LC1", "LC2", "LC3"]]
+          U: [["UA1", "UA2", "UA3"], ["UB1", "UB2", "UB3"], ["UC1", "UC2", "UC3"]],
+          D: [["DA1", "DA2", "DA3"], ["DB1", "DB2", "DB3"], ["DC1", "DC2", "DC3"]],
+          F: [["FA1", "FA2", "FA3"], ["FB1", "FB2", "FB3"], ["FC1", "FC2", "FC3"]],
+          B: [["BA1", "BA2", "BA3"], ["BB1", "BB2", "BB3"], ["BC1", "BC2", "BC3"]],
+          R: [["RA1", "RA2", "RA3"], ["RB1", "RB2", "RB3"], ["RC1", "RC2", "RC3"]],
+          L: [["LA1", "LA2", "LA3"], ["LB1", "LB2", "LB3"], ["LC1", "LC2", "LC3"]]
         };
 
         this.turns = [];
@@ -156,55 +158,55 @@
       //         456
       //         789
       //
-      //         987
-      //         654
-      //         321
+      //         123
+      //         456
+      //         789
 
 
       //function used for cycling the stickers for every turn
-      cycleStickers(c, symbols){
+      cycleStickers(c, symbols) {
         let tmp = [this.stickers[symbols[3]][Math.floor(c[3][0] / 3)][c[3][0] % 3], this.stickers[symbols[3]][Math.floor(c[3][1] / 3)][c[3][1] % 3], this.stickers[symbols[3]][Math.floor(c[3][2] / 3)][c[3][2] % 3]];
-            
-        for(let i = 3; i > 0; i--){
-          for(let j = 0; j < 3; j++)
-             this.stickers[symbols[i]][Math.floor(c[i][j] / 3)][c[i][j] % 3] = this.stickers[symbols[i - 1]][Math.floor(c[i - 1][j] / 3)][c[i - 1][j] % 3];
+
+        for (let i = 3; i > 0; i--) {
+          for (let j = 0; j < 3; j++)
+            this.stickers[symbols[i]][Math.floor(c[i][j] / 3)][c[i][j] % 3] = this.stickers[symbols[i - 1]][Math.floor(c[i - 1][j] / 3)][c[i - 1][j] % 3];
         }
 
-        for(let j = 0; j < 3; j++)
+        for (let j = 0; j < 3; j++)
           this.stickers[symbols[0]][Math.floor(c[0][j] / 3)][c[0][j] % 3] = tmp[j];
       }
 
-      turnFace(turn){
+      turnFace(turn) {
         let turnSymbol = turn.substring(0, 1);
         let amount = (turn.length == 1) ? null : turn.substring(1, 2);
-        
-        if(("UDFBRL").includes(turnSymbol)){
-        let tmpSide = JSON.parse(JSON.stringify(this.stickers[turnSymbol]));
-          
-        for(let x = 0; x < 3; x++){
-          for(let y = 0; y < 3; y++){
-            if(amount == null) this.stickers[turnSymbol][x][2 - y] = tmpSide[y][x];
-            else if(amount == "2") this.stickers[turnSymbol][(2 - y)][2 - x] = tmpSide[y][x];
-            else this.stickers[turnSymbol][(2 - x)][y] = tmpSide[y][x];
+
+        if (("UDFBRL").includes(turnSymbol)) {
+          let tmpSide = JSON.parse(JSON.stringify(this.stickers[turnSymbol]));
+
+          for (let x = 0; x < 3; x++) {
+            for (let y = 0; y < 3; y++) {
+              if (amount == null) this.stickers[turnSymbol][x][2 - y] = tmpSide[y][x];
+              else if (amount == "2") this.stickers[turnSymbol][(2 - y)][2 - x] = tmpSide[y][x];
+              else this.stickers[turnSymbol][(2 - x)][y] = tmpSide[y][x];
+            }
           }
-        }
 
-        let rotations = 1;
+          let rotations = 1;
 
-        if(amount == "2") rotations = 2;
-        else if(amount == "\'") rotations = 3;
-        
-        for(let c = 0; c < rotations; c++){
-          if(turnSymbol == "U") this.cycleStickers([[0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]], ["F", "L", "B", "R"]);
-          else if(turnSymbol == "R") this.cycleStickers([[2, 5, 8], [2, 5, 8], [6, 3, 0], [6, 3, 0]], ["F", "U", "B", "D"]);
-          else if(turnSymbol == "F") this.cycleStickers([[6, 7, 8], [0, 3, 6], [6, 7, 8], [8, 5, 2]], ["U", "R", "D", "L"]);
-          else if(turnSymbol == "B") this.cycleStickers([[0, 1, 2], [6, 3, 0], [0, 1, 2], [2, 5, 8]], ["U", "L", "D", "R"]);
-          else if(turnSymbol == "L") this.cycleStickers([[0, 3, 6], [8, 5, 2], [8, 5, 2], [0, 3, 6]], ["F", "D", "B", "U"]);
-          else if(turnSymbol == "D") this.cycleStickers([[6, 7, 8], [6, 7, 8], [6, 7, 8], [6, 7, 8]], ["F", "R", "B", "L"]); 
-        }
-          
-        }else if(("xyz").includes(turnSymbol)){
-          
+          if (amount == "2") rotations = 2;
+          else if (amount == "\'") rotations = 3;
+
+          for (let c = 0; c < rotations; c++) {
+            if (turnSymbol == "U") this.cycleStickers([[0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]], ["F", "L", "B", "R"]);
+            else if (turnSymbol == "R") this.cycleStickers([[2, 5, 8], [2, 5, 8], [6, 3, 0], [6, 3, 0]], ["F", "U", "B", "D"]);
+            else if (turnSymbol == "F") this.cycleStickers([[6, 7, 8], [0, 3, 6], [6, 7, 8], [8, 5, 2]], ["U", "R", "D", "L"]);
+            else if (turnSymbol == "B") this.cycleStickers([[0, 1, 2], [6, 3, 0], [0, 1, 2], [2, 5, 8]], ["U", "L", "D", "R"]);
+            else if (turnSymbol == "L") this.cycleStickers([[0, 3, 6], [8, 5, 2], [8, 5, 2], [0, 3, 6]], ["F", "D", "B", "U"]);
+            else if (turnSymbol == "D") this.cycleStickers([[6, 7, 8], [6, 7, 8], [6, 7, 8], [6, 7, 8]], ["F", "R", "B", "L"]);
+          }
+
+        } else if (("xyz").includes(turnSymbol)) {
+
         }
       }
 
@@ -215,28 +217,30 @@
       //b - a
       //
 
-      setTurns(turns){
+      setTurns(turns) {
         this.turns = turns;
         this.rotation = 0;
       }
-  
-      draw(canvas, camera){
+
+      draw(canvas, camera) {
         let ctx = canvas.getContext("2d");
         ctx.width = camera.width;
         ctx.height = camera.height;
 
+        ctx.fillStyle = "#ffffff";
+        //ctx.fillRect(0, 0, camera.width, camera.height);
         ctx.clearRect(0, 0, camera.width, camera.height);
 
-        function drawFace(face, xS, yS, xI, yI, cI, c, t){
+        function drawFace(face, xS, yS, xI, yI, cI, c, t) {
           let points = [];
           console.log("drawing face(" + t + "): " + face);
 
           //gen points
           const diff = [0, 0.05, 0.95, 1];
-          for(let x = 0; x < 3; x++){
-            for(let idx = 0; idx < diff.length; idx++){
-              for(let y = 0; y < 3; y++){
-                for(let i = 0; i < diff.length; i++){
+          for (let x = 0; x < 3; x++) {
+            for (let idx = 0; idx < diff.length; idx++) {
+              for (let y = 0; y < 3; y++) {
+                for (let i = 0; i < diff.length; i++) {
                   let point = [0, 0, 0];
                   point[xI] = (xS < 0 ? 1 : -1) * (x + diff[idx]) + xS;
                   point[yI] = (yS < 0 ? 1 : -1) * (y + diff[i]) + yS;
@@ -246,13 +250,13 @@
               }
             }
           }
-          
+
           //convert points
           points = c3dto2d(camera, points);
-  
+
           //render stickers
-          for(let y = 0; y < 3; y++){
-            for(let x = 0; x < 3; x++){
+          for (let y = 0; y < 3; y++) {
+            for (let x = 0; x < 3; x++) {
               ctx.beginPath();
               ctx.moveTo(points[(y * 48) + (x * 4)][0], points[(y * 48) + (x * 4)][1]);
               ctx.lineTo(points[(y * 48) + (x * 4) + 3][0], points[(y * 48) + (x * 4) + 3][1]);
@@ -288,10 +292,10 @@
 
         //sort by distance
         let maxIndex = 0;
-        for(let i = 0; i < distance.length; i++){
+        for (let i = 0; i < distance.length; i++) {
           maxIndex = i;
-          for(let j = i; j < distance.length; j++){
-            if(distance[j] > distance[maxIndex])
+          for (let j = i; j < distance.length; j++) {
+            if (distance[j] > distance[maxIndex])
               maxIndex = j;
           }
           let tmp = distance[maxIndex];
@@ -303,20 +307,37 @@
         }
 
         //render
-        for(let i = 0; i < 6; i++)
+        for (let i = 0; i < 6; i++)
           drawFace(params[i][0], params[i][1], params[i][2], params[i][3], params[i][4], params[i][5], params[i][6], params[i][7]);
       }
     }
 
-    function click(){
+    function click() {
       let value = document.getElementById("text").value;
       console.log(value);
       let move = "";
 
-      for(let i = 0; i < value.length; i++){
-        if(value.charAt(i).toLowerCase() != value.charAt(i).toUpperCase() && move.length > 0){
+      for (let i = 0; i < value.length; i++) {
+        if (value.charAt(i).toLowerCase() != value.charAt(i).toUpperCase() && move.length > 0) {
           console.log(move);
           cube.turnFace(move);
+
+          let repeat = false;
+          let values = [];
+
+          for (const [key, value] of Object.entries(cube.stickers)) {
+            for (let y = 0; y < 3; y++) {
+              for (let x = 0; x < 3; x++) {
+                values.forEach((v) => {if (value[y][x] == v) repeat = true;})
+                values.push(value[y][x]);
+              }
+            }
+          }
+
+          if (repeat) {
+            console.log("REPEAT!!!!");
+          }
+
           move = "";
         }
         move += value.charAt(i);
@@ -326,15 +347,15 @@
       cube.draw(document.getElementById("c"), camera);
     }
 
-    function toggleControls(){
+    function toggleControls() {
       let button = document.getElementById("toggle");
-      
+
       toggled = !toggled;
-      if(toggled) button.innerHTML = "Disable Controls";
+      if (toggled) button.innerHTML = "Disable Controls";
       else button.innerHTML = "Enable Controls";
     }
 
-    window.onload = function(){
+    window.onload = function () {
       camera = {
         x: 3,
         y: 3,
@@ -348,33 +369,35 @@
       };
       cube = new Cube("");
       cube.draw(document.getElementById("c"), camera);
-      document.getElementById("button").onclick = function(){click();};
-      document.getElementById("toggle").onclick = function(){toggleControls();};
+      document.getElementById("button").onclick = function () {click();};
+      document.getElementById("toggle").onclick = function () {toggleControls();};
     };
 
-    window.onkeydown = function(e){
-      if(!toggled) return;
-      if(e.code == "KeyA") camera.x--;
-      else if(e.code == "KeyD") camera.x++;
-      else if(e.code == "KeyW") camera.y--;
-      else if(e.code == "KeyS") camera.y++;
-      else if(e.code == "KeyR") camera.z--;
-      else if(e.code == "KeyT") camera.z++;
-      else if(e.code == "KeyZ") camera.yaw--;
-      else if(e.code == "KeyX") camera.yaw++;
-      else if(e.code == "KeyC") camera.pitch--;
-      else if(e.code == "KeyV") camera.pitch++;
-      else if(e.code == "KeyB") camera.fov--;
-      else if(e.code == "KeyN") camera.fov++;
+    window.onkeydown = function (e) {
+      const step = 0.5;
+
+      if (!toggled) return;
+      if (e.code == "KeyA") camera.x -= step;
+      else if (e.code == "KeyD") camera.x += step;
+      else if (e.code == "KeyW") camera.y -= step;
+      else if (e.code == "KeyS") camera.y += step;
+      else if (e.code == "KeyR") camera.z -= step;
+      else if (e.code == "KeyT") camera.z += step;
+      else if (e.code == "KeyZ") camera.yaw -= step;
+      else if (e.code == "KeyX") camera.yaw += step;
+      else if (e.code == "KeyC") camera.pitch -= step;
+      else if (e.code == "KeyV") camera.pitch += step;
+      else if (e.code == "KeyB") camera.fov -= step;
+      else if (e.code == "KeyN") camera.fov += step;
       else return;
 
-      if(camera.yaw < 0) camera.yaw = 360;
-      if(camera.pitch < 0) camera.pitch = 360;
-      if(camera.roll < 0) camera.roll = 360;
+      if (camera.yaw < 0) camera.yaw = 360;
+      if (camera.pitch < 0) camera.pitch = 360;
+      if (camera.roll < 0) camera.roll = 360;
 
       let t = new Date().getTime();
       cube.draw(document.getElementById("c"), camera);
-      
+
       console.log("x: " + camera.x + " y: " + camera.y + " z: " + camera.z);
       console.log("yaw: " + camera.yaw + " pitch: " + camera.pitch);
       console.log("fov: " + camera.fov);
