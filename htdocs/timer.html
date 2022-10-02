@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Reyes-Castillo">
+  <meta name="keywords" content="html">
+  <meta name="revised" content="22-09-2022">
+
+  <title>Timer - SimplyCube</title>
+
+  <link rel="icon" type="image/gif" href="../images/logo.png">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <style>
+    #content{
+      margin-top: 80px;
+    }
+    #scramble{
+      text-align: center;
+      border: 3px solid black;
+      width: 80%;
+      font-size: 40px;
+      margin: auto;
+      margin-bottom: 20px;
+      background-color: white;
+    }
+    .timer-row{
+      display: flex;
+      justify-content: center;
+    }
+    #timer {
+      background-color: white;
+      text-align: center;
+      border: 3px solid black;
+      margin: 5px;
+      min-height: 300px;
+      min-width: 300px;
+      padding: 75px;
+      display: table;
+    }
+    #timer > p{
+      font-size: 50px;
+      margin: auto;
+      vertical-align: middle;
+      display: table-cell;
+    }
+    #time-list{
+      margin: 5px;
+      margin-left: 20px;
+      border: 3px solid black;
+      background-color: white;
+      font-size: 45px;
+      padding: 5px;
+      height: fit-content;
+    }
+    #time-list > h6{
+      margin: 10px 0px;
+      font-size: 0.6em;
+    }
+    #top-times, #recent-times{
+      font-size: 20px;
+    }
+    #recent-times > ol{
+      margin: 0px;
+      padding-inline-start: 1em;
+    }
+    #stats{
+      background-color: white;
+      text-align: center;
+      border: 3px solid black;
+      overflow: auto;
+      margin: 20px auto;
+      width: 80%;
+      font-size: 25px;
+    }
+    #stats > ul{
+      list-style-type: none;
+      display: flex;
+      padding-left: 0px;
+      margin: 10px 0px;
+    }
+    #stats > ul > li{
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header">
+    <a href="../">
+      <img id="home-button" width=30 height=30 src="../images/logo.png"></img>
+    </a>
+    <p>SimplyCube</p>
+    <ul id="nav-buttons">
+      <li>
+        <p>Beginner</p>
+        <div class="nav-dropdown-content">
+          <a href="../htdocs/beginner.html">Beginner Tutorial</a>
+          <a href="../htdocs/notation.html">Notation</a>
+        </div>
+      </li>
+      <li>
+        <p>Advanced</p>
+        <div class="nav-dropdown-content">
+          <a href="../htdocs/cfop.html">CFOP Tutorial</a>
+          <a href="../htdocs/pll.html">PLL</a>
+          <a href="../htdocs/oll.html">OLL</a>
+        </div>
+      </li>
+      <li>
+        <p>Practice</p>
+        <div class="nav-dropdown-content">
+          <a href="../htdocs/timer.html">Timer</a>
+          <a href="../htdocs/virtual.html">Virtual Cube</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="content">
+    <div id="scramble">
+      R' R' R' R' R' R' R' R' R' R' R' R' R' R' 
+    </div>
+    <div class="timer-row">
+      <div id="timer">
+        <p>00:00.000</p>
+      </div>
+      <div id="time-list">
+        <h6>Top times:</h6>
+        <div id="top-times">
+          00:00.000 <br>
+          00:00.000 <br>
+          00:00.000 <br>
+          00:00.000 <br> 
+          00:00.000
+        </div>
+        <h6>Recent times:</h6>
+        <div id="recent-times">
+          <ol>
+            <li>00:00.000</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div id="stats">
+      <ul>
+        <li>Mean: </li>
+        <li>Ao3: </li>
+        <li>Ao5: </li>
+        <li>Ao12: </li>
+        <li>Ao100: </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
