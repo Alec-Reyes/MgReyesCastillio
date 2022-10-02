@@ -10,7 +10,44 @@
   <title>SimplyCube</title>
 
   <link rel="icon" type="image/gif" href="images/logo.png">
-  <link rel="stylesheet" type="text/css" href="src/css/home.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <style>
+    .background {
+      padding: 50px;
+      background-color: rgb(40, 40, 40);
+      text-align: center;
+    }
+
+    .button-row {
+      margin: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .button-content {
+      display: flex;
+      border-radius: 10px;
+      padding: 10px 10px;
+      margin: 5px;
+      text-align: center;
+      background-color: white;
+      justify-content: center;
+      flex-direction: column;
+      width: 500px;
+    }
+
+    div.button-img {
+      border-radius: 10px;
+      padding: 10px;
+      margin: 5px;
+      background-color: lightblue;
+    }
+    
+    div.button-img:hover {
+      background-color: #9bc0cc;
+    }
+  </style>
 </head>
 
 <body>
@@ -19,6 +56,31 @@
     <a href="">
       <img id="home-button" width=30 height=30 src="images/logo.png"></img>
     </a>
+    <p>SimplyCube</p>
+    <ul id="nav-buttons">
+      <li>
+        <p>Beginner</p>
+        <div class="nav-dropdown-content">
+          <a href="htdocs/beginner.html">Beginner Tutorial</a>
+          <a href="htdocs/notation.html">Notation</a>
+        </div>
+      </li>
+      <li>
+        <p>Advanced</p>
+        <div class="nav-dropdown-content">
+          <a href="htdocs/cfop.html">CFOP Tutorial</a>
+          <a href="htdocs/pll.html">PLL</a>
+          <a href="htdocs/oll.html">OLL</a>
+        </div>
+      </li>
+      <li>
+        <p>Practice</p>
+        <div class="nav-dropdown-content">
+          <a href="htdocs/timer.html">Timer</a>
+          <a href="htdocs/virtual.html">Virtual Cube</a>
+        </div>
+      </li>
+    </ul>
   </div>
   <div class="background">
     <h1 style="color:white; font-size: 50px;">SimplyCube</h1>
@@ -32,14 +94,14 @@
         <p style="margin-top: 0px;">A step by step tutorial to the beginner method of solving the Rubik's Cube</p>
       </div>
       <div class="button-img">
-        <a href="src/beginner.html" >
+        <a href="htdocs/beginner.html" >
           <img src="images/beginner.png" width="200px" height="200px" >
         </a>
       </div>
     </div>
     <div class="button-row">
       <div class="button-img">
-        <a href="src/notation.html" >
+        <a href="htdocs/notation.html" >
           <img src="images/notation.png" width="200px" height="200px" >
         </a>
       </div>
@@ -57,14 +119,14 @@
       </div>
 
       <div class="button-img">
-        <a href="src/cfop.html" >
+        <a href="htdocs/cfop.html" >
           <img src="images/cfop.png" width="200px" height="200px" >
         </a>
       </div>
     </div>
     <div class="button-row">
       <div class="button-img">
-        <a href="src/oll.html" >
+        <a href="htdocs/oll.html" >
           <img src="images/oll.png" width="200px" height="200px" >
         </a>
       </div>
@@ -82,14 +144,14 @@
       </div>
 
       <div class="button-img">
-        <a href="src/pll.html" >
+        <a href="htdocs/pll.html" >
           <img src="images/pll.png" width="200px" height="200px" >
         </a>
       </div>
     </div>
     <div class="button-row">
       <div class="button-img">
-        <a href="src/timer.html" >
+        <a href="htdocs/timer.html" >
           <img src="images/timer.png" width="200px" height="200px" >
         </a>
       </div>
@@ -107,7 +169,7 @@
       </div>
 
       <div class="button-img">
-        <a href="src/virtual.html" >
+        <a href="htdocs/virtual.html" >
           <img src="images/virtual.png" width="200px" height="200px" >
         </a>
       </div>
@@ -115,20 +177,19 @@
   </div>
 
   <div id="footer">
-    <div class="footer-content">
+    <div>
       <h3>Contact Us:</h3>
       b2026slccastillo@pshs.edu.ph <br>
       b2026andreyes@pshs.edu.ph
     </div>
-    <div class="footer-content" style="text-align: center;">
+    <div style="text-align: center;">
       <h3>Copyright &copy; 2022</h3>
     </div>
-    <div class="footer-content" style="text-align: right;">
+    <div style="text-align: right;">
       <h3>Other Links:</h3>
       Temporary text to<br>
       test formatting
     </div>
   </div>
 </body>
-
 </html>
