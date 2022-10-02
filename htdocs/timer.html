@@ -16,12 +16,13 @@
     }
     #scramble{
       text-align: center;
-      border: 3px solid black;
-      width: 80%;
+      width: 100vh;
       font-size: 40px;
       margin: auto;
       margin-bottom: 20px;
-      background-color: white;
+      background-color: lightblue;
+      border-radius: 10px;
+      padding: 5px;
     }
     .timer-row{
       display: flex;
@@ -30,15 +31,15 @@
     #timer {
       background-color: white;
       text-align: center;
-      border: 3px solid black;
       margin: 5px;
-      min-height: 300px;
-      min-width: 300px;
+      min-height: 40vh;
+      min-width: 40vh;
       padding: 75px;
       display: table;
+      border-radius: 15px;
     }
     #timer > p{
-      font-size: 50px;
+      font-size: 60px;
       margin: auto;
       vertical-align: middle;
       display: table-cell;
@@ -46,31 +47,47 @@
     #time-list{
       margin: 5px;
       margin-left: 20px;
-      border: 3px solid black;
       background-color: white;
       font-size: 45px;
       padding: 5px;
       height: fit-content;
+      border-radius: 10px;
     }
     #time-list > h6{
       margin: 10px 0px;
       font-size: 0.6em;
     }
-    #top-times, #recent-times{
+    #top-times{
       font-size: 20px;
+    }
+    #top-times > ul{
+      list-style-type: none;
+      padding-inline-start: 0px;
+      margin-block-start: 0.6em;
+      margin-block-end: 0.6em;
+    }
+    #recent-times{
+      overflow-y: auto;
+      font-size: 20px;
+      max-height: 30vh;
     }
     #recent-times > ol{
       margin: 0px;
-      padding-inline-start: 1em;
+      padding-inline-start: 0px;
+      list-style-type: none;
+    }
+    #recent-times > ol > li{
+      background-color: white;
     }
     #stats{
       background-color: white;
       text-align: center;
-      border: 3px solid black;
       overflow: auto;
       margin: 20px auto;
-      width: 80%;
+      width: fit-content;
       font-size: 25px;
+      border-radius: 10px;
+      padding: 5px;
     }
     #stats > ul{
       list-style-type: none;
@@ -79,7 +96,53 @@
       margin: 10px 0px;
     }
     #stats > ul > li{
+      margin: 0px 10px;
+    }
+    #settings{
+      display: none;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: blur(3px);
+    }
+    #settings > div{
+      background-color: lightblue;
+      padding: 80px;
+      border-radius: 10px;
+      width: 40vmin;
+      height: 40vmin;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    #settings > div > button{
+      border: none;
+      border-radius: 5px;
+      padding: 3px 12px;
+      margin: 10px;
+      background-color: white;
+    }
+    #settings > div > button:hover{
+      background-color: lightgrey;
+    }
+    #settings-time{
+      margin: 8vmin 0px;
+    }
+    #settings-scramble{
+      font-size: 20px;
+    }
+    #text{
       margin: auto;
+      text-align: center;
+      width: 80%;
+      background-color: lightblue;
+      padding: 5px;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -121,34 +184,62 @@
     </div>
     <div class="timer-row">
       <div id="timer">
-        <p>00:00.000</p>
+        <p>0.000</p>
       </div>
       <div id="time-list">
-        <h6>Top times:</h6>
+        <h6>Best times:</h6>
         <div id="top-times">
-          00:00.000 <br>
-          00:00.000 <br>
-          00:00.000 <br>
-          00:00.000 <br> 
-          00:00.000
+          <ul>
+            <li id="b-single">Single: 0</li>
+            <li id="b-ao3">Ao3: 0</li>
+            <li id="b-ao5">Ao5: 0</li>
+            <li id="b-ao12">Ao12: 0</li>
+            <li id="b-ao100">Ao100: 0</li>
+          </ul>
         </div>
         <h6>Recent times:</h6>
         <div id="recent-times">
           <ol>
-            <li>00:00.000</li>
           </ol>
         </div>
       </div>
     </div>
     <div id="stats">
       <ul>
-        <li>Mean: </li>
-        <li>Ao3: </li>
-        <li>Ao5: </li>
-        <li>Ao12: </li>
-        <li>Ao100: </li>
+        <li id="mean">Mean: 0</li>
+        <li id="ao3">Ao3: 0</li>
+        <li id="ao5">Ao5: 0</li>
+        <li id="ao12">Ao12: 0</li>
+        <li id="ao100">Ao100: 0</li>
       </ul>
     </div>
+    <div id="settings">
+      <div>
+        <button id="settings-delete">Delete Time</button>
+        <button id="settings-reset">Reset All Times</button>
+        <h2 id="settings-time">0.000</h2>
+        <p id="settings-scramble">R R R R R R R R R R R</p>
+      </div>
+    </div>
+    <div id="text">
+      <p>To start the timer you hold the space bar until the timer turns green then press the space bar again once your done solving the cube. You can also use the scramble generator to scramble the cube randomly. Deleting a time or checking its scramble can be done by clicking on the time in the time list. Your times and progress also saves when exiting the page.</p>
+    </div>
   </div>
+  <div id="footer">
+    <div>
+      <h3>Contact Us:</h3>
+      b2026slccastillo@pshs.edu.ph <br>
+      b2026andreyes@pshs.edu.ph
+    </div>
+    <div style="text-align: center;">
+      <h3>Copyright &copy; 2022</h3>
+    </div>
+    <div style="text-align: right;">
+      <h3>Other Links:</h3>
+      Temporary text to<br>
+      test formatting
+    </div>
+  </div>
+  <script src="../js/timer.js" type="module"></script>
 </body>
-</html>
+</html>  
