@@ -1,0 +1,101 @@
+body {
+  margin: 0px;
+  background-color: rgb(230, 235, 240);
+  font-family: Helvetica;
+}
+
+#header {
+  color: white;
+  background-color: rgb(40, 40, 40);
+  display: flex;
+  position: fixed;
+  height: 50px;
+  padding: 5px;
+  width: 100%;
+  text-align: center;
+  top: 0px;
+}
+
+#home-button {
+  padding: 9px;
+  background-color: lightblue;
+  border-radius: 20px;
+}
+
+#header > p{
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+#home-button:hover {
+  background-color: #9bc0cc;
+}
+
+#nav-buttons{
+  float: left;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+}
+
+#nav-buttons > li {
+  color: white;
+  float: left;
+}
+
+#nav-buttons > li > p{
+  background-color: rgb(40, 40, 40);
+  color: white;
+  padding: 20px;
+  height: 20px;
+  margin: 0px;
+  font-size: 18px;
+  width: 5em;
+}
+
+#nav-buttons > li > p:hover, #nav-buttons li:hover {
+  background-color: grey;
+}
+
+.nav-dropdown-content{
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 33.3%;
+}
+
+#nav-buttons > li:hover .nav-dropdown-content{
+  display: block;
+}
+
+.nav-dropdown-content > a{
+  display: block;
+  z-index: 1;
+  text-decoration: none;
+  color: white;
+  background-color: rgb(40, 40, 40);
+  padding: 15px;
+}
+
+.nav-dropdown-content  > a:hover{
+  background-color: grey;
+}
+
+#content {
+  margin: 8px;
+}
+
+#footer {
+  padding: 15px;
+  color: white;
+  background-color: rgb(40, 40, 40);
+  display: flex;
+  justify-content: center;
+}
+
+#footer > div {
+  margin: auto;
+}
