@@ -176,6 +176,7 @@ window.onload = function(){
   //deleting single time
   document.getElementById("settings-delete").onclick = function(){
     timer.times.splice(document.getElementById("settings").timeIndex, 1);
+    timer.scrambles.splice(document.getElementById("settings").timeIndex, 1);
     saveTimes();
     computeStats();
     computeBest();
@@ -189,6 +190,7 @@ window.onload = function(){
   //deleting all times
   document.getElementById("settings-reset").onclick = function(){
     timer.times = [];
+    timer.scrambles = [];
     saveTimes();
     computeStats();
     computeBest();
