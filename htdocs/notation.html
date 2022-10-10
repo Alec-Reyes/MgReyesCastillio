@@ -31,20 +31,21 @@
         font-size: 25px;
         padding: 20px;
         border-radius: 7px;
+        overflow: auto;
       }
       .section-title {
         font-size: 40px;
       }
-      
-      .notation-images {
+      .notation-image {
         display: flex;
         height: 150px;
         width: fit-content;
-        
+        flex-direction: column;
+        margin: 0px;
+        float: left;
       }
-      .move-header {
-        margin-top: 20px;
-        
+      .move-content {
+        float: left;
       }
       div > img {
         width: 100%;
@@ -94,17 +95,34 @@
     
     <div class="notation-description">
       <div class="section-title"> Face Moves </div>
-      
+      <div class="notation-image">
+        <img src="../images/notation/face/U.png">
+        <div class="move-header">U</div>
+      </div>
+      <div class="notation-image">
+        <img src="../images/notation/face/R.png">
+        <div class="move-header">R</div>
+      </div>
+      <div class="notation-image">
+        <img src="../images/notation/face/L.png">
+        <div class="move-header">L</div>
+      </div>
+      <div class="notation-image">
+        <img src="../images/notation/face/F.png">
+        <div class="move-header">F</div>
+      </div>
+      <div class="notation-image">
+        <img src="../images/notation/face/B.png">
+        <div class="move-header">B</div>
+      </div>
+      <div class="notation-image">
+        <img src="../images/notation/face/D.png">
+        <div class="move-header">D</div>
+      </div>
     </div>
 
     <div class="notation-description">
       <div class="section-title"> Slice Moves: </div>
-      <div class="move-header"> Insert headers here </div>
-      <div class="notation-images">
-      <img src="../images/beginner.png"> <img src="../images/notation.png">
-      </div>
-      <div class="move-header">insert second header here</div>
-      </div>
     <div class="notation-description">
       <div class="section-title"> Wide Moves: </div>
       And then last section here
