@@ -27,20 +27,23 @@
         margin: auto;
         color: black;
         margin-top: 30px;
+        margin-bottom: 30px;
         width: fit-content;
         font-size: 25px;
         padding: 20px;
         border-radius: 7px;
         overflow: auto;
+        max-width: 80%;
       }
       .section-title {
         font-size: 40px;
       }
+      .section-subtitle{
+        font-size: 25px;
+      }
       .notation-image {
-        display: flex;
         height: 150px;
         width: fit-content;
-        flex-direction: column;
         margin: 0px;
         float: left;
       }
@@ -51,9 +54,28 @@
         width: 100%;
         height: 100%;
       }
+      .notation-description > div{
+        overflow: auto;
+        margin: 20px 0px;
+      }
+      .notation-description > div > ul{
+        list-style-type: none;
+        padding: 0;
+      }
+      .notation-description > div > ul > li{
+        float: left;
+        margin: auto;
+        text-align: center;
+        width: 16.6%;
+      }
+      .notation-description > div > ul > li > img{
+        width: 100%;
+        height: 100%;
+      }
     </style>
 	</head>
 <body>
+  <!--images from https://github.com/tdecker91/visualcube-->
   <div id="header">
     <a href="../">
       <img id="home-button" width=30 height=30 src="../images/logo.png"></img>
@@ -90,42 +112,190 @@
       Move Notation
     </div>
     <div class="notation-description">
-      This is list of the offical Rubik's Cube notation which contains what each move is and the symbol representing it. The letter part of each move stands for the face you need to turn. It can also end with a number or apostrophe which indicates the amount of moves you have to do. 
+      This is list of the offical Rubik's Cube notation which contains what each move is and the symbol representing it. The letter part of each move stands for the face you need to turn. It can also end with a number which indicates the amount of moves you have to do. 
     </div>
     
     <div class="notation-description">
-      <div class="section-title"> Face Moves </div>
-      <div class="notation-image">
-        <img src="../images/notation/face/U.png">
-        <div class="move-header">U</div>
+      <div>
+        <div class="section-title"> Face Moves </div>
+        <ul>
+          <li>
+            <img src="../images/notation/face/U.png">
+          </li>
+          <li>
+            <img src="../images/notation/face/R.png">
+          </li>
+          <li>
+            <img src="../images/notation/face/L.png">
+          </li>
+          <li>
+            <img src="../images/notation/face/F.png">
+          </li>
+          <li>
+            <img src="../images/notation/face/B.png">
+          </li>
+          <li>
+            <img src="../images/notation/face/D.png">
+          </li>
+        </ul>
+        <ul>
+          <li>U</li>
+          <li>R</li>
+          <li>L</li>
+          <li>F</li>
+          <li>B</li>
+          <li>D</li>
+        </ul>
+        </div>
+        <div>
+          <div class="section-title">Face prime moves</div>
+          <div class="section-subtitle">Normal face moves but turned in the opposite direction</div>
+          <div class="section-subtitle">(Donated with an apostrophe ')</div>
+          <ul>
+            <li>
+              <img src="../images/notation/face/Up.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/Rp.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/Lp.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/Fp.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/Bp.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/Dp.png">
+            </li>
+        </ul>
+        <ul>
+          <li>U'</li>
+          <li>R'</li>
+          <li>L'</li>
+          <li>F'</li>
+          <li>B'</li>
+          <li>D'</li>
+        </ul>
       </div>
-      <div class="notation-image">
-        <img src="../images/notation/face/R.png">
-        <div class="move-header">R</div>
-      </div>
-      <div class="notation-image">
-        <img src="../images/notation/face/L.png">
-        <div class="move-header">L</div>
-      </div>
-      <div class="notation-image">
-        <img src="../images/notation/face/F.png">
-        <div class="move-header">F</div>
-      </div>
-      <div class="notation-image">
-        <img src="../images/notation/face/B.png">
-        <div class="move-header">B</div>
-      </div>
-      <div class="notation-image">
-        <img src="../images/notation/face/D.png">
-        <div class="move-header">D</div>
+      <div>
+          <div class="section-title">Double face moves</div>
+          <div class="section-subtitle">Normal face moves but turned 2 times</div>
+          <ul>
+            <li>
+              <img src="../images/notation/face/U2.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/R2.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/L2.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/F2.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/B2.png">
+            </li>
+            <li>
+              <img src="../images/notation/face/D2.png">
+            </li>
+        </ul>
+        <ul>
+          <li>U2</li>
+          <li>R2</li>
+          <li>L2</li>
+          <li>F2</li>
+          <li>B2</li>
+          <li>D2</li>
+        </ul>
       </div>
     </div>
-
     <div class="notation-description">
-      <div class="section-title"> Slice Moves: </div>
+      <div>
+        <div class="section-title"> Slice Moves </div>
+        <div class="section-subtitle">(Prime and double notation also apply)</div>
+        <ul>
+          <li>
+            <img src="../images/notation/slice/M.png">
+          </li>
+          <li>
+            <img src="../images/notation/slice/E.png">
+          </li>
+          <li>
+            <img src="../images/notation/slice/S.png">
+          </li>
+          <li>
+            <img src="../images/notation/slice/Mp.png">
+          </li>
+          <li>
+            <img src="../images/notation/slice/Ep.png">
+          </li>
+          <li>
+            <img src="../images/notation/slice/Sp.png">
+          </li>
+        </ul>
+        <ul>
+          <li>M</li>
+          <li>E</li>
+          <li>S</li>
+          <li>M'</li>
+          <li>E'</li>
+          <li>S'</li>
+        </ul>
+      </div>
+    </div>
     <div class="notation-description">
-      <div class="section-title"> Wide Moves: </div>
-      And then last section here
+      <div>
+        <div class="section-title"> Wide Moves </div>
+        <div class="section-subtitle">Normal face moves but with 2 layers</div>
+        <div class="section-subtitle">(Prime and double notation also apply)</div>
+        <ul>
+          <li>
+            <img src="../images/notation/wide/u.png">
+          </li>
+          <li>
+            <img src="../images/notation/wide/r.png">
+          </li>
+          <li>
+            <img src="../images/notation/wide/l.png">
+          </li>
+          <li>
+            <img src="../images/notation/wide/f.png">
+          </li>
+          <li>
+            <img src="../images/notation/wide/b.png">
+          </li>
+          <li>
+            <img src="../images/notation/wide/d.png">
+          </li>
+        </ul>
+        <ul>
+          <li>u</li>
+          <li>r</li>
+          <li>l</li>
+          <li>f</li>
+          <li>b</li>
+          <li>d</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <div>
+      <h3>Contact Us:</h3>
+      b2026slccastillo@pshs.edu.ph <br>
+      b2026andreyes@pshs.edu.ph
+    </div>
+    <div style="text-align: center;">
+      <h3>Copyright &copy; 2022</h3>
+    </div>
+    <div style="text-align: right;">
+      <h3>Other Links:</h3>
+      Temporary text to<br>
+      test formatting
     </div>
   </div>
 </body>
