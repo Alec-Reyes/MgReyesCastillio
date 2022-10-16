@@ -16,6 +16,36 @@ export function sqDist(a, b) {
   );
 }
 
+//https://stackoverflow.com/questions/34050929/3d-point-rotation-algorithm
+//rotates a point around another point
+//angles are in radians
+export function rotate3dPoint(point, center, yaw, pitch, roll){
+  let result = [];
+  
+  point[0] -= center[0];
+  point[1] -= center[1];
+  point[2] -= center[2];
+  
+  let cosa = Math.cos(yaw);
+  let sina = Math.sin(yaw);
+
+  let cosb = Math.cos(pitch);
+  let sinb = Math.sin(pitch);
+
+  let cosc = Math.cos(roll);
+  let sinc = Math.sin(roll);
+
+  result[0] = (cosa*cosb)*point[0] + (cosa*sinb*sinc - sina*cosc)*point[1] + (cosa*sinb*cosc + sina*sinc)*point[2];
+  result[1] = (sina*cosb)*point[0] + (sina*sinb*sinc + cosa*cosc)*point[1] + (sina*sinb*cosc - cosa*sinc)*point[2];
+  result[2] = (-sinb)*point[0] + (cosb*sinc)*point[1] + (cosb*cosc)*point[2];
+
+  result[0] += center[0];
+  result[1] += center[1];
+  result[2] += center[2];
+
+  return result;
+}
+
 //new convertt3dto2d function
 
 //z up
@@ -250,7 +280,7 @@ export class Cube {
     this.prevTime = new Date().getTime();
   }
 
-  draw(canvas, camera, dps) {
+  draw(canvas, camera, tps) {
     let ctx = canvas.getContext("2d");
     ctx.width = camera.width;
     ctx.height = camera.height;
@@ -258,16 +288,49 @@ export class Cube {
     ctx.fillStyle = "#ffffff";
     //ctx.fillRect(0, 0, camera.width, camera.height);
     ctx.clearRect(0, 0, camera.width, camera.height);
+    
+    //computing rotation
 
-    //turns
-    //let
+    //[this.stickers.U, -1.5, -1.5, 0, 1, 2, 1.5, "U"],
+    //[this.stickers.D, -1.5, 1.5, 0, 1, 2, -1.5, "D"],
+    //[this.stickers.F, 1.5, -1.5, 2, 1, 0, 1.5, "F"],
+    //[this.stickers.B, 1.5, 1.5, 2, 1, 0, -1.5, "B"],
+    //[this.stickers.R, 1.5, 1.5, 2, 0, 1, 1.5, "R"],
+    //[this.stickers.L, 1.5, -1.5, 2, 0, 1, -1.5, "L"],
 
-    function drawFace(face, xS, yS, xI, yI, cI, c, t) {
+    let turnParams = {
+      U: {xI: 0, yI: 1, zI: 2, z: 1.5, r: false, affS: "FRBL"},
+      D: {xI: 0, yI: 1, zI: 2, z: -1.5, r: true, affS: "FRBL"},
+      R: {xI: 2, yI: 0, zI: 1, z: 1.5, r: false, affS: "FUBD"},
+      L: {xI: 2, yI: 0, zI: 1, z: -1.5, r: true, affS: "FUBD"},
+      F: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true, affS: "URDL"},
+      B: {xI: 2, yI: 1, zI: 0, z: -1.5, r: false, affS: "URDL"}
+    }
+    
+    if(this.turns.length > 0){
+      let amount = this.turns[0].charAt(this.turns[0].length - 1);
+      let time = new Date().getTime();
+      console.log(time - this.prevTime);
+      
+      this.rotation = -(amount == 2 ? 180 : 90) * (tps * (time - this.prevTime) / 1000) * (Math.PI / 180);
+      if(amount == "'") this.rotation *= -1;
+      if(turnParams[this.turns[0].charAt(0)].r) this.rotation *= -1;
+      if(this.rotation < 0) this.rotation += Math.PI * 2;
+      
+      if(tps * (time - this.prevTime) / 1000 > 1){
+        this.rotation = 0;
+        this.turnFace(this.turns[0]);
+        this.turns.splice(0, 1);
+        this.prevTime = time;
+      }
+    }
+
+    function drawFace(face, xS, yS, xI, yI, cI, c, f, cube) {
       let points = [];
       //console.log("drawing face(" + t + "): " + face);
 
       //gen points
-      const diff = [0, 0.05, 0.95, 1];
+      const diff = [0, 0.05, 0.95, 0.999];
       for (let x = 0; x < 3; x++) {
         for (let idx = 0; idx < diff.length; idx++) {
           for (let y = 0; y < 3; y++) {
@@ -276,6 +339,17 @@ export class Cube {
               point[xI] = (xS < 0 ? 1 : -1) * (x + diff[idx]) + xS;
               point[yI] = (yS < 0 ? 1 : -1) * (y + diff[i]) + yS;
               point[cI] = c;
+
+              //rotate
+              if(cube.turns.length > 0){
+                let param = turnParams[cube.turns[0].charAt(0)];
+                if(cube.turns[0].charAt(0) == f || (param.affS.includes(f) && Math.abs(param.z - point[param.zI]) < 1)){
+                  let p = rotatePoint(point[param.xI], point[param.yI], cube.rotation);
+                  point[param.xI] = p[0];
+                  point[param.yI] = p[1];
+                }
+              } 
+              
               points.push(point);
             }
           }
@@ -334,13 +408,6 @@ export class Cube {
 
     let center = [camera.x, camera.y, camera.z];
 
-    //drawFace(this.stickers.U, -1.5, -1.5, 0, 1, 2, 1.5);
-    //drawFace(this.stickers.D, -1.5, 1.5, 0, 1, 2, -1.5);
-    //drawFace(this.stickers.F, 1.5, -1.5, 2, 1, 0, 1.5);
-    //drawFace(this.stickers.B, 1.5, 1.5, 2, 1, 0, -1.5);
-    //drawFace(this.stickers.R, 1.5, 1.5, 2, 0, 1, 1.5);
-    //drawFace(this.stickers.L, 1.5, -1.5, 2, 0, 1, -1.5);
-
     //UDFBRL
     let params = [
       [this.stickers.U, -1.5, -1.5, 0, 1, 2, 1.5, "U"],
@@ -384,7 +451,8 @@ export class Cube {
         params[i][4],
         params[i][5],
         params[i][6],
-        params[i][7]
+        params[i][7],
+        this
       );
   }
 }
