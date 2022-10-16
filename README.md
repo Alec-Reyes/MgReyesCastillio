@@ -1,4 +1,4 @@
-# (SimplyCube)[https://alec-reyes.github.io/MgReyesCastillio]
+# [SimplyCube](https://alec-reyes.github.io/MgReyesCastillio)
 
 
 ## Description:
