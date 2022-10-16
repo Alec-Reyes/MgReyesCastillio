@@ -56,7 +56,7 @@ function loadTimes(){
 //adds a time to the ol
 function addTime(time){
   let t = document.createElement("li");
-  t.textContent = document.getElementById("recent-times").firstElementChild.childElementCount + 1 + ". " + formatMs(time);
+  t.innerHTML = "<strong>" + (document.getElementById("recent-times").firstElementChild.childElementCount + 1) + ". </strong>" + formatMs(time);
   document.getElementById("recent-times").firstElementChild.prepend(t);
 }
 
@@ -67,35 +67,35 @@ function computeStats(){
     timer.times.forEach((t) => mean += t);
     mean /= timer.times.length;
   }
-  document.getElementById("mean").textContent = "Mean: " + formatMs(Math.round(mean));
+  document.getElementById("mean").innerHTML = "<strong>Mean: </strong>" + formatMs(Math.round(mean));
 
   let ao3 = 0;
   if(timer.times.length >= 3){
     for(let i = 0; i < 3; i++) ao3 += timer.times[timer.times.length - (i + 1)];
     ao3 /= 3;
   }
-  document.getElementById("ao3").textContent = "Ao3: " + formatMs(Math.round(ao3));
+  document.getElementById("ao3").innerHTML = "<strong>Ao3: </strong>" + formatMs(Math.round(ao3));
 
   let ao5 = 0;
   if(timer.times.length >= 5){
     for(let i = 0; i < 5; i++) ao5 += timer.times[timer.times.length - (i + 1)];
     ao5 /= 5;
   }
-  document.getElementById("ao5").textContent = "Ao5: " + formatMs(Math.round(ao5));
+  document.getElementById("ao5").innerHTML = "<strong>Ao5: </strong>" + formatMs(Math.round(ao5));
 
   let ao12 = 0;
   if(timer.times.length >= 12){
     for(let i = 0; i < 12; i++) ao12 += timer.times[timer.times.length - (i + 1)];
     ao12 /= 12;
   }
-  document.getElementById("ao12").textContent = "Ao12: " + formatMs(Math.round(ao12));
+  document.getElementById("ao12").innerHTML = "<strong>Ao12: </strong>" + formatMs(Math.round(ao12));
 
   let ao100 = 0;
   if(timer.times.length >= 100){
     for(let i = 0; i < 100; i++) ao100 += timer.times[timer.times.length - (i + 1)];
     ao100 /= 100;
   }
-  document.getElementById("ao100").textContent = "Ao100: " + formatMs(Math.round(ao100));
+  document.getElementById("ao100").innerHTML = "<strong>Ao100: </strong>" + formatMs(Math.round(ao100));
 }
 
 function computeBest(){
@@ -137,11 +137,11 @@ function computeBest(){
     }
   }  
 
-  document.getElementById("b-single").textContent = "Single: " + formatMs(Math.floor(bSingle == Infinity ? 0 : bSingle));
-  document.getElementById("b-ao3").textContent = "Ao3: " + formatMs(Math.floor(bAo3 == Infinity ? 0 : bAo3));
-  document.getElementById("b-ao5").textContent = "Ao5: " + formatMs(Math.floor(bAo5 == Infinity ? 0 : bAo5));
-  document.getElementById("b-ao12").textContent = "Ao12: " + formatMs(Math.floor(bAo12 == Infinity ? 0 : bAo12));
-  document.getElementById("b-ao100").textContent = "Ao100: " + formatMs(Math.floor(bAo100 == Infinity ? 0 : bAo100));
+  document.getElementById("b-single").innerHTML = "<strong>Single: </strong>" + formatMs(Math.floor(bSingle == Infinity ? 0 : bSingle));
+  document.getElementById("b-ao3").innerHTML = "<strong>Ao3: </strong>" + formatMs(Math.floor(bAo3 == Infinity ? 0 : bAo3));
+  document.getElementById("b-ao5").innerHTML = "<strong>Ao5: </strong>" + formatMs(Math.floor(bAo5 == Infinity ? 0 : bAo5));
+  document.getElementById("b-ao12").innerHTML = "<strong>Ao12: </strong>" + formatMs(Math.floor(bAo12 == Infinity ? 0 : bAo12));
+  document.getElementById("b-ao100").innerHTML = "<strong>Ao100: </strong>" + formatMs(Math.floor(bAo100 == Infinity ? 0 : bAo100));
 }
 
 function generateScramble(){
