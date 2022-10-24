@@ -49,31 +49,29 @@
   <label>Moves</label><br>
   <input type="text" id="text"><br>
   <button id="button">Enter</button><br>
-  <button id="toggle">Disable controls</button>
+  <button id="toggle">Disable controls</button><br>
+  <button id="clear">Reset</button>
 
   <script type="module">
-    import {Cube} from "../js/cube.js"
+    import {Cube, Camera, rotateCameraByMouse, convertMoves} from "../js/cube.js"
     var camera = {};
     var cube = {};
+    //milliseconds per frame
+    const MPF = 10;
+    //turns per second
+    const TPS = 3;
 
     let toggled = true;
 
-    function click() {
+    function setTurns() {
       let value = document.getElementById("text").value;
-      console.log(value);
-      let move = "";
-
-      for (let i = 0; i < value.length; i++) {
-        if (value.charAt(i).toLowerCase() != value.charAt(i).toUpperCase() && move.length > 0) {
-          console.log(move);
-          cube.turnFace(move);
-          move = "";
-        }
-        move += value.charAt(i);
+      let moves = convertMoves(value);
+      if(moves == null){
+        
+      }else{
+        cube.instantComplete();
+        cube.setTurns(moves);
       }
-      cube.turnFace(move);
-      console.log(JSON.stringify(cube.stickers));
-      cube.draw(document.getElementById("c"), camera);
     }
 
     function toggleControls() {
@@ -85,21 +83,24 @@
     }
 
     window.onload = function () {
-      camera = {
-        x: 3,
-        y: 3,
-        z: 3,
-        yaw: 135,
-        pitch: 320,
-        roll: 0,
-        fov: 80,
-        width: 600,
-        height: 600
-      };
+      let canvas = document.getElementById("c");
+      
+      camera = new Camera(3, 3, 0, 135, 0, 0, 80, 600, 600);
+      
       cube = new Cube("");
-      cube.draw(document.getElementById("c"), camera);
-      document.getElementById("button").onclick = function () {click();};
-      document.getElementById("toggle").onclick = function () {toggleControls();};
+      cube.draw(canvas, camera, TPS);
+      
+      document.getElementById("button").onclick = function () {setTurns()};
+      document.getElementById("toggle").onclick = function () {toggleControls()};
+      document.getElementById("clear").onclick = function() {cube.clear([])};
+      canvas.onmousemove = function(e){rotateCameraByMouse(camera, cube, e)};
+
+      setInterval(() => {
+        //camera.rotArPoint(0, 1, 0, [0, 0, 0]);
+        camera.lookAtOrigin();
+        cube.draw(canvas, camera, TPS);
+        //console.log(camera.pitch);
+      }, MPF);
     };
 
     window.onkeydown = function (e) {
@@ -124,13 +125,13 @@
       if (camera.pitch < 0) camera.pitch = 360;
       if (camera.roll < 0) camera.roll = 360;
 
-      let t = new Date().getTime();
-      cube.draw(document.getElementById("c"), camera);
+      //let t = new Date().getTime();
+      //cube.draw(document.getElementById("c"), camera, TPS);
 
       console.log("x: " + camera.x + " y: " + camera.y + " z: " + camera.z);
       console.log("yaw: " + camera.yaw + " pitch: " + camera.pitch);
       console.log("fov: " + camera.fov);
-      console.log("Time Elapsed: " + (new Date().getTime() - t));
+      //console.log("Time Elapsed: " + (new Date().getTime() - t));
     };
   </script>
 </body>
