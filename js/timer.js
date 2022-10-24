@@ -211,8 +211,11 @@ window.onload = function(){
   };
 
   window.onmousedown = function(e){
-    if(e.target.id == "settings"){
+    if(e.target.id == "settings" || e.target.id == "settings-close"){
       document.getElementById("settings").style.display = "none";
+      //adds back window scrollbar
+      document.body.style.overflow = "auto";
+      document.body.style.userSelect = "auto";
     }
     if(e.target.nodeName == "LI" && e.target.parentNode.parentNode.id == "recent-times"){
       console.log(e.target.textContent);
@@ -226,6 +229,10 @@ window.onload = function(){
       document.getElementById("settings-time").textContent = formatMs(time);
       document.getElementById("settings-scramble").textContent = scramble;
       document.getElementById("settings").timeIndex = index;
+
+      //removes window scrollbar
+      document.body.style.overflow = "hidden";
+      document.body.style.userSelect = "none";
     }
   }
 
