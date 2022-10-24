@@ -13,10 +13,16 @@
   <link rel="stylesheet" type="text/css" href="css/main.css">
 
   <style>
-    .background {
-      padding: 50px;
-      background-color: rgb(40, 40, 40);
+    #title-background {
+      padding: 35px;
+      margin-top: 50px;
+      background-color: rgb(30, 30, 30);
       text-align: center;
+    }
+
+    #title-background > div{
+      padding: 5px;
+      background-color: rgb(35, 35, 35);
     }
 
     .button-row {
@@ -35,6 +41,7 @@
       justify-content: center;
       flex-direction: column;
       width: 500px;
+      box-shadow: 5px 5px 5px lightgrey;
     }
 
     div.button-img {
@@ -42,6 +49,7 @@
       padding: 10px;
       margin: 5px;
       background-color: lightblue;
+      box-shadow: 5px 5px 5px lightgrey;
     }
     
     div.button-img:hover {
@@ -82,9 +90,11 @@
       </li>
     </ul>
   </div>
-  <div class="background">
-    <h1 style="color:white; font-size: 50px;">SimplyCube</h1>
-    <h3 style="color: white;"><i>your gateway to the cubing world</i></h3>
+  <div id="title-background">
+    <div>
+      <h1 style="color:white; font-size: 50px;">SimplyCube</h1>
+      <h3 style="color: white;"><i>your gateway to the cubing world</i></h3>
+    </div>
   </div>
 
   <div id="content">
@@ -114,7 +124,7 @@
     <div class="button-row">
       <div class="button-content">
         <h2>CFOP Tutorial</h2>
-        <p style="margin-top: 0px;">A step-by-step process on CFOP, an advanced but faster method of solving the Rubik's Cube</p>
+        <p style="margin-top: 0px;">A step-by-step process on CFOP which is an advanced but faster method of solving the Rubik's Cube</p>
       </div>
 
       <div class="button-img">
@@ -163,7 +173,7 @@
     <div class="button-row">
       <div class="button-content">
         <h2>Virtual Cube</h2>
-        <p style="margin-top: 0px;">A usable 3d Rubik's cube for your visualization and solve recreations
+        <p style="margin-top: 0px;">A usable 3D Rubik's cube for your visualization and solve recreations
 </p>
       </div>
 
@@ -186,8 +196,8 @@
     </div>
     <div style="text-align: right;">
       <h3>Other Links:</h3>
-      Temporary text to<br>
-      test formatting
+      <a href="https://github.com/Alec-Reyes/MgReyesCastillio"> Github </a> <br>
+      <a href="htdocs/sources.html"> Sources </a>
     </div>
   </div>
 </body>
