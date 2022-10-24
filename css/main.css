@@ -91,6 +91,7 @@ body {
 
 #footer {
   padding: 15px;
+  padding-bottom: 50px;
   color: white;
   background-color: rgb(40, 40, 40);
   display: flex;
@@ -99,4 +100,12 @@ body {
 
 #footer > div {
   margin: auto;
+}
+#footer > div > a {
+  text-decoration: none;
+  color: white;
+}
+#footer > div > a:hover {
+  text-decoration: underline;
+  color: lightgrey;
 }
