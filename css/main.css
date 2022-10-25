@@ -103,9 +103,9 @@ body {
 }
 #footer > div > a {
   text-decoration: none;
-  color: white;
+  color: lightblue;
 }
 #footer > div > a:hover {
   text-decoration: underline;
-  color: lightgrey;
+  color: rgb(150,180,250);
 }
