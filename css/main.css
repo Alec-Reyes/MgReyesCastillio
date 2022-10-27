@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
 body {
   margin: 0px;
   background-color: rgb(230, 235, 240);
@@ -14,12 +15,13 @@ body {
   width: 100%;
   text-align: center;
   top: 0px;
+  font-family: 'Rubik', sans-serif;
 }
 
 #home-button {
   padding: 9px;
   background-color: lightblue;
-  border-radius: 20px;
+  border-radius: 25px;
 }
 
 #header > p{
@@ -44,10 +46,11 @@ body {
 #nav-buttons > li {
   color: white;
   float: left;
+  background-color: rgb(38, 38, 38);
 }
 
 #nav-buttons > li > p{
-  background-color: rgb(40, 40, 40);
+  background-color: rgb(38, 38, 38);
   color: white;
   padding: 20px;
   height: 20px;
@@ -101,11 +104,34 @@ body {
 #footer > div {
   margin: auto;
 }
+
+#footer > div > h2, #footer > div > h3 {
+  font-family: 'Rubik', sans-serif;
+}
+
 #footer > div > a {
   text-decoration: none;
   color: lightblue;
 }
+
 #footer > div > a:hover {
-  text-decoration: underline;
   color: rgb(150,180,250);
+}
+
+#sources{
+  background-color: rgb(50, 50, 50);
+  box-shadow: 5px 5px 5px lightgrey;
+  border-radius: 7px;
+  color: white;
+  width: fit-content;
+  padding: 8px 12px;
+}
+
+#sources > a{
+  color: white;
+  text-decoration: none;
+}
+
+#sources > a:hover{
+  color: lightgrey;
 }
