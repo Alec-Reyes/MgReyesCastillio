@@ -23,8 +23,11 @@ PLL: A list of algorithms for the PLL step of the CFOP method.
 
 ## Wireframe:
 
-### Homepage:
+### Old Homepage:
 ![Homepage Wireframe](https://user-images.githubusercontent.com/112668532/190655058-e765e2a2-2647-4a04-9ffb-0412be02a0dd.png)
+
+### Current Homepage:
+![Homepage Wireframe](https://user-images.githubusercontent.com/112668532/198275948-b51299d0-8cc1-4471-8a4a-b4584b6cd247.png)
 
 ### Timer:
 ![Timer Wireframe](https://user-images.githubusercontent.com/112668532/190655196-d8dba826-3312-43f6-9f7a-bd3438708488.png)
