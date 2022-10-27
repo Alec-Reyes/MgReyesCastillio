@@ -185,6 +185,9 @@ window.onload = function(){
     for(let i = timer.times.length - 1; i >= 0; i--) list += "<li>" + (i + 1) + ". " + formatMs(timer.times[i]) + "</li>";
     document.getElementById("recent-times").firstElementChild.innerHTML = list;
     document.getElementById("settings").style.display = "none";
+    //adds back window scrollbar
+    document.body.style.overflow = "auto";
+    document.body.style.userSelect = "auto";
   }
 
   //deleting all times
@@ -197,6 +200,9 @@ window.onload = function(){
     generateScramble();
     document.getElementById("recent-times").firstElementChild.innerHTML = "";
     document.getElementById("settings").style.display = "none";
+    //adds back window scrollbar
+    document.body.style.overflow = "auto";
+    document.body.style.userSelect = "auto";
   }
 
   window.onmouseover = function(e){
