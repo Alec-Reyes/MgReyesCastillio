@@ -162,8 +162,10 @@ function generateScramble(){
   document.getElementById("scramble").textContent = scramble.substring(0, scramble.length - 1);
 }
 
-//runs when windows is loaded
-window.onload = function(){
+if(!window.toload) window.toload = [];
+
+//adds load function to queue
+window.toload.push(function(){
   let timerElement = document.getElementById("timer").firstElementChild;
   let prevLi = null;
 
@@ -279,4 +281,4 @@ window.onload = function(){
       }
     }
   }
-}
+});

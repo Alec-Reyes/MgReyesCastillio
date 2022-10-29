@@ -5,6 +5,13 @@ body {
   font-family: Helvetica;
 }
 
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
 #header {
   color: white;
   background-color: rgb(40, 40, 40);
