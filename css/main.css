@@ -22,15 +22,18 @@ body {
   padding: 9px;
   background-color: lightblue;
   border-radius: 25px;
+  -webkit-transition: transform .3s ease-out, background-color .3s ease-out;
+  transition: transform .3s ease-out, background-color .3s ease-out;
+}
+
+#home-button:hover {
+  background-color: #95b5bf;
+  transform: rotate(90deg);
 }
 
 #header > p{
   margin-left: 5px;
   font-weight: bold;
-}
-
-#home-button:hover {
-  background-color: #9bc0cc;
 }
 
 #nav-buttons{
@@ -46,11 +49,13 @@ body {
 #nav-buttons > li {
   color: white;
   float: left;
-  background-color: rgb(38, 38, 38);
+  background-color: rgb(40, 40, 40);
 }
 
 #nav-buttons > li > p{
-  background-color: rgb(38, 38, 38);
+  -webkit-transition: all .3s ease-out;
+  transition: background-color .3s ease-out;
+  background-color: rgb(40, 40, 40);
   color: white;
   padding: 20px;
   height: 20px;
@@ -64,26 +69,35 @@ body {
 }
 
 .nav-dropdown-content{
-  display: none;
+  visibility: hidden;
+  -webkit-transition: opacity .4s ease-out, margin-top .4s ease-out;
+  transition: opacity .4s ease-out, margin-top .4s ease-out;
+  display: block;
+  opacity: 0;
   position: absolute;
+  margin-top: 3px;
   z-index: 1;
   width: 33.3%;
 }
 
 #nav-buttons > li:hover .nav-dropdown-content{
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  margin-top: 0px;
 }
 
 .nav-dropdown-content > a{
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
   display: block;
   z-index: 1;
   text-decoration: none;
   color: white;
-  background-color: rgb(40, 40, 40);
+  background-color: rgb(38, 38, 38);
   padding: 15px;
 }
 
-.nav-dropdown-content  > a:hover{
+.nav-dropdown-content > a:hover{
   background-color: grey;
 }
 
@@ -93,16 +107,19 @@ body {
 }
 
 #footer {
-  padding: 15px;
+  padding: 0px 15px;
   padding-bottom: 50px;
   color: white;
   background-color: rgb(40, 40, 40);
-  display: flex;
-  justify-content: center;
+  overflow: auto;
 }
 
 #footer > div {
-  margin: auto;
+  float: left;
+  min-width: 33.33%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 #footer > div > h2, #footer > div > h3 {
@@ -116,6 +133,13 @@ body {
 
 #footer > div > a:hover {
   color: rgb(150,180,250);
+}
+
+@media (max-width: 760px){
+  #footer{
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 #sources{
