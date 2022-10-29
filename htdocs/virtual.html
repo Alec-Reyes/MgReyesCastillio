@@ -83,7 +83,9 @@
       else button.innerHTML = "Enable Controls";
     }
 
-    window.onload = function () {
+    if(!window.toload) window.toload = [];
+    
+    window.toload.push(function () {
       let canvas = document.getElementById("c");
       
       camera = new Camera(3, 3, 0, 135, 0, 0, 80, 600, 600);
@@ -133,7 +135,7 @@
       console.log("yaw: " + camera.yaw + " pitch: " + camera.pitch);
       console.log("fov: " + camera.fov);
       //console.log("Time Elapsed: " + (new Date().getTime() - t));
-    };
+    });
   </script>
 </body>
 
