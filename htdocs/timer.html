@@ -16,7 +16,7 @@
     #scramble{
       text-align: center;
       width: fit-content;
-      font-size: 35px;
+      font-size: 2em;
       margin: auto;
       margin-bottom: 20px;
       background-color: lightblue;
@@ -40,7 +40,7 @@
       box-shadow: 5px 5px 5px lightgrey;
     }
     #timer > p{
-      font-size: 60px;
+      font-size: 3em;
       margin: auto;
       vertical-align: middle;
       display: table-cell;
@@ -54,8 +54,9 @@
       height: fit-content;
       border-radius: 10px;
       box-shadow: 5px 5px 5px lightgrey;
+      width: fit-content;
     }
-    #time-list > h6{
+    #time-list h6{
       margin: 8px 0px;
       font-family: 'Rubik', sans-serif;
       font-size: 0.6em;
@@ -103,6 +104,34 @@
     #stats > ul > li{
       margin: 0px 10px;
     }
+    @media (max-width: 745px){
+      .timer-row{
+        flex-direction: column;
+      }
+      #timer{
+        min-width: fit-content;
+        min-height: fit-content;
+        padding: 0px;
+        width: 90vw;
+        height: 90vw;
+        margin: auto;
+        margin-bottom: 20px;
+      }
+      #time-list{
+        margin: auto;
+        display: flex;
+        width: 90vw;
+      }
+      #time-list > div{
+        margin: 8px auto;
+      }
+      #stats > ul{
+        flex-direction: column;
+      }
+      #stats{
+        width: 100%;
+      }
+    }
     #settings{
       display: none;
       position: fixed;
@@ -124,6 +153,7 @@
       transform: translate(-50%, -50%);
       text-align: center;
       box-shadow: 5px 5px 5px grey;
+      overflow: auto;
     }
     #settings > div > button{
       border: none;
@@ -211,20 +241,24 @@
 
       <!--Time list-->
       <div id="time-list">
-        <h6>Best times:</h6>
-        <div id="top-times">
-          <ul>
-            <li id="b-single">Single: 0</li>
-            <li id="b-ao3">Ao3: 0</li>
-            <li id="b-ao5">Ao5: 0</li>
-            <li id="b-ao12">Ao12: 0</li>
-            <li id="b-ao100">Ao100: 0</li>
-          </ul>
+        <div>
+          <h6>Best times:</h6>
+          <div id="top-times">
+            <ul>
+              <li id="b-single">Single: 0</li>
+              <li id="b-ao3">Ao3: 0</li>
+              <li id="b-ao5">Ao5: 0</li>
+              <li id="b-ao12">Ao12: 0</li>
+              <li id="b-ao100">Ao100: 0</li>
+            </ul>
+          </div>
         </div>
-        <h6>Recent times:</h6>
-        <div id="recent-times">
-          <ol>
-          </ol>
+        <div>
+          <h6>Recent times:</h6>
+          <div id="recent-times">
+            <ol>
+            </ol>
+          </div>
         </div>
       </div>
     </div>

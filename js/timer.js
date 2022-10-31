@@ -19,8 +19,7 @@ function formatMs(t){
   if(secs < 10 && t > 0) s += "0";
   s += secs + ".";
   if(ms < 100) s += 0;
-  if(ms < 10) s += 0;
-  s += ms;
+  s += Math.floor(ms / 10);
   
   return s;
 }
@@ -38,16 +37,12 @@ function loadTimes(){
   arr = arr.split(",");
   scr = scr.split(",");
 
-  console.log(arr);
-
   arr.forEach(function(t){
     if(!Number.isInteger(parseInt(t))) return;
     t = parseInt(t);
     timer.times.push(t);
     addTime(t);
   });
-
-  console.log(scr);
 
   if(scr[0].length == 0) return;
   scr.forEach((s) => timer.scrambles.push(s));
@@ -145,13 +140,14 @@ function computeBest(){
 }
 
 function generateScramble(){
-  const faces = "RLUDFB";
+  const faces = "RUFLDB";
   let scramble = "";
   let prev = "";
 
   for(let i = 0; i < 20; i++){
     let f = prev;
-    while(f == prev) f = faces.charAt(Math.floor(Math.random() * 6));
+    let moves = scramble.split(" ");
+    while(f == prev || (i >= 2 && f == moves[i - 2].charAt(0) && faces.indexOf(f) % 3 == faces.indexOf(moves[i - 1].charAt(0)) % 3)) f = faces.charAt(Math.floor(Math.random() * 6));
     prev = f;
     scramble += f;
     let move = Math.floor(Math.random() * 4);
@@ -162,11 +158,45 @@ function generateScramble(){
   document.getElementById("scramble").textContent = scramble.substring(0, scramble.length - 1);
 }
 
-if(!window.toload) window.toload = [];
+function initAndStopTimer(){
+  let timerElement = document.getElementById("timer").firstElementChild;
+  if(!timer.starting){
+    timer.starting = true;
+    timerElement.style.color = "#55FF33";
+    document.getElementById("timer").style.backgroundColor = "#dedede";
+  }else if(timer.timerInterval != null){
+    clearInterval(timer.timerInterval);
+    timer.timerInterval = null;
+    timer.starting = false;
+    let time = new Date().getTime() - timer.startTime;
+    timerElement.innerText = formatMs(time);
+    addTime(time);
+    timer.times.push(time);
+    timer.scrambles.push(document.getElementById("scramble").textContent);
+    saveTimes();
+    computeStats();
+    computeBest();
+    generateScramble();
+  }
+}
 
+function startTimer(){
+  let timerElement = document.getElementById("timer").firstElementChild;
+  if(timer.timerInterval == null && timer.starting){
+    timerElement.style.color = "black";
+    document.getElementById("timer").style.backgroundColor = "white";
+    timer.startTime = new Date().getTime();
+    timer.timerInterval = setInterval(function (){
+      timerElement.innerText = formatMs(new Date().getTime() - timer.startTime);
+    }, 2);
+  }
+}
+
+if(!window.toload) window.toload = [];
 //adds load function to queue
 window.toload.push(function(){
   let timerElement = document.getElementById("timer").firstElementChild;
+  let lastTouchEnd = 0;
   let prevLi = null;
 
   if(!localStorage.getItem("times")) saveTimes();
@@ -217,6 +247,11 @@ window.toload.push(function(){
       e.target.style.backgroundColor = "lightgrey";
       prevLi = e.target;
     }
+    if(e.target.id == "timer" || e.target.parentNode.id == "timer"){
+      document.getElementById("timer").style.backgroundColor = "#dedede";
+    }else{
+      document.getElementById("timer").style.backgroundColor = "";
+    }
   });
 
   if(!window.tomousedown) window.tomousedown = [];
@@ -228,8 +263,8 @@ window.toload.push(function(){
       document.body.style.userSelect = "auto";
     }
     if(e.target.nodeName == "LI" && e.target.parentNode.parentNode.id == "recent-times"){
-      console.log(e.target.textContent);
       document.getElementById("settings").style.display = "block";
+      document.getElementById("settings").firstElementChild.scrollTop = 0;
 
       let arr = e.target.textContent.split(" ");
       let index = parseInt(arr[0].substring(0, arr[0].length - 1)) - 1;
@@ -244,6 +279,36 @@ window.toload.push(function(){
       document.body.style.overflow = "hidden";
       document.body.style.userSelect = "none";
     }
+    //starts and stops timer
+    if((e.target.id == "timer" || e.target.parentNode.id == "timer") && new Date().getTime() - lastTouchEnd > 10){
+      initAndStopTimer();
+    }
+  });
+
+  if(!window.tomouseup) window.tomouseup = [];
+  window.tomouseup.push(function(e){
+    if(timer.starting && new Date().getTime() - lastTouchEnd > 10){
+      e.preventDefault();
+      startTimer();
+    }
+  });
+
+  //event handler for touching the box
+  if(!window.totouchstart) window.totouchstart = [];
+  window.totouchstart.push(function(e){
+    for (let i = 0; i < e.targetTouches.length; i++) {
+      if(e.targetTouches[i].target.id == "timer" || e.target.parentNode.id == "timer"){
+        initAndStopTimer();
+        return;
+      }
+    }
+  });
+
+  //event handler for untouching the box
+  if(!window.totouchend) window.totouchend = [];
+  window.totouchend.push(function(e){
+    lastTouchEnd = new Date().getTime();
+    startTimer();
   });
 
   //event handler for holding space down
@@ -251,23 +316,7 @@ window.toload.push(function(){
   window.tokeydown.push(function(e){
     if(e.code == "Space"){
       e.preventDefault();
-      if(!timer.starting){
-        timer.starting = true;
-        timerElement.style.color = "#55FF33";
-      }else if(timer.timerInterval != null){
-        clearInterval(timer.timerInterval);
-        timer.timerInterval = null;
-        timer.starting = false;
-        let time = new Date().getTime() - timer.startTime;
-        timerElement.innerText = formatMs(time);
-        addTime(time);
-        timer.times.push(time);
-        timer.scrambles.push(document.getElementById("scramble").textContent);
-        saveTimes();
-        computeStats();
-        computeBest();
-        generateScramble();
-      }
+      initAndStopTimer();
     }
   });
 
@@ -276,13 +325,25 @@ window.toload.push(function(){
   window.tokeyup.push(function(e){
     if(e.code == "Space" && timer.starting){
       e.preventDefault();
-      if(timer.timerInterval == null){
-        timerElement.style.color = "black";
-        timer.startTime = new Date().getTime();
-        timer.timerInterval = setInterval(function (){
-          timerElement.innerText = formatMs(new Date().getTime() - timer.startTime);
-        }, 2);
-      }
+      startTimer();
     }
   });
+
+  //sets height of recent times
+  if(!window.toresize) window.toresize = [];
+  window.toresize.push(function() {
+    if(window.innerWidth <= 745){
+      document.getElementById("recent-times").style.height = document.getElementById("top-times").clientHeight + "px";
+    }
+    else{ 
+      document.getElementById("recent-times").style.height = "";
+    }
+  });
+
+  if(window.innerWidth <= 745){
+    document.getElementById("recent-times").style.height = document.getElementById("top-times").clientHeight + "px";
+  }
+  else{ 
+    document.getElementById("recent-times").style.height = "";
+  }
 });
