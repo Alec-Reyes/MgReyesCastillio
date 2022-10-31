@@ -38,6 +38,10 @@
       justify-content: center;
     }
 
+    .button-row:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
     .button-content {
       display: flex;
       border-radius: 10px;
@@ -55,7 +59,7 @@
       font-family: 'Rubik', sans-serif;
     }
 
-    div.button-img {
+    .button-img {
       -webkit-transition: background-color .2s ease-out;
       transition: background-color .2s ease-out;
       border-radius: 10px;
@@ -65,8 +69,23 @@
       box-shadow: 5px 5px 5px lightgrey;
     }
     
-    div.button-img:hover {
+    .button-img:hover {
       background-color: #95b5bf;
+    }
+
+    @media (max-width: 500px){
+      .button-row {
+        display: block;
+      }
+      .button-content{
+        width: fit-content;
+        margin: auto;
+      }
+      .button-img{
+        width: fit-content;
+        margin: auto;
+        margin-top: 40px;
+      }
     }
   </style>
 </head>
@@ -129,14 +148,14 @@
 
     <!--Notation row-->
     <div class="button-row">
+      <div class="button-content">
+        <h2>Notation</h2>
+        <p style="margin-top: 0px;">A list of the offical Rubik's Cube notation which contains what each move is and the symbol representing it</p>
+      </div>
       <div class="button-img">
         <a href="htdocs/notation.html" >
           <img src="images/notation.png" width="200px" height="200px" >
         </a>
-      </div>
-      <div class="button-content">
-        <h2>Notation</h2>
-        <p style="margin-top: 0px;">A list of the offical Rubik's Cube notation which contains what each move is and the symbol representing it</p>
       </div>
     </div>
 
@@ -146,7 +165,6 @@
         <h2>CFOP Tutorial</h2>
         <p style="margin-top: 0px;">A step-by-step process on CFOP which is an advanced but faster method of solving the Rubik's Cube</p>
       </div>
-
       <div class="button-img">
         <a href="htdocs/cfop.html" >
           <img src="images/cfop.png" width="200px" height="200px" >
@@ -156,14 +174,14 @@
 
     <!--OLL row-->
     <div class="button-row">
+      <div class="button-content">
+        <h2>OLL Algorithms</h2>
+        <p style="margin-top: 0px;">A list of algorithms for the OLL step in CFOP which orients the last layer</p>
+      </div>
       <div class="button-img">
         <a href="htdocs/oll.html" >
           <img src="images/oll.png" width="200px" height="200px" >
         </a>
-      </div>
-      <div class="button-content">
-        <h2>OLL Algorithms</h2>
-        <p style="margin-top: 0px;">A list of algorithms for the OLL step in CFOP which orients the last layer</p>
       </div>
     </div>
 
@@ -183,14 +201,14 @@
     
     <!--Timer row-->  
     <div class="button-row">
+      <div class="button-content">
+        <h2>Timer</h2>
+        <p style="margin-top: 0px;">A timer to measure your Rubik's cube solves</p>
+      </div>
       <div class="button-img">
         <a href="htdocs/timer.html" >
           <img src="images/timer.png" width="200px" height="200px" >
         </a>
-      </div>
-      <div class="button-content">
-        <h2>Timer</h2>
-        <p style="margin-top: 0px;">A timer to measure your Rubik's cube solves</p>
       </div>
     </div>
 

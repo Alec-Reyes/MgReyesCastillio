@@ -207,7 +207,8 @@ window.toload.push(function(){
     document.body.style.userSelect = "auto";
   }
 
-  window.onmouseover = function(e){
+  if(!window.tomouseover) window.tomouseover = [];
+  window.tomouseover.push(function(e){
     if(prevLi != null){
       prevLi.style.backgroundColor = "white";
       prevLi = null;
@@ -216,9 +217,10 @@ window.toload.push(function(){
       e.target.style.backgroundColor = "lightgrey";
       prevLi = e.target;
     }
-  };
+  });
 
-  window.onmousedown = function(e){
+  if(!window.tomousedown) window.tomousedown = [];
+  window.tomousedown.push(function(e){
     if(e.target.id == "settings" || e.target.id == "settings-close"){
       document.getElementById("settings").style.display = "none";
       //adds back window scrollbar
@@ -242,10 +244,11 @@ window.toload.push(function(){
       document.body.style.overflow = "hidden";
       document.body.style.userSelect = "none";
     }
-  }
+  });
 
   //event handler for holding space down
-  window.onkeydown = function(e){
+  if(!window.tokeydown) window.tokeydown = [];
+  window.tokeydown.push(function(e){
     if(e.code == "Space"){
       e.preventDefault();
       if(!timer.starting){
@@ -266,10 +269,11 @@ window.toload.push(function(){
         generateScramble();
       }
     }
-  }
+  });
 
   //event handler for releasing space
-  window.onkeyup = function(e){
+  if(!window.tokeyup) window.tokeyup = [];
+  window.tokeyup.push(function(e){
     if(e.code == "Space" && timer.starting){
       e.preventDefault();
       if(timer.timerInterval == null){
@@ -280,5 +284,5 @@ window.toload.push(function(){
         }, 2);
       }
     }
-  }
+  });
 });
