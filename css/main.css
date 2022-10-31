@@ -10,6 +10,7 @@ body {
   -moz-transition: none !important;
   -ms-transition: none !important;
   -o-transition: none !important;
+  transition: none !important;
 }
 
 #header {
@@ -43,8 +44,24 @@ body {
   font-weight: bold;
 }
 
+#menu-button{
+  -webkit-transition: background-color .3s ease-out;
+  transition: background-color .3s ease-out;
+  background-color: rgb(40, 40, 40);
+  color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-size: 18px;
+  width: 5em;
+  height: 60px;
+  border: none;
+  z-index: 2;
+  font-weight: bold;
+  display: none;
+}
+
 #nav-buttons{
-  float: left;
   list-style-type: none;
   margin: 0px;
   padding: 0px;
@@ -60,7 +77,7 @@ body {
 }
 
 #nav-buttons > li > p{
-  -webkit-transition: all .3s ease-out;
+  -webkit-transition: background-color .3s ease-out;
   transition: background-color .3s ease-out;
   background-color: rgb(40, 40, 40);
   color: white;
@@ -71,7 +88,7 @@ body {
   width: 5em;
 }
 
-#nav-buttons > li > p:hover, #nav-buttons li:hover {
+#nav-buttons > li > p:hover, #nav-buttons li:hover, #menu-button:hover{
   background-color: grey;
 }
 
@@ -85,6 +102,7 @@ body {
   margin-top: 3px;
   z-index: 1;
   width: 33.3%;
+  background-color: rgb(38, 38, 38);
 }
 
 #nav-buttons > li:hover .nav-dropdown-content{
@@ -106,6 +124,32 @@ body {
 
 .nav-dropdown-content > a:hover{
   background-color: grey;
+}
+
+@media (max-width: 560px){
+  #menu-button{
+    display: block;
+  }
+  #nav-buttons{
+    display: none;
+    top: 60px;
+    left: 0px;
+    width: fit-content;
+  }
+  #nav-buttons > li {
+    float: none;
+  }
+  .nav-dropdown-content{
+    position: absolute;
+    margin-top: -60px;
+    width: fit-content;
+  }
+  .nav-dropdown-content > a{
+    padding: 20px;
+  }
+  #nav-buttons > li:hover .nav-dropdown-content{
+    margin-top: -60px;
+  }
 }
 
 #content {
