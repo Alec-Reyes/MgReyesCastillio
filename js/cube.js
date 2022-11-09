@@ -530,6 +530,8 @@ export class Camera{
     this.fov = fov;
     this.width = width;
     this.height = height;
+    this.xRot = 0;
+    this.yRot = 0;
   }
 
   rotArPoint(yaw, pitch, roll, point){
@@ -556,38 +558,16 @@ export class Camera{
   }
 }
 
-export function rotateCameraByMouse(camera, cube, event){
+export function rotateCameraByMouse(camera, homePos, event){
   if(event.buttons == 1){
-    const mult = 10;
-    let dist = sqDist3d(camera.getPos(), [0, 0, 0]);
-    let camSize = Math.tan(camera.fov * Math.PI / 360) * 2;
-    
-    let rPoint = [event.movementX / camera.width * camSize * mult, 0, event.movementY / camera.height * camSize * mult];
-
-    //rotate point around origin
-    //yaw
-    let r = rotatePoint(rPoint[0], rPoint[1], camera.yaw * Math.PI / 180);
-    rPoint[0] = r[0];
-    rPoint[1] = r[1];
-    //pitch
-    r = rotatePoint(rPoint[2], rPoint[0], camera.pitch * Math.PI / 180);
-    rPoint[2] = r[0];
-    rPoint[0] = r[1];
-    //roll
-    r = rotatePoint(rPoint[1], rPoint[2], camera.roll * Math.PI);
-    rPoint[1] = r[0];
-    rPoint[2] = r[1];
-
-    camera.x += rPoint[0];
-    camera.y += rPoint[1];
-    camera.z += rPoint[2];
-
-    let coeff = Math.sqrt(dist) / Math.sqrt(sqDist3d(camera.getPos(), [0, 0, 0]));
-
-    camera.x *= coeff;
-    camera.y *= coeff;
-    camera.z *= coeff;
-
-    console.log(camera.getPos());
+    //calc horizontal rot
+    camera.xRot = roundAngle(camera.xRot - 180 * (event.movementX / camera.width));
+    //calc vertical rot
+    let yRot = roundAngle(camera.yRot + 180 * (event.movementY / camera.height));
+    if(yRot < 90 || yRot > 270) camera.yRot = yRot;
+    let r = rotatePoint(Math.sqrt(sqDist3d([0, 0, 0], homePos)), homePos[2], camera.yRot * Math.PI / 180);
+    camera.x = Math.cos(camera.xRot * Math.PI / 180) * r[0];
+    camera.y = Math.sin(camera.xRot * Math.PI / 180) * r[0];
+    camera.z = r[1];
   }
 }
