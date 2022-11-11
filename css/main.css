@@ -13,7 +13,7 @@ body {
   transition: none !important;
 }
 
-#header {
+header {
   color: white;
   background-color: rgb(40, 40, 40);
   display: flex;
@@ -39,7 +39,7 @@ body {
   transform: rotate(90deg);
 }
 
-#header > p{
+header > p{
   margin-left: 5px;
   font-weight: bold;
 }
@@ -157,7 +157,7 @@ body {
   margin-top: 80px;
 }
 
-#footer {
+footer {
   padding: 0px 15px;
   padding-bottom: 50px;
   color: white;
@@ -165,7 +165,7 @@ body {
   overflow: auto;
 }
 
-#footer > div {
+footer > div {
   float: left;
   min-width: 33.33%;
   padding: 10px;
@@ -173,21 +173,21 @@ body {
   text-align: center;
 }
 
-#footer > div > h2, #footer > div > h3 {
+footer > div > h2, footer > div > h3 {
   font-family: 'Rubik', sans-serif;
 }
 
-#footer > div > a {
+footer > div > a {
   text-decoration: none;
   color: lightblue;
 }
 
-#footer > div > a:hover {
+footer > div > a:hover {
   color: rgb(150,180,250);
 }
 
 @media (max-width: 760px){
-  #footer{
+  footer{
     display: flex;
     flex-direction: column;
   }
