@@ -54,7 +54,7 @@
     <label>Moves</label><br>
     <input type="text" id="text"><br>
     <button id="button">Enter</button><br>
-    <button id="toggle">Disable controls</button><br>
+    <button id="toggle">Enable controls</button><br>
     <button id="clear">Reset</button>
   </div>
 
@@ -84,7 +84,7 @@
     //turns per second
     const TPS = 3;
 
-    let toggled = true;
+    let toggled = false;
 
     function setTurns() {
       let value = document.getElementById("text").value;
@@ -110,7 +110,8 @@
     window.toload.push(function () {
       let canvas = document.getElementById("c");
       
-      camera = new Camera(3, 3, 0, 135, 0, 0, 80, 600, 600);
+      camera = new Camera(3, 3, 0, 135, 0, 0, 80, 600, 600, 45, 30);
+      camera.lookAtOrigin();
       
       cube = new Cube("");
       cube.draw(canvas, camera, TPS);

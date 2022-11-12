@@ -80,7 +80,7 @@ export function rotate3dPoint(point, center, yaw, pitch, roll){
 //converts string into array of moves and returns null if not correctly formatted
 //moves is a string
 export function convertMoves(moves){
-  const moveSym = ["U", "D", "R", "L", "F", "B", "M", "E", "S", "u", "d", "r", "l", "f", "b", "Uw", "Dw", "Rw", "Lw", "Fw", "Bw"];
+  const moveSym = ["U", "D", "R", "L", "F", "B", "M", "E", "S", "u", "d", "r", "l", "f", "b", "Uw", "Dw", "Rw", "Lw", "Fw", "Bw", "x", "y", "z"];
   const remove = [" ", "(", ")", "[", "]", ","];
   let result = [];
 
@@ -256,26 +256,46 @@ export class Cube {
           c: [[6, 7, 8], [6, 7, 8], [6, 7, 8], [6, 7, 8]],
           s: ["F", "R", "B", "L"]
         },
+        M:{
+          c: [[7, 4, 1], [7, 4, 1], [1, 4, 7], [1, 4, 7]],
+          s: ["D", "B", "U", "F"]
+        },
+        S:{
+          c: [[3, 4, 5], [1, 4, 7], [3, 4, 5], [7, 4, 1]],
+          s: ["U", "R", "D", "L"]
+        },
+        E:{
+          c: [[3, 4, 5], [3, 4, 5], [3, 4, 5], [3, 4, 5]],
+          s: ["F", "R", "B", "L"]
+        },
+        x:{
+          c: [[0, 1, 2, 3, 4, 5, 6, 7, 8], [0, 1, 2, 3, 4, 5, 6, 7, 8], [8, 7, 6, 5, 4, 3, 2, 1, 0], [8, 7, 6, 5, 4, 3, 2, 1, 0]],
+          s: ["F", "U", "B", "D"]
+        },
+        y:{
+          c: [[0, 1, 2, 3, 4, 5, 6, 7, 8], [0, 1, 2, 3, 4, 5, 6, 7, 8], [0, 1, 2, 3, 4, 5, 6, 7, 8], [0, 1, 2, 3, 4, 5, 6, 7, 8]],
+          s: ["F", "L", "B", "R"]
+        },
+        z:{
+          c: [[0, 1, 2, 3, 4, 5, 6, 7, 8], [2, 5, 8, 1, 4, 7, 0, 3, 6], [0, 1, 2, 3, 4, 5, 6, 7, 8], [6, 3, 0, 7, 4, 1, 8, 5, 2]],
+          s: ["U", "R", "D", "L"]
+        },
       }
   }
 
   //function used for cycling the stickers for every turn
   cycleStickers(c, symbols) {
-    let tmp = [
-      this.stickers[symbols[3]][Math.floor(c[3][0] / 3)][c[3][0] % 3],
-      this.stickers[symbols[3]][Math.floor(c[3][1] / 3)][c[3][1] % 3],
-      this.stickers[symbols[3]][Math.floor(c[3][2] / 3)][c[3][2] % 3],
-    ];
+    let tmp = [];
+    for(let i = 0; i < c[3].length; i++)
+      tmp.push(this.stickers[symbols[3]][Math.floor(c[3][i] / 3)][c[3][i] % 3]);
 
     for (let i = 3; i > 0; i--) {
-      for (let j = 0; j < 3; j++)
-        this.stickers[symbols[i]][Math.floor(c[i][j] / 3)][c[i][j] % 3] =
-          this.stickers[symbols[i - 1]][Math.floor(c[i - 1][j] / 3)][
-            c[i - 1][j] % 3
-          ];
+      for (let j = 0; j < c[i].length; j++){
+        this.stickers[symbols[i]][Math.floor(c[i][j] / 3)][c[i][j] % 3] = this.stickers[symbols[i - 1]][Math.floor(c[i - 1][j] / 3)][c[i - 1][j] % 3];
+      }
     }
 
-    for (let j = 0; j < 3; j++)
+    for (let j = 0; j < tmp.length; j++)
       this.stickers[symbols[0]][Math.floor(c[0][j] / 3)][c[0][j] % 3] = tmp[j];
   }
 
@@ -304,8 +324,43 @@ export class Cube {
       for (let c = 0; c < rotations; c++) {
         this.cycleStickers(this.cycleParams[turnSymbol].c, this.cycleParams[turnSymbol].s);
       }
-    } else if ("xyz".includes(turnSymbol)) {
+    } else if ("MES".includes(turnSymbol)) {
+      let rotations = 1;
+
+      if (amount == "2") rotations = 2;
+      else if (amount == "'") rotations = 3;
+
+      for (let c = 0; c < rotations; c++) {
+        this.cycleStickers(this.cycleParams[turnSymbol].c, this.cycleParams[turnSymbol].s);
+      }
+    }else if ("xyz".includes(turnSymbol)) {
+      let turnFaces = [];
+
+      if(turnSymbol == "x") turnFaces = ["R", "L"];
+      else if(turnSymbol == "y") turnFaces = ["U", "D"];
+      else if(turnSymbol == "z") turnFaces = ["F", "B"];
       
+      for(let c = 0; c < 2; c++){
+        let tmpSide = JSON.parse(JSON.stringify(this.stickers[turnFaces[c]]));
+        for (let x = 0; x < 3; x++) {
+          for (let y = 0; y < 3; y++) {
+            if (((amount == null && c == 0) || (amount != null && c == 1)))
+              this.stickers[turnFaces[c]][x][2 - y] = tmpSide[y][x];
+            else if (amount == "2")
+              this.stickers[turnFaces[c]][2 - y][2 - x] = tmpSide[y][x];
+            else this.stickers[turnFaces[c]][2 - x][y] = tmpSide[y][x];
+          }
+        }
+      }
+
+      let rotations = 1;
+
+      if (amount == "2") rotations = 2;
+      else if (amount == "'") rotations = 3;
+
+      for (let c = 0; c < rotations; c++) {
+        this.cycleStickers(this.cycleParams[turnSymbol].c, this.cycleParams[turnSymbol].s);
+      }
     }
   }
 
@@ -327,12 +382,18 @@ export class Cube {
     //computing rotation
 
     let turnParams = {
-      U: {xI: 0, yI: 1, zI: 2, z: 1.5, r: false},
-      D: {xI: 0, yI: 1, zI: 2, z: -1.5, r: true},
-      R: {xI: 2, yI: 0, zI: 1, z: 1.5, r: false},
-      L: {xI: 2, yI: 0, zI: 1, z: -1.5, r: true},
-      F: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true},
-      B: {xI: 2, yI: 1, zI: 0, z: -1.5, r: false}
+      U: {xI: 0, yI: 1, zI: 2, z: 1.5, r: false, f: "U"},
+      D: {xI: 0, yI: 1, zI: 2, z: -1.5, r: true, f: "D"},
+      R: {xI: 2, yI: 0, zI: 1, z: 1.5, r: false, f: "R"},
+      L: {xI: 2, yI: 0, zI: 1, z: -1.5, r: true, f: "L"},
+      F: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true, f: "F"},
+      B: {xI: 2, yI: 1, zI: 0, z: -1.5, r: false, f: "B"},
+      M: {xI: 2, yI: 0, zI: 1, z: 1.5, r: true, f: ""},
+      S: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true, f: ""},
+      E: {xI: 0, yI: 1, zI: 2, z: -1.5, r: true, f: ""},
+      x: {xI: 2, yI: 0, zI: 1, z: 1.5, r: false, f: "RL"},
+      y: {xI: 0, yI: 1, zI: 2, z: 1.5, r: false, f: "UD"},
+      z: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true, f: "FB"}
     }
     
     if(this.turns.length > 0){
@@ -386,7 +447,7 @@ export class Cube {
             if(cube.turns.length > 0){
               let param = turnParams[cube.turns[0].charAt(0)];
               let fIdx = cube.cycleParams[cube.turns[0].charAt(0)].s.indexOf(f);
-              if(cube.turns[0].charAt(0) == f || (fIdx != -1 && cube.cycleParams[cube.turns[0].charAt(0)].c[fIdx].includes(x * 3 + y))){
+              if(param.f.includes(f) || (fIdx != -1 && cube.cycleParams[cube.turns[0].charAt(0)].c[fIdx].includes(x * 3 + y))){
                 let p = rotatePoint(point[param.xI], point[param.yI], cube.rotation);
                 point[param.xI] = p[0];
                 point[param.yI] = p[1];
@@ -519,8 +580,9 @@ export class Cube {
 }
 
 //represents where the observer of the world is
+//if set the xRot and yRot (anglular coords) it will set the pos to its corresponing x, y, z
 export class Camera{
-  constructor(x, y, z, yaw, pitch, roll, fov, width, height) {
+  constructor(x, y, z, yaw, pitch, roll, fov, width, height, xRot, yRot) {
     this.x = x;
     this.y = y;
     this.z = z;
@@ -532,6 +594,14 @@ export class Camera{
     this.height = height;
     this.xRot = 0;
     this.yRot = 0;
+    if(xRot != null && yRot != null){
+      this.xRot = xRot;
+      this.yRot = yRot;
+      let r = rotatePoint(Math.sqrt(sqDist3d([0, 0, 0], [x, y, z])), z, this.yRot * Math.PI / 180);
+      this.x = Math.cos(this.xRot * Math.PI / 180) * r[0];
+      this.y = Math.sin(this.xRot * Math.PI / 180) * r[0];
+      this.z = r[1];
+    }
   }
 
   rotArPoint(yaw, pitch, roll, point){
