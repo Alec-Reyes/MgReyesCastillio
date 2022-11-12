@@ -52,11 +52,11 @@ export function angle3d(a, b){
 //angles are in radians
 export function rotate3dPoint(point, center, yaw, pitch, roll){
   let result = [];
-  
+
   point[0] -= center[0];
   point[1] -= center[1];
   point[2] -= center[2];
-  
+
   let cosa = Math.cos(yaw);
   let sina = Math.sin(yaw);
 
@@ -339,7 +339,7 @@ export class Cube {
       if(turnSymbol == "x") turnFaces = ["R", "L"];
       else if(turnSymbol == "y") turnFaces = ["U", "D"];
       else if(turnSymbol == "z") turnFaces = ["F", "B"];
-      
+
       for(let c = 0; c < 2; c++){
         let tmpSide = JSON.parse(JSON.stringify(this.stickers[turnFaces[c]]));
         for (let x = 0; x < 3; x++) {
@@ -378,7 +378,7 @@ export class Cube {
     ctx.fillStyle = "#ffffff";
     //ctx.fillRect(0, 0, camera.width, camera.height);
     ctx.clearRect(0, 0, camera.width, camera.height);
-    
+
     //computing rotation
 
     let turnParams = {
@@ -395,17 +395,17 @@ export class Cube {
       y: {xI: 0, yI: 1, zI: 2, z: 1.5, r: false, f: "UD"},
       z: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true, f: "FB"}
     }
-    
+
     if(this.turns.length > 0){
       let amount = this.turns[0].charAt(this.turns[0].length - 1);
       let time = new Date().getTime();
       //console.log(time - this.prevTime);
-      
+
       this.rotation = -(amount == 2 ? 180 : 90) * (tps * (time - this.prevTime) / 1000) * (Math.PI / 180);
       if(amount == "'") this.rotation *= -1;
       if(turnParams[this.turns[0].charAt(0)].r) this.rotation *= -1;
       if(this.rotation < 0) this.rotation += Math.PI * 2;
-      
+
       if(tps * (time - this.prevTime) / 1000 > 1){
         this.rotation = 0;
         this.turnFace(this.turns[0]);
@@ -452,8 +452,8 @@ export class Cube {
                 point[param.xI] = p[0];
                 point[param.yI] = p[1];
               }
-            } 
-              
+            }
+
             points.push(point);
           }
         }
@@ -474,7 +474,7 @@ export class Cube {
         distance.push(sqDist3d(center, [(points[c * 8][0] + points[c * 8 + 2][0]) / 2, (points[c * 8][1] + points[c * 8 + 2][1]) / 2, (points[c * 8][2] + points[c * 8 + 2][2]) / 2]));
       }
     }
-    
+
     //gen stickers
     for (let i = 0; i < 6; i++){
       genStickers(
@@ -610,7 +610,7 @@ export class Camera{
 
     //console.log(pos);
     //console.log(this.getPos());
-    
+
     this.x = pos[0];
     this.y = pos[1];
     this.z = pos[2];
@@ -631,9 +631,9 @@ export class Camera{
 export function rotateCameraByMouse(camera, homePos, event){
   if(event.buttons == 1){
     //calc horizontal rot
-    camera.xRot = roundAngle(camera.xRot - 180 * (event.movementX / camera.width));
+    camera.xRot = roundAngle(camera.xRot - 90 * (event.movementX / camera.width));
     //calc vertical rot
-    let yRot = roundAngle(camera.yRot + 180 * (event.movementY / camera.height));
+    let yRot = roundAngle(camera.yRot + 90 * (event.movementY / camera.height));
     if(yRot < 90 || yRot > 270) camera.yRot = yRot;
     let r = rotatePoint(Math.sqrt(sqDist3d([0, 0, 0], homePos)), homePos[2], camera.yRot * Math.PI / 180);
     camera.x = Math.cos(camera.xRot * Math.PI / 180) * r[0];

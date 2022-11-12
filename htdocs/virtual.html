@@ -12,6 +12,49 @@
 
   <link rel="icon" type="image/gif" href="../images/logo.png">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
+
+  <style>
+    #content{
+      display: flex;
+    }
+    #solve-container{
+      background-color: rgb(245, 245, 245);
+      text-align: center;
+      margin: auto;
+      color: black;
+      width: 100%;
+      font-size: 25px;
+      border-radius: 7px;
+      overflow: auto;
+      box-shadow: 5px 5px 5px lightgrey;
+      padding: 5%;
+    }
+    #solve-container > h3{
+      margin: 0.2em;
+      font-family: 'Rubik', sans-serif;
+    }
+    #scramble-input{
+      width: 100%;
+      margin: 0;
+      height: 2em;
+    }
+    #solve-input{
+      width: 100%;
+      height: 5em;
+    }
+    #play-button{
+      background-image: url("../images/play-button.svg");
+      background-size: cover;
+      height: 55px;
+      width: 55px;
+      padding: 0;
+      border: none;
+      margin: 5px;
+    }
+    #play-button:hover {
+      background-color: lightgray;
+    }
+  </style>
 </head>
 
 <body>
@@ -47,16 +90,24 @@
       </li>
     </ul>
   </header>
-  
-  <div id="content">
-    <canvas width="600px" height="600px" id="c"></canvas><br>
 
-    <label>Moves</label><br>
-    <input type="text" id="text"><br>
-    <button id="button">Enter</button><br>
-    <button id="toggle">Enable controls</button><br>
-    <button id="clear">Reset</button>
+  <div id="content">
+    <!--The canvas that renders the cube-->
+    <canvas width="400px" height="400px" id="c"></canvas>
+    <!--the solve container-->
+    <div id="solve-container">
+      <h3>Scramble</h3>
+      <input type="text" id="scramble-input">
+      <h3>Solve</h3>
+      <textarea id="solve-input" row="50" col="35"></textarea>
+      <button id="play-button"></button>
+    </div>
   </div>
+  <label>Moves</label><br>
+  <input type="text" id="text"><br>
+  <button id="button">Enter</button><br>
+  <button id="toggle">Enable controls</button><br>
+  <button id="clear">Reset</button>
 
   <!--Footer-->
   <footer>
@@ -90,7 +141,7 @@
       let value = document.getElementById("text").value;
       let moves = convertMoves(value);
       if(moves == null){
-        
+
       }else{
         cube.instantComplete();
         cube.setTurns(moves);
@@ -106,20 +157,19 @@
     }
 
     if(!window.toload) window.toload = [];
-    
     window.toload.push(function () {
       let canvas = document.getElementById("c");
-      
-      camera = new Camera(3, 3, 0, 135, 0, 0, 80, 600, 600, 45, 30);
+
+      camera = new Camera(4, 4, 0, 135, 0, 0, 80, 400, 400, 45, 30);
       camera.lookAtOrigin();
-      
+
       cube = new Cube("");
       cube.draw(canvas, camera, TPS);
-      
+
       document.getElementById("button").onclick = function () {setTurns()};
       document.getElementById("toggle").onclick = function () {toggleControls()};
       document.getElementById("clear").onclick = function() {cube.clear([])};
-      canvas.onmousemove = function(e){rotateCameraByMouse(camera, [3, 3, 0], e)};
+      canvas.onmousemove = function(e){rotateCameraByMouse(camera, [4, 4, 0], e)};
 
       setInterval(() => {
         //camera.rotArPoint(0, 1, 0, [0, 0, 0]);
@@ -129,7 +179,8 @@
       }, MPF);
     });
 
-    window.onkeydown = function (e) {
+    if(!window.tokeydown) window.tokeydown = [];
+    window.tokeydown.push(function (e) {
       const step = 0.5;
 
       if (!toggled) return;
@@ -158,7 +209,7 @@
       console.log("yaw: " + camera.yaw + " pitch: " + camera.pitch);
       console.log("fov: " + camera.fov);
       //console.log("Time Elapsed: " + (new Date().getTime() - t));
-    };
+    });
   </script>
   <script src="../js/script.js"></script>
 </body>
