@@ -41,7 +41,7 @@
       border: 2px solid black;
       box-sizing: border-box;
     }
-    #solve-input{
+    #solve-input, #clear-solve-input{
       width: 100%;
       min-height: 4em;
       max-height: 8em;
@@ -51,9 +51,18 @@
       border: 2px solid black;
       cursor: text;
       box-sizing: border-box;
-      display: inline-block;
+      display: block;
       font-size: 0.5em;
       text-align: left;
+    }
+    #clear-solve-input{
+      background-color: transparent;
+      color: transparent;
+      caret-color: black;
+      border-color: transparent;
+    }
+    #solve-input .comment{
+      color: green;
     }
     #play-button{
       background-image: url("../images/play-button.svg");
@@ -110,11 +119,10 @@
     <!--the solve container-->
     <div id="solve-container">
       <h4>Scramble</h4>
-      <input type="text" id="scramble-input">
+      <input type="text" id="scramble-input" spellcheck="false">
       <h4>Solve</h4>
-      <div id="solve-input" contenteditable="true">
-        <span></span>
-      </div>
+      <div id="solve-input" style="white-space: pre-line" spellcheck="false"></div>
+      <div id="clear-solve-input" contenteditable="true" spellcheck="false"></div>
       <button id="play-button"></button>
     </div>
   </div>
@@ -140,6 +148,12 @@
       <a href="htdocs/sources.html"> Sources </a>
     </div>
   </footer>
+
+  <script>
+    function run(s){
+      document.getElementById("solve-input").innerHTML = s;
+    }
+  </script>
 
   <script type="module">
     import {Cube, Camera, rotateCameraByMouse, convertMoves} from "../js/cube.js"
@@ -171,6 +185,21 @@
       else button.innerHTML = "Enable Controls";
     }
 
+    function fixSolveInput() {
+      let element = document.getElementById("solve-input");
+      let rect = element.getBoundingClientRect();
+      let clearElement = document.getElementById("clear-solve-input");
+      clearElement.style.marginTop = -rect.height + "px";
+    }
+
+    function fixScroll(){
+      let clearElement = document.getElementById("clear-solve-input");
+      let element = document.getElementById("solve-input");
+      element.scrollTop = clearElement.scrollTop;
+      element.scrollLeft = clearElement.scrollLeft;
+      //console.log("fixing");
+    }
+
     if(!window.toload) window.toload = [];
     window.toload.push(function () {
       let canvas = document.getElementById("c");
@@ -193,24 +222,25 @@
         //console.log(camera.pitch);
       }, MPF);
 
+      fixSolveInput();
       //event listener for the solve input
       let solveInput = document.getElementById("solve-input");
+      let clearSolveInput = document.getElementById("clear-solve-input");
 
-      solveInput.onkeyup = function(e) {
+      clearSolveInput.onscroll = function(e) {fixScroll()};
+      clearSolveInput.onkeyup = function(e) {
         const moveSym = ["U", "D", "R", "L", "F", "B", "M", "E", "S", "u", "d", "r", "l", "f", "b", "Uw", "Dw", "Rw", "Lw", "Fw", "Bw", "x", "y", "z"];
         const remove = [" ", "(", ")", "[", "]", ","];
         let moves = "";
         let result = [];
 
-        moves = solveInput.innerHTML;
+        moves = clearSolveInput.innerHTML.replaceAll("&nbsp;", " ");
 
-        moves = moves.replaceAll("&nbsp;", " ");
-        moves = moves.replaceAll("<br>", "\n");
-        if(!moves.endsWith("\n")) moves += "\n";
-
+        //adds newlines based on the divs
         let newMoves = "";
         let canceled = false;
         for(let i = 0; i < moves.length; i++){
+          if(!canceled && i > 0 && moves.substring(i, i + 5) == "<div>" && moves.substring(i, i + 11) != "<div></div>") newMoves += "\n";
           if(moves.charAt(i) == "<") canceled = true;
           if(!canceled) newMoves += moves.charAt(i);
           if(moves.charAt(i) == ">") canceled = false;
@@ -218,26 +248,38 @@
 
         moves = newMoves;
 
-        console.log(moves);
-
+        //filters comments
         let current = "";
         let index = moves.indexOf("//");
         while(index != -1){
           result.push(moves.slice(0, index));
           moves = moves.slice(index);
           index = moves.indexOf("\n");
-          result.push(moves.slice(0, index + 1));
+          if(index == -1) index = moves.length - 1;
+          result.push("<span class=\"comment\">" + moves.slice(0, index + 1) + "</span>");
           moves = moves.slice(index + 1);
           index = moves.indexOf("//");
-          console.log(moves);
         }
         if(moves.length > 0) result.push(moves);
 
         console.log(result);
 
-        remove.forEach((c) => {moves = moves.replaceAll(c, "")});
+        //filters temp symbols
+        for(let i = 0; i < result.length; i++){
+          if(!result[i].startsWith("<span")) {
+            remove.forEach(c => result[i] = result[i].replaceAll(c, "<span class=\"symbol\">" + c + "</span>"));
+          }
+        }
 
-        //console.log("Pruned: " + moves);
+        console.log("final: " + result);
+
+        //adds all the array elements together
+        let final = "";
+        result.forEach(s => final += s);
+        solveInput.innerHTML = final + "&nbsp;";
+
+        fixScroll();
+        fixSolveInput();
 
         while(moves.length > 0){
           let m = null;
