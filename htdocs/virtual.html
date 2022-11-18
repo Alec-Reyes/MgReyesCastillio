@@ -54,6 +54,7 @@
       display: block;
       font-size: 0.5em;
       text-align: left;
+      font-family: Courier;
     }
     #clear-solve-input{
       background-color: transparent;
@@ -63,6 +64,10 @@
     }
     #solve-input .comment{
       color: green;
+    }
+    #solve-input .error{
+      text-decoration: underline;
+      text-decoration-color: red;
     }
     #play-button{
       background-image: url("../images/play-button.svg");
@@ -159,6 +164,7 @@
     import {Cube, Camera, rotateCameraByMouse, convertMoves} from "../js/cube.js"
     var camera = {};
     var cube = {};
+    var currentSolve = [];
     //milliseconds per frame
     const MPF = 10;
     //turns per second
@@ -230,7 +236,7 @@
       clearSolveInput.onscroll = function(e) {fixScroll()};
       clearSolveInput.onkeyup = function(e) {
         const moveSym = ["U", "D", "R", "L", "F", "B", "M", "E", "S", "u", "d", "r", "l", "f", "b", "Uw", "Dw", "Rw", "Lw", "Fw", "Bw", "x", "y", "z"];
-        const remove = [" ", "(", ")", "[", "]", ","];
+        const remove = [" ", "(", ")", "[", "]", ",", "\n"];
         let moves = "";
         let result = [];
 
@@ -265,13 +271,68 @@
         console.log(result);
 
         //filters temp symbols
+        newMoves = [];
         for(let i = 0; i < result.length; i++){
+          let line = result[i];
           if(!result[i].startsWith("<span")) {
-            remove.forEach(c => result[i] = result[i].replaceAll(c, "<span class=\"symbol\">" + c + "</span>"));
+            //remove.forEach(c => result[i] = result[i].replaceAll(c, "<span class=\"symbol\">" + c + "</span>"));
+            while(line.length > 0){
+              let index = line.length;
+              for(const r of remove){
+                let i = line.indexOf(r);
+                if(i != -1 && i < index) index = i
+              }
+              if(index == line.length){
+                newMoves.push(line);
+                line = "";
+              }else{
+                if(index > 0) newMoves.push(line.slice(0, index));
+                newMoves.push("<span class=\"symbol\">" + line.substring(index, index + 1) + "</span>");
+                line = line.slice(index + 1);
+              }
+            }
           }
+          if(line.length > 0) newMoves.push(line);
         }
+        result = newMoves;
+
+        //fillter moves
+        newMoves = [];
+        currentSolve = [];
+        for(let i = 0; i < result.length; i++){
+          let line = result[i];
+          if(!line.startsWith("<span")){
+            let r = [];
+            while(line.length > 0){
+              let m = null;
+              moveSym.some(move => {
+                if(line.startsWith(move))
+                  m = move;
+                return m != null;
+              });
+              if(m == null){
+                r.push("<span class=\"error\">" + line.substring(0, 1) + "</span>");
+                line = line.slice(1);
+              }else{
+                let str = line.substring(0, m.length);
+                line = line.slice(m.length);
+                if(line.startsWith("'") || line.startsWith("2")){
+                  str += line.charAt(0);
+                  line = line.slice(1);
+                }
+                r.push("<span class=\"move\">" + str + "</span>");
+                currentSolve.push(str);
+              }
+            }
+            line = "";
+            for(const str of r) line += str;
+          }
+          newMoves.push(line);
+        }
+        result = newMoves;
 
         console.log("final: " + result);
+        console.log(currentSolve);
 
         //adds all the array elements together
         let final = "";
