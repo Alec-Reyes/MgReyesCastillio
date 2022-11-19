@@ -236,24 +236,48 @@ export class Cube {
           c: [[0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]],
           s: ["F", "L", "B", "R"]
         },
+        u:{
+          c: [[0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5]],
+          s: ["F", "L", "B", "R"]
+        },
         R:{
           c: [[2, 5, 8], [2, 5, 8], [6, 3, 0], [6, 3, 0]],
+          s: ["F", "U", "B", "D"]
+        },
+        r:{
+          c: [[1, 2, 4, 5, 7, 8], [1, 2, 4, 5, 7, 8], [7, 6, 4, 3, 1, 0], [7, 6, 4, 3, 1, 0]],
           s: ["F", "U", "B", "D"]
         },
         F:{
           c: [[6, 7, 8], [0, 3, 6], [6, 7, 8], [8, 5, 2]],
           s: ["U", "R", "D", "L"]
         },
+        f:{
+          c: [[3, 4, 5, 6, 7, 8], [1, 4, 7, 0, 3, 6], [3, 4, 5, 6, 7, 8], [7, 4, 1, 8, 5, 2]],
+          s: ["U", "R", "D", "L"]
+        },
         B:{
           c: [[0, 1, 2], [6, 3, 0], [0, 1, 2], [2, 5, 8]],
+          s: ["U", "L", "D", "R"]
+        },
+        b:{
+          c: [[0, 1, 2, 3, 4, 5], [6, 3, 0, 7, 4, 1], [0, 1, 2, 3, 4, 5], [2, 5, 8, 1, 4, 7]],
           s: ["U", "L", "D", "R"]
         },
         L:{
           c: [[0, 3, 6], [8, 5, 2], [8, 5, 2], [0, 3, 6]],
           s: ["F", "D", "B", "U"]
         },
+        l:{
+          c: [[0, 3, 6, 1, 4, 7], [8, 5, 2, 7, 4, 1], [8, 5, 2, 7, 4, 1], [0, 3, 6, 1, 4, 7]],
+          s: ["F", "D", "B", "U"]
+        },
         D:{
           c: [[6, 7, 8], [6, 7, 8], [6, 7, 8], [6, 7, 8]],
+          s: ["F", "R", "B", "L"]
+        },
+        d:{
+          c: [[3, 4, 5, 6, 7, 8], [3, 4, 5, 6, 7, 8], [3, 4, 5, 6, 7, 8], [3, 4, 5, 6, 7, 8]],
           s: ["F", "R", "B", "L"]
         },
         M:{
@@ -303,16 +327,16 @@ export class Cube {
     let turnSymbol = turn.substring(0, 1);
     let amount = turn.length == 1 ? null : turn.substring(1, 2);
 
-    if ("UDFBRL".includes(turnSymbol)) {
-      let tmpSide = JSON.parse(JSON.stringify(this.stickers[turnSymbol]));
+    if ("UuDdFfBbRrLl".includes(turnSymbol)) {
+      let tmpSide = JSON.parse(JSON.stringify(this.stickers[turnSymbol.toUpperCase()]));
 
       for (let x = 0; x < 3; x++) {
         for (let y = 0; y < 3; y++) {
           if (amount == null)
-            this.stickers[turnSymbol][x][2 - y] = tmpSide[y][x];
+            this.stickers[turnSymbol.toUpperCase()][x][2 - y] = tmpSide[y][x];
           else if (amount == "2")
-            this.stickers[turnSymbol][2 - y][2 - x] = tmpSide[y][x];
-          else this.stickers[turnSymbol][2 - x][y] = tmpSide[y][x];
+            this.stickers[turnSymbol.toUpperCase()][2 - y][2 - x] = tmpSide[y][x];
+          else this.stickers[turnSymbol.toUpperCase()][2 - x][y] = tmpSide[y][x];
         }
       }
 
@@ -344,7 +368,7 @@ export class Cube {
         let tmpSide = JSON.parse(JSON.stringify(this.stickers[turnFaces[c]]));
         for (let x = 0; x < 3; x++) {
           for (let y = 0; y < 3; y++) {
-            if (((amount == null && c == 0) || (amount != null && c == 1)))
+            if (((amount == null && c == 0) || (amount == "'" && c == 1)))
               this.stickers[turnFaces[c]][x][2 - y] = tmpSide[y][x];
             else if (amount == "2")
               this.stickers[turnFaces[c]][2 - y][2 - x] = tmpSide[y][x];
@@ -383,11 +407,17 @@ export class Cube {
 
     let turnParams = {
       U: {xI: 0, yI: 1, zI: 2, z: 1.5, r: false, f: "U"},
+      u: {xI: 0, yI: 1, zI: 2, z: 1.5, r: false, f: "U"},
       D: {xI: 0, yI: 1, zI: 2, z: -1.5, r: true, f: "D"},
+      d: {xI: 0, yI: 1, zI: 2, z: -1.5, r: true, f: "D"},
       R: {xI: 2, yI: 0, zI: 1, z: 1.5, r: false, f: "R"},
+      r: {xI: 2, yI: 0, zI: 1, z: 1.5, r: false, f: "R"},
       L: {xI: 2, yI: 0, zI: 1, z: -1.5, r: true, f: "L"},
+      l: {xI: 2, yI: 0, zI: 1, z: -1.5, r: true, f: "L"},
       F: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true, f: "F"},
+      f: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true, f: "F"},
       B: {xI: 2, yI: 1, zI: 0, z: -1.5, r: false, f: "B"},
+      b: {xI: 2, yI: 1, zI: 0, z: -1.5, r: false, f: "B"},
       M: {xI: 2, yI: 0, zI: 1, z: 1.5, r: true, f: ""},
       S: {xI: 2, yI: 1, zI: 0, z: 1.5, r: true, f: ""},
       E: {xI: 0, yI: 1, zI: 2, z: -1.5, r: true, f: ""},

@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="../css/main.css">
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
     #content{
       display: flex;
     }
@@ -40,6 +41,7 @@
       font-size: 0.5em;
       border: 2px solid black;
       box-sizing: border-box;
+      font-family: 'Space Mono', monospace;
     }
     #solve-input, #clear-solve-input{
       width: 100%;
@@ -54,7 +56,7 @@
       display: block;
       font-size: 0.5em;
       text-align: left;
-      font-family: Courier;
+      font-family: 'Space Mono', monospace;
     }
     #clear-solve-input{
       background-color: transparent;
@@ -72,14 +74,15 @@
     #play-button{
       background-image: url("../images/play-button.svg");
       background-size: cover;
-      height: 55px;
-      width: 55px;
+      height: 30px;
+      width: 30px;
       padding: 0;
       border: none;
+      border-radius: 100%;
       margin: 5px;
     }
     #play-button:hover {
-      background-color: lightgray;
+      filter: invert(100%);
     }
   </style>
 </head>
@@ -126,7 +129,7 @@
       <h4>Scramble</h4>
       <input type="text" id="scramble-input" spellcheck="false">
       <h4>Solve</h4>
-      <div id="solve-input" style="white-space: pre-line" spellcheck="false"></div>
+      <div id="solve-input" style="white-space: break-spaces; word-wrap: break-word;" spellcheck="false"></div>
       <div id="clear-solve-input" contenteditable="true" spellcheck="false"></div>
       <button id="play-button"></button>
     </div>
@@ -165,6 +168,12 @@
     var camera = {};
     var cube = {};
     var currentSolve = [];
+    var currentScramble = [];
+    var solve = {
+      id: null,
+      running: false,
+      index: 0
+    };
     //milliseconds per frame
     const MPF = 10;
     //turns per second
@@ -196,14 +205,8 @@
       let rect = element.getBoundingClientRect();
       let clearElement = document.getElementById("clear-solve-input");
       clearElement.style.marginTop = -rect.height + "px";
-    }
-
-    function fixScroll(){
-      let clearElement = document.getElementById("clear-solve-input");
-      let element = document.getElementById("solve-input");
       element.scrollTop = clearElement.scrollTop;
       element.scrollLeft = clearElement.scrollLeft;
-      //console.log("fixing");
     }
 
     if(!window.toload) window.toload = [];
@@ -218,7 +221,43 @@
 
       document.getElementById("button").onclick = function () {setTurns()};
       document.getElementById("toggle").onclick = function () {toggleControls()};
-      document.getElementById("clear").onclick = function() {cube.clear([])};
+      document.getElementById("clear").onclick = function() {cube.clear(currentScramble)};
+      document.getElementById("play-button").onclick = function() {
+        if(currentSolve.length == 0) return;
+        if(solve.id == null){
+          cube.clear(currentScramble);
+          solve.running = true;
+
+          //chenges background image
+          if(solve.running) this.style.backgroundImage = "url(\"../images/pause-button.svg\")";
+          else this.style.backgroundImage = "";
+
+          //starts the animation
+          solve.index = 0;
+          cube.setTurns([currentSolve[solve.index]]);
+          document.getElementById("moveIndex" + solve.index).style.color = "blue";
+          solve.id = setInterval(function(){
+            if(cube.turns.length == 0 && solve.running){
+              document.getElementById("moveIndex" + solve.index).style.color = "";
+              solve.index++;
+              if(solve.index >= currentSolve.length){
+                clearInterval(solve.id);
+                document.getElementById("play-button").style.backgroundImage = "";
+                solve.id = null;
+                return;
+              }
+              cube.setTurns([currentSolve[solve.index]]);
+              document.getElementById("moveIndex" + solve.index).style.color = "blue";
+            }
+          }, 10);
+        }else{
+          solve.running = !solve.running;
+
+          //chenges background image
+          if(solve.running) this.style.backgroundImage = "url(\"../images/pause-button.svg\")";
+          else this.style.backgroundImage = "";
+        }
+      }
       canvas.onmousemove = function(e){rotateCameraByMouse(camera, [4, 4, 0], e)};
 
       setInterval(() => {
@@ -229,11 +268,27 @@
       }, MPF);
 
       fixSolveInput();
+
+      //event listener for the scramble input
+      let scrambleInput = document.getElementById("scramble-input");
+      scrambleInput.onkeyup = function(e){
+        //updates the current scramble and the state of the Cube
+        currentScramble = convertMoves(scrambleInput.value);
+        if(currentScramble == null){
+          scrambleInput.style.textDecoration = "underline";
+          scrambleInput.style.textDecorationColor = "red";
+          currentScramble = [];
+        }else{
+          scrambleInput.style.textDecoration = "none";
+          //updates Cube
+          cube.clear(currentScramble);
+        }
+      }
+
       //event listener for the solve input
       let solveInput = document.getElementById("solve-input");
       let clearSolveInput = document.getElementById("clear-solve-input");
-
-      clearSolveInput.onscroll = function(e) {fixScroll()};
+      clearSolveInput.onscroll = function(e) {fixSolveInput()};
       clearSolveInput.onkeyup = function(e) {
         const moveSym = ["U", "D", "R", "L", "F", "B", "M", "E", "S", "u", "d", "r", "l", "f", "b", "Uw", "Dw", "Rw", "Lw", "Fw", "Bw", "x", "y", "z"];
         const remove = [" ", "(", ")", "[", "]", ",", "\n"];
@@ -267,8 +322,6 @@
           index = moves.indexOf("//");
         }
         if(moves.length > 0) result.push(moves);
-
-        console.log(result);
 
         //filters temp symbols
         newMoves = [];
@@ -320,7 +373,7 @@
                   str += line.charAt(0);
                   line = line.slice(1);
                 }
-                r.push("<span class=\"move\">" + str + "</span>");
+                r.push("<span class=\"move\" id=\"moveIndex" + currentSolve.length + "\">" + str + "</span>");
                 currentSolve.push(str);
               }
             }
@@ -331,34 +384,13 @@
         }
         result = newMoves;
 
-        console.log("final: " + result);
-        console.log(currentSolve);
 
         //adds all the array elements together
         let final = "";
         result.forEach(s => final += s);
         solveInput.innerHTML = final + "&nbsp;";
 
-        fixScroll();
         fixSolveInput();
-
-        while(moves.length > 0){
-          let m = null;
-          moveSym.some(move => {
-            if(moves.startsWith(move))
-              m = move;
-            return m != null;
-          });
-          if(m == null) return null;
-          else{
-            result.push(moves.substring(0, m.length));
-            moves = moves.slice(m.length);
-            if(moves.startsWith("'") || moves.startsWith("2")){
-              result[result.length - 1] += moves.charAt(0);
-              moves = moves.slice(1);
-            }
-          }
-        }
       };
     });
 
