@@ -12,7 +12,7 @@
 
     <link rel="icon" type="image/gif" href="../images/logo.png">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    
+
     <style>
       #title{
         text-align: center;
@@ -67,12 +67,21 @@
       .notation-description > div > ul{
         list-style-type: none;
         padding: 0;
+				margin: 0;
+				overflow: auto;
       }
       .notation-description > div > ul > li{
         float: left;
         margin: auto;
         text-align: center;
         width: 16.6%;
+      }
+			.notation-description > div > ul.three-img-section{
+        width: 50%;
+				margin: 0 auto;
+      }
+      .notation-description > div > ul.three-img-section > li{
+        width: 33.3%;
       }
       .notation-description > div > ul > li > img{
         width: 100%;
@@ -122,9 +131,9 @@
 
     <!--Page desc-->
     <div class="notation-description" style="background-color: white;">
-      This is list of the offical Rubik's Cube notation which contains what each move is and the symbol representing it. The letter part of each move stands for the face you need to turn. It can also end with a number which indicates the amount of moves you have to do. 
+      This is list of the offical Rubik's Cube notation which contains what each move is and the symbol representing it. The letter part of each move stands for the face you need to turn. It can also end with a number which indicates the amount of moves you have to do.
     </div>
-    
+
     <div class="notation-description">
       <!--Face moves-->
       <div>
@@ -163,7 +172,7 @@
       <div>
         <div class="section-title">Face prime moves</div>
         <div class="section-subtitle">Normal face moves but turned in the opposite direction</div>
-        <div class="section-subtitle">(Donated with an apostrophe ')</div>
+        <div class="section-subtitle">(Represented with an apostrophe ')</div>
         <ul>
           <li>
             <img src="../images/notation/face/Up.png">
@@ -234,7 +243,7 @@
       <div>
         <div class="section-title"> Slice Moves </div>
         <div class="section-subtitle">(Prime and double notation also apply)</div>
-        <ul>
+        <ul class="three-img-section">
           <li>
             <img src="../images/notation/slice/M.png">
           </li>
@@ -244,23 +253,11 @@
           <li>
             <img src="../images/notation/slice/S.png">
           </li>
-          <li>
-            <img src="../images/notation/slice/Mp.png">
-          </li>
-          <li>
-            <img src="../images/notation/slice/Ep.png">
-          </li>
-          <li>
-            <img src="../images/notation/slice/Sp.png">
-          </li>
         </ul>
-        <ul>
+        <ul class="three-img-section">
           <li>M</li>
           <li>E</li>
           <li>S</li>
-          <li>M'</li>
-          <li>E'</li>
-          <li>S'</li>
         </ul>
       </div>
     </div>
@@ -298,6 +295,31 @@
           <li>f</li>
           <li>b</li>
           <li>d</li>
+        </ul>
+      </div>
+    </div>
+
+		<!--cube rotatations section-->
+    <div class="notation-description">
+      <div>
+        <div class="section-title"> Cube Rotations </div>
+				<div class="section-subtitle">Moves which turn the whole cube</div>
+        <div class="section-subtitle">(Prime and double notation also apply)</div>
+        <ul class="three-img-section">
+          <li>
+            <img src="../images/notation/rotation/x.png">
+          </li>
+          <li>
+            <img src="../images/notation/rotation/y.png">
+          </li>
+          <li>
+            <img src="../images/notation/rotation/z.png">
+          </li>
+        </ul>
+        <ul class="three-img-section">
+          <li>x</li>
+          <li>y</li>
+          <li>z</li>
         </ul>
       </div>
     </div>
