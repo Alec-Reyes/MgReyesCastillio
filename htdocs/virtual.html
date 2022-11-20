@@ -209,6 +209,13 @@
       element.scrollLeft = clearElement.scrollLeft;
     }
 
+    function updateParams(){
+      let url = new URL(window.location);
+      if(currentScramble.length > 0) url.searchParams.set("scr", document.getElementById("scramble-input").value);
+      if(currentSolve.length > 0) url.searchParams.set("solve", document.getElementById("clear-solve-input").innerText);
+      window.history.pushState(null, '', url.toString());
+    }
+
     if(!window.toload) window.toload = [];
     window.toload.push(function () {
       let canvas = document.getElementById("c");
@@ -228,7 +235,7 @@
           cube.clear(currentScramble);
           solve.running = true;
 
-          //chenges background image
+          //changes background image
           if(solve.running) this.style.backgroundImage = "url(\"../images/pause-button.svg\")";
           else this.style.backgroundImage = "";
 
@@ -258,8 +265,8 @@
           else this.style.backgroundImage = "";
         }
       }
-      canvas.onmousemove = function(e){rotateCameraByMouse(camera, [4, 4, 0], e)};
 
+      canvas.onmousemove = function(e){rotateCameraByMouse(camera, [4, 4, 0], e)};
       setInterval(() => {
         //camera.rotArPoint(0, 1, 0, [0, 0, 0]);
         camera.lookAtOrigin();
@@ -272,6 +279,7 @@
       //event listener for the scramble input
       let scrambleInput = document.getElementById("scramble-input");
       scrambleInput.onkeyup = function(e){
+        console.log(e);
         //updates the current scramble and the state of the Cube
         currentScramble = convertMoves(scrambleInput.value);
         if(currentScramble == null){
@@ -282,6 +290,7 @@
           scrambleInput.style.textDecoration = "none";
           //updates Cube
           cube.clear(currentScramble);
+          updateParams();
         }
       }
 
@@ -296,6 +305,7 @@
         let result = [];
 
         moves = clearSolveInput.innerHTML.replaceAll("&nbsp;", " ");
+        console.log(moves);
 
         //adds newlines based on the divs
         let newMoves = "";
@@ -389,9 +399,33 @@
         let final = "";
         result.forEach(s => final += s);
         solveInput.innerHTML = final + "&nbsp;";
+        console.log(solveInput.innerHTML);
 
         fixSolveInput();
+        updateParams();
       };
+
+      //loads url params
+      let url = new URL(window.location);
+      if(url.searchParams.has("scr")){
+        let scrambeInput = document.getElementById("scramble-input");
+        scrambleInput.value = url.searchParams.get("scr");
+        scrambeInput.dispatchEvent(new Event("keyup"));
+      }
+      if(url.searchParams.has("solve")){
+        let scrambleInput = document.getElementById("clear-solve-input");
+        let text = url.searchParams.get("solve");
+        text = "<div>" + text;
+        //replaceAll is not woking for \n idk why
+        let newText = "";
+        for(let i = 0; i < text.length; i++){
+          if(text.charAt(i) != "\n") newText += text.charAt(i);
+          else newText += "</div><div>";
+        }
+        text = newText + "</div>";
+        scrambleInput.innerHTML = text;
+        scrambleInput.dispatchEvent(new Event("keyup"));
+      }
     });
 
     if(!window.tokeydown) window.tokeydown = [];
