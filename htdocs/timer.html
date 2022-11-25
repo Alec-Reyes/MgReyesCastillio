@@ -191,6 +191,22 @@
       background-color: rgb(245, 245, 245);
       box-shadow: 5px 5px 5px lightgrey;
     }
+    #video{
+      margin: auto;
+      text-align: center;
+      width: fit-content;
+      background-color: white;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      box-sizing: border-box;
+      background-color: rgb(245, 245, 245);
+      box-shadow: 5px 5px 5px lightgrey;
+    }
+    #video > video{
+      border-radius: 10px;
+    }
   </style>
 </head>
 
@@ -295,6 +311,15 @@
       Mean - Average<br></p>
     </div>
   </div>
+
+  <div id="video" style="width: fit-content;">
+  <video width="400" controls autoplay muted>
+  <source src="../videos/timer_demonstration.mp4" type="video/mp4">
+  Your browser does not support HTML video.
+</video>
+    <p>courtesy of Lukas Castillo</p>
+  </div>
+
 
   <!--Footer-->
   <footer>
