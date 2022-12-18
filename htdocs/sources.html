@@ -12,7 +12,123 @@
 
     <link rel="icon" type="image/gif" href="../images/logo.png">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-	</head>
+
+    <script src="https://kit.fontawesome.com/bf1debbb54.js" crossorigin="anonymous"></script>
+
+    <style>
+      #title{
+        text-align: center;
+        margin: auto;
+        width:fit-content;
+        padding: 10px 20px;
+        font-size: 45px;
+        background-color: lightblue;
+        border-radius: 7px;
+        font-family: 'Rubik', sans-serif;
+        box-shadow: 5px 5px 5px lightgrey;
+      }
+      .sources-description{
+        background-color: rgb(245, 245, 245);
+        text-align: center;
+        margin: auto;
+        color: black;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        width: fit-content;
+        font-size: 25px;
+        padding: 20px;
+        border-radius: 7px;
+        overflow: auto;
+        max-width: 80%;
+        box-shadow: 5px 5px 5px lightgrey;
+      }
+      .section-title {
+        font-size: 40px;
+        font-family: 'Rubik', sans-serif;
+      }
+      .sources-description > div{
+        overflow: auto;
+        margin: 20px 0px;
+      }
+
+      .sources-row {
+        margin: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+  
+      .sources-content {
+        border-radius: 10px;
+        padding: 10px 10px;
+        margin: 5px;
+        text-align: center;
+        background-color: white;
+        justify-content: center;
+        width: 600px;
+        box-shadow: 5px 5px 5px lightgrey;
+      }
+
+      .sources-header{
+        display: flex;
+        justify-content: center;
+      }
+      
+      .sources-header > h2 {
+        font-family: 'Rubik', sans-serif;
+      }
+
+      .sources-header > a {
+        display: block;
+        text-decoration: none;
+      }
+
+      .sources-header > a > i{
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        color: black;
+        height: 100%;
+      }
+
+      .sources-header > a > i.fa-youtube{
+        color: red;
+      }
+
+      .sources-header > a > i::before{
+        margin-left: 10px;
+        display: block;
+      }
+
+      .sources-header > a > i:hover{
+        color: lightgray;
+      }
+  
+      .sources-content > img{
+        float: left;
+        margin-left: 5px;
+        width: 66px;
+        height: 66px;
+      }
+
+      .sources-content > ul{
+        list-style-type: none;
+        padding: 0px;
+      }
+
+      .sources-content > ul > li > a{
+        text-decoration: none;
+        color: blue;
+      }
+      
+      .sources-content > ul > li > a:hover {
+        color: darkblue;
+      }
+      
+      .sources-content > ul > li > a > h4{
+        display: inline;
+      }
+    </style>
+  </head>
 <body class="preload">
   <!--Header-->
   <header>
@@ -20,7 +136,7 @@
       <img id="home-button" width=30 height=30 src="../images/logo.png"></img>
     </a>
     <p>SimplyCube</p>
-    <button id="menu-button">Menu</button>
+    <sources id="menu-button">Menu</sources>
     <ul id="nav-buttons">
       <li>
         <p>Beginner</p>
@@ -48,9 +164,59 @@
   </header>
 
   <div id="content">
-    
+    <!--Tile-->
+    <div id="title">
+      Sources
+    </div>
+
+    <!--Page desc-->
+    <div class="sources-description" style="background-color: white;">
+      This website could not be possible without these helpful and useful resources.
+    </div>
+
+    <!--Virualcube row-->
+    <div class="sources-row">
+      <div class="sources-content" style="background-color: white;">
+        <div class="sources-header">
+          <h2>Tdecker91's Visualcube</h2>
+          <a href="https://github.com/tdecker91/visualcube" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+        <img src="../images/logo.png" style="float: right;">
+        <p>Tdecker91's typescript fork of Visualcube is a really useful program that can create many different types of rubik's cube images. This was an essential program to almost all the images in the website. The ability to pass in an algorithm and add arrows helped with visuallizing the moves and was integral to the notation page.</p>
+      </div>
+    </div>
+
+    <!--Jperm row-->
+    <div class="sources-row">
+      <div class="sources-content">
+        <div class="sources-header">
+          <h2>Jperm</h2>
+          <a href="https://jperm.net" target="_blank">
+            <i class="fa-solid fa-link" style="font-size: 20px"></i>
+          </a>
+          <a href="https://youtube.com/jperm" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </div>
+        <img src="../images/jperm.png">
+        <p>Jperm's youtube channel is what inspired me to start cubing. His tutorials are really easy to follow and well made and I highly encourge you to check them out. His website jperm.net also was the isparation for this website. Almost all the algorithms I learned was from his website. Without it, this website wouldnt have existed.</p>
+      </div>
+    </div>
   </div>
 
+  <!--Others-->
+  <div class="sources-row">
+    <div class="sources-content" style="background-color: white;">
+      <div class="sources-header">
+        <h2>Other sources:</h2>
+      </div>
+      <ul>
+        <li><a href="https://www.freepik.com/free-vector/social-media-logos-icons-set_10490904.htm#query=social%20media%20icon&position=0&from_view=keyword"><h4>Freepik</h4></a> - This icon set by Myriammira was used for many of the icons in the website. I highly recommend using this if you need an icon set.</li>
+      </ul>
+    </div>
+  </div>
   <!--Footer-->
   <footer>
     <div>

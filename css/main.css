@@ -23,6 +23,7 @@ header {
   width: 100%;
   text-align: center;
   top: 0px;
+  z-index: 999;
   font-family: 'Rubik', sans-serif;
 }
 
@@ -56,7 +57,7 @@ header > p{
   width: 5em;
   height: 60px;
   border: none;
-  z-index: 2;
+  z-index: 1001;
   font-weight: bold;
   display: none;
 }
@@ -100,7 +101,7 @@ header > p{
   opacity: 0;
   position: absolute;
   margin-top: 3px;
-  z-index: 1;
+  z-index: 1000;
   width: 33.3%;
   background-color: rgb(38, 38, 38);
 }
@@ -115,7 +116,7 @@ header > p{
   -webkit-transition: all .3s ease-out;
   transition: all .3s ease-out;
   display: block;
-  z-index: 1;
+  z-index: 10000;
   text-decoration: none;
   color: white;
   background-color: rgb(38, 38, 38);

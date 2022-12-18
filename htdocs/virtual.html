@@ -12,6 +12,7 @@
 
   <link rel="icon" type="image/gif" href="../images/logo.png">
   <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
@@ -84,6 +85,47 @@
     #play-button:hover {
       filter: invert(100%);
     }
+    #recreations-title{
+      margin: 5px auto;
+      padding: 0;
+      width: fit-content;
+      font-family: 'Rubik', sans-serif;
+      font-size: 25px;
+    }
+    #recreations-history{
+      background-color: rgb(245, 245, 245);
+      text-align: center;
+      margin: auto;
+      color: black;
+      width: 80%;
+      font-size: 25px;
+      border-radius: 7px;
+      overflow: auto;
+      box-shadow: 5px 5px 5px lightgrey;
+      padding: 5%;
+      margin: 5%;
+      margin-top: 0;
+    }
+    #recreations-history-track{
+      background-color: rgb(230, 235, 240);
+      border-radius: 7px;
+    }
+    #recreations-history > ul > li > button.splide__pagination__page.is-active{
+      background-color: lightblue;
+    }
+    .recreation-content{
+      background-color: rgb(245, 245, 245);
+      width: fit-content;
+      padding: 5%;
+      margin: 2% auto;
+      border-radius: 7px;
+      display: flex;
+      flex-direction: column;
+    }
+    .recreation-content > p{
+      margin: 0;
+      padding: 0;
+    }
   </style>
 </head>
 
@@ -140,6 +182,39 @@
   <button id="toggle">Enable controls</button><br>
   <button id="clear">Reset</button>
 
+  <!--Recreations history-->
+  <h4 id="recreations-title">Recreations</h4>
+  <div class="splide" id="recreations-history">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide">
+          <div class="splide__slide__container">
+            <div class="recreation-content">
+              <p class="recreation-time">10s</p>
+              <p class="recreation-move-length">60 moves</p>
+              <p class="recreation-tps">5 tps</p>
+              <img>
+            </div>
+          </div>
+        </li>
+        <li class="splide__slide">
+          <div class="splide__slide__container">
+            <div class="recreation-content">
+              
+            </div>
+          </div>
+        </li>
+        <li class="splide__slide">
+          <div class="splide__slide__container">
+            <div class="recreation-content">
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <!--Footer-->
   <footer>
     <div>
@@ -153,16 +228,16 @@
     <div>
       <h2>Other Links:</h2>
       <a href="https://github.com/Alec-Reyes/MgReyesCastillio"> Github </a> <br>
-      <a href="htdocs/sources.html"> Sources </a>
+      <a href="sources.html"> Sources </a>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"></script>
   <script>
-    function run(s){
-      document.getElementById("solve-input").innerHTML = s;
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+      new Splide(".splide").mount();
+    });
   </script>
-
   <script type="module">
     import {Cube, Camera, rotateCameraByMouse, convertMoves} from "../js/cube.js"
     var camera = {};
@@ -216,6 +291,7 @@
       window.history.pushState(null, '', url.toString());
     }
 
+    //runs when the window is loaded
     if(!window.toload) window.toload = [];
     window.toload.push(function () {
       let canvas = document.getElementById("c");
