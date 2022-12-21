@@ -181,10 +181,83 @@ footer > div > h2, footer > div > h3 {
 footer > div > a {
   text-decoration: none;
   color: lightblue;
+  display: block;
+  margin: auto;
+  padding: 5px;
 }
 
 footer > div > a:hover {
   color: rgb(150,180,250);
+}
+
+footer > div > h4{
+  margin: 0;
+  padding: 0;
+}
+
+.email-entry{
+  display: flex;
+  align-items: center;
+  width: min-content;
+  margin: auto;
+}
+
+.email-entry > * {
+  padding: 5px;
+  height: min-content;
+}
+
+.email-entry > .email-icon {
+  background-position: 0px -201px;
+  background-image: url('../images/sprites/socmed-sprites.png');
+  background-size: 692.7px 507.8px;
+  width: 37.5px;
+  height: 30px;
+  display: block;
+  margin: auto;
+}
+.email-entry > .email-icon:hover {
+  background-position: -393.7px -201px;
+  background-size: 692.7px 507.8px;
+}
+
+#icon-container{
+  display: flex;
+  width: min-content;
+  margin: auto;
+}
+
+#icon-container > a{
+  padding: 5px;
+}
+
+#icon-container > .github-icon {
+  background-position: -76px -179px;
+  background-image: url('../images/sprites/socmed-sprites.png');
+  background-size: 325.6px 221.5px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin: auto;
+}
+
+#icon-container > .github-icon:hover{
+  background-position: -183px -189px;
+  background-size: 340px 231.3px;
+}
+
+#icon-container > .discord-icon {
+  background-position: -226.4px -207.4px;
+  background-image: url('../images/sprites/socmed-sprites.png');
+  background-size: 344.6px 250.8px;
+  width: 36px;
+  height: 30px;
+  display: block;
+  margin: auto;
+}
+#icon-container > .discord-icon:hover {
+  background-position: -269.7px -208.1px;
+  background-size: 344.6px 250.8px;
 }
 
 @media (max-width: 760px){
