@@ -247,7 +247,7 @@ footer > div > h4{
 }
 
 #icon-container > .discord-icon {
-  background-position: -226.4px -207.4px;
+  background-position: -226px -208.1px;
   background-image: url('../images/sprites/socmed-sprites.png');
   background-size: 344.6px 250.8px;
   width: 36px;
@@ -256,11 +256,11 @@ footer > div > h4{
   margin: auto;
 }
 #icon-container > .discord-icon:hover {
-  background-position: -269.7px -208.1px;
+  background-position: -288.3px -208.1px;
   background-size: 344.6px 250.8px;
 }
 
-@media (max-width: 760px){
+@media (max-width: 910px){
   footer{
     display: flex;
     flex-direction: column;

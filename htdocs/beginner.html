@@ -8,11 +8,12 @@
 		<meta name="revised" content="27-10-2022">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title>Notation - SimplyCube</title>
+		<title>Beginner - SimplyCube</title>
 
     <link rel="icon" type="image/gif" href="../images/logo.png">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-
+    <script src="https://kit.fontawesome.com/bf1debbb54.js" crossorigin="anonymous"></script>
+    
     <style>
       #title{
         text-align: center;
@@ -24,17 +25,34 @@
         background-color: lightblue;
         border-radius: 7px;
         font-family: 'Rubik', sans-serif;
+        box-shadow: 5px 5px 5px lightgrey;
+      }
+      .beginner-image {
+        height: 150px;
+        width: 150px;
+        margin: 0px;
       }
       .subtitle{
         text-align: center;
-        margin: auto;
+        margin: 10px;
         width:fit-content;
         padding: 10px 20px;
         font-size: 30px;
-        border-radius: 5px;
         background-color: lightblue;
         border-radius: 7px;
         font-family: 'Rubik', sans-serif;
+        box-shadow: 3px 3px 3px lightgrey;
+      }
+      .subtitle-header{
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .subtitle-header > img{
+        height: 100px;
+        width: 100px;
+        margin: 8px;
       }
       .beginner-description{
         background-color: rgb(245, 245, 245);
@@ -44,7 +62,7 @@
         margin-top: 30px;
         margin-bottom: 30px;
         width: fit-content;
-        font-size: 25px;
+        font-size: 22px;
         padding: 20px;
         border-radius: 7px;
         overflow: auto;
@@ -58,45 +76,53 @@
       .section-subtitle{
         font-size: 25px;
       }
-      .notation-image {
-        height: 150px;
-        width: fit-content;
-        margin: 0px;
-        float: left;
-      }
-      .move-content {
-        float: left;
-      }
+      
       div > img {
         width: 100%;
         height: 100%;
       }
-      .beginner-description > div{
-        overflow: auto;
-        margin: 20px 0px;
-      }
-      .beginner-description > div > ul{
-        list-style-type: none;
-        padding: 0;
-				margin: 0;
-				overflow: auto;
-      }
-      .beginner-description > div > ul > li{
-        float: left;
+      .alg-container {
         margin: auto;
-        text-align: center;
-        width: 16.6%;
+        width: fit-content;
+        max-width: 100%;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
       }
-			.beginner-description > div > ul.three-img-section{
-        width: 50%;
-				margin: 0 auto;
+      .alg-container-scroll{
+        margin: auto;
+        width: fit-content;
+        max-width: 100%;
+        overflow-x: scroll;
+        display: flex;
+        justify-content: initial;
+        flex-wrap: nowrap;
       }
-      .beginner-description > div > ul.three-img-section > li{
-        width: 33.3%;
-      }
-      .beginner-description > div > ul > li > img{
-        width: 100%;
+      a > i {
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        color: black;
         height: 100%;
+      }
+      a > i:hover {
+        color: lightgrey;
+      }
+
+      @media (max-width: 420px){
+        .subtitle{
+          font-size: 25px;
+        }
+        .beginner-description{
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 320px){
+        .subtitle{
+          font-size: 22px;
+        }
       }
     </style>
 	</head>
@@ -149,87 +175,551 @@
 
     <!--Moving the cube-->
     <div class="beginner-description">
-      (basic stuff about movement). If you want to check the full list of moves make sure to check notation page.
+      This tutorial will assume you're familiar with Rubik's cube notation. If you need a guide on that, or just need a quick refresher, you can check out our notation 
+      page here. <a href="../htdocs/notation.html">
+        <i class="fa-solid fa-link" style="font-size: 20px"></i>
+      </a>
+    <br><br>
+     For this tutorial, we will be solving this rubik's cube layer-by-layer. This is to get to know the terminology in cubing, and get the hang of speedy rotations that will be important later on.
     </div>
 
     <!--Cross title-->
-    <div class="subtitle">
-      Cross
+    <div class="subtitle-header">
+      <div class="subtitle">
+        Cross
+      </div>
+      <img class="beginner-image" src="../images/beginner/cross.png">
+    </div>
+
+    <div class="beginner-description">
+      Our goal for this step is to create what's called the white cross (hence its name). First, pick a layer for you to solve, ideally the one with the most white edges in place. An example of a white edge solved is the one in the picture next to the title. The white edge is facing the top, and the other color of the edge piece is aligned with the color of the center square. 
     </div>
 
     <!--Tutorial on fixing the cross edges-->
     <div class="beginner-description">
-      easy case of inserting the edge
+      To insert an edge turn the cross face so the edge you are trying to fix is below the its place on the cross face. Then turn the face the edge is in until its on the cross. Here is a quick cross example solve: 
+      <a href="https://testing.alecreyess.repl.co/htdocs/virtual.html?mask=CROSS&scr=D2R2B%27UF%27UL%27FR2D2B%27U2L2U%27LB2LB%27L%27R&solve=U+%2F%2Ffixing+orange%0Ay2+%2F%2Frotating+cube+to+find+pieces%0AU%27F2+%2F%2Ffixing+red%0AFU%27RU2+%2F%2Fflipping+red%0Ay2+%2F%2Ffinding+pieces%0AUL%27+%2F%2Ffixing+green%0AU2L+%2F%2Ffixing+blue%0AU%27FU%27RU%27+%2F%2Fflipping+blue">
+        <i class="fa-solid fa-link" style="font-size: 20px"></i>
+      </a>
+      <br> <br> and here is a picture example of solving an edge:
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/crossInsertEdge/1.png">
+        <img class="beginner-image" src="../images/beginner/crossInsertEdge/2.png">
+        <img class="beginner-image" src="../images/beginner/crossInsertEdge/3.png">
+        <img class="beginner-image" src="../images/beginner/crossInsertEdge/4.png">
+      </div>
     </div>
-    
+
+    <!--Flipping edge algorithm-->
     <div class="beginner-description">
-      another way of inserting an edge
+      Sometimes when you insert an edge it would be flipped (as shown in the leftmost picture below). To fix this you just need to do these 4 moves. 
+      <div class="alg-container">
+        <div>
+          <img class="beginner-image" src="../images/beginner/crossFlip/1.png">
+          <p> </p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/crossFlip/2.png">
+          <p>F</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/crossFlip/3.png">
+          <p>U'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/crossFlip/4.png">
+          <p>R</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/crossFlip/5.png">
+          <p>U</p>
+        </div>
+      </div>
     </div>
 
     <!--First layer title-->
-    <div class="subtitle">
-      First Layer
+    <div class="subtitle-header">
+      <img class="beginner-image" src="../images/beginner/fl.png">
+      <div class="subtitle">
+        First Layer
+      </div>
+    </div>
+
+    <!--Showing the sexy move-->
+    <div class="beginner-description">
+      Before we go on to the next step, we should first learn one of the most used and one the fastest triggers (RUR'U') also called the "sexy move".<br>
+      <div style="font-size:10px">(editor's note: it really is called the sexy move. I'm dying.)</div> <br>
+      <div class="alg-container">
+        <div>
+          <img class="beginner-image" src="../images/beginner/sexyMove/1.png">
+          <p>R</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/sexyMove/2.png">
+          <p>U'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/sexyMove/3.png">
+          <p>R'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/sexyMove/4.png">
+          <p>U'</p>
+        </div>
+      </div>
     </div>
 
     <!--Tutorial on inserting the first edges-->
     <div class="beginner-description">
-      just do the RUR'U' until it works
+      Once you've done the white cross, you only need to solve the corners so that everything in the first layer is in place. <br> <br>
+      There will be times in this tutorial where in the middle of the step,it looks like you're scrambling the progress you already made. Just trust the process and carry out the instructions to the T, and everything will be fine.
+      <!-- put some style in this-->
+      <br> <br> To solve the remaining corners, first turn the cross upside down so its facing the bottom. 
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/cross.png">
+        <img class="beginner-image" src="../images/beginner/arrow.png">
+        <img class="beginner-image" src="../images/beginner/crossInverted.png">
+      </div>
+      Then find a corner piece on the top that belongs to the bottom layer and turn the top face so the piece is over where its supppsed to go.
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/flTurn/1.png">
+        <img class="beginner-image" src="../images/beginner/flTurn/2.png">
+      </div>
+      Make sure the corner piece and the location its going to go is on the right of your cube. Now do the sexy moves until the corner piece is on the bottom layer and 
+turned correctly.
+      <div class="alg-container">
+        <div>
+          <img class="beginner-image" src="../images/beginner/flInsert/1.png">
+          <p> </p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/flInsert/2.png">
+          <p>(RUR'U')</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/flInsert/3.png">
+          <p>(RUR'U') x 2</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/flInsert/4.png">
+          <p>(RUR'U') x 3</p>
+        </div>
+      </div>
+    </div>
+
+    <!--When the piece is stuck-->
+    <div class="beginner-description">
+      Sometimes there are no corner piece on the top layer and they are stuck on the bottom layer. To remove it rotate the cube so the stuck piece is on the right then do the sexy move algorithm once. After just insert the corner piece like usual.
+      <div class="alg-container">
+        <div>
+          <img class="beginner-image" src="../images/beginner/flRemove/1.png">
+          <p> </p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/flRemove/2.png">
+          <p>(RUR'U')</p>
+        </div>
+      </div>
     </div>
 
     <!--Second layer title-->
-    <div class="subtitle">
-      Second Layer
+    <div class="subtitle-header">
+      <div class="subtitle">
+        Second Layer
+      </div>
+      <img class="beginner-image" src="../images/beginner/sl.png">
     </div>
 
-    <!--The algs for inserting an edge-->
     <div class="beginner-description">
-      First alg
+      If you've made it this far, you should have a solved first layer. For this part, we will be using 2 algoritms and will use each depending on where the edge piece is. First find an edge that belongs in the middle layer on the top layer. Turn the top face until the side sticker of the edge matches the center.
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/slAlign/1.png">
+        <img class="beginner-image" src="../images/beginner/slAlign/2.png">
+      </div>
     </div>
     
+    <!--The alg for inserting an edge on the right-->
     <div class="beginner-description">
-      Second alg
+      If the color on the top of the edge matches the center color on the right of the edge then do the following algorithm: URU'R'U'yL'UL
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/slInsertRight/1.png">
+
+        <!--The alg-->
+        <div class="alg-container-scroll">
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/2.png">
+            <p>U</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/3.png">
+            <p>R</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/4.png">
+            <p>U'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/5.png">
+            <p>R'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/6.png">
+            <p>U'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/7.png">
+            <p>y</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/8.png">
+            <p>L'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/9.png">
+            <p>U</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertRight/10.png">
+            <p>L</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--The alg for inserting an edge on the right-->
+    <div class="beginner-description">
+      Otherwise, if the color on the top of the edge matches the center color on the left of the edge then do the following algorithm: yU'L'ULyURU'R'
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/slInsertLeft/1.png">
+
+        <!--The alg-->
+        <div class="alg-container-scroll">
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/2.png">
+            <p>y</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/3.png">
+            <p>U'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/4.png">
+            <p>L'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/5.png">
+            <p>U</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/6.png">
+            <p>L</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/7.png">
+            <p>y</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/8.png">
+            <p>U</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/9.png">
+            <p>R</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/10.png">
+            <p>U'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/slInsertLeft/11.png">
+            <p>R'</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Edge cases-->
+    <div class="beginner-description">
+      If the edge is in the middle layer but in the wrong spot or the edge is flipped, you just need to insert an edge from the top layer instead to displace the edge in the middle layer.
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/slWrong.png">
+        <img class="beginner-image" src="../images/beginner/arrow.png">
+        <img class="beginner-image" src="../images/beginner/slWrongSolve.png">
+      </div>
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/slFlip.png">
+        <img class="beginner-image" src="../images/beginner/arrow.png">
+        <img class="beginner-image" src="../images/beginner/slFlipSolve.png">
+      </div>
     </div>
 
     <!--EO title-->
-    <div class="subtitle">
-      Fliping edges
+    <div class="subtitle-header">
+      <img class="beginner-image" src="../images/beginner/eo.png">
+      <div class="subtitle">
+        Edge Orientation
+      </div>
     </div>
 
     <!--The alg for fliping the top edges-->
     <div class="beginner-description">
-      same alg many times
+      Congrats! you have solved 2/3 of your cube. Now the next step is orient all the edges on the top so its all the same color. It doesn't matter yet if the other side of the edge doesn't match the cetner color, like in the white cross. We'll fix this in the next step.
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/eoTypes/1.png">
+        <img class="beginner-image" src="../images/beginner/arrow.png">
+        <img class="beginner-image" src="../images/beginner/eo.png">
+      </div>
+    </div>
+
+    <div class="beginner-description">
+      First turn the top layer so the color pattern matches one of the 4 pictures below. Make sure you also have the correct orientation of the top layer or the algorithm wont work.
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/eo.png">
+        <img class="beginner-image" src="../images/beginner/eoTypes/3.png">
+        <img class="beginner-image" src="../images/beginner/eoTypes/2.png">
+        <img class="beginner-image" src="../images/beginner/eoTypes/1.png">
+      </div>
+      If all 4 of your edges are correct then you can skip this and move on the next step. Otherwise do the following algorithm:
+      <!--The alg-->
+      <div class="alg-container-scroll">
+        <div>
+          <img class="beginner-image" src="../images/beginner/eoAlg/1.png">
+          <p>F</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/eoAlg/2.png">
+          <p>R</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/eoAlg/3.png">
+          <p>U</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/eoAlg/4.png">
+          <p>R'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/eoAlg/5.png">
+          <p>U'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/eoAlg/6.png">
+          <p>F'</p>
+        </div>
+      </div>
+      After doing the algorithm, repeat all the steps above until you get all 4 cross edges to be the same color.
     </div>
 
     <!--Fixing edges-->
-    <div class="subtitle">
-      Fixing edges
+    <div class="subtitle-header">
+      <div class="subtitle">
+        Fixing edges
+      </div>
+      <img class="beginner-image" src="../images/beginner/fe.png">
     </div>
 
     <div class="beginner-description">
-      sune
+      This step solves all the 4 top layer edges so their side color matches their respective center color. First turn the top layer until at least 2 of the side stickers matches the centers they are on.
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/feAlign/1.png">
+        <img class="beginner-image" src="../images/beginner/feAlign/2.png">
+        <img class="beginner-image" src="../images/beginner/feAlign/3.png">
+      </div>
+    </div>
+
+    <!--How to align the top-->
+    <div class="beginner-description">
+      If all 4 edges are solved then you can move on to the next step. Otherwise if the 2 edges that are solves are adjacent, move it to the back left corner and if the 2 edges are opposite from each other, turn the top layer so they are vertical.
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/feAdj/1.png">
+        <img class="beginner-image" src="../images/beginner/arrow.png">
+        <img class="beginner-image" src="../images/beginner/feAdj/2.png">
+      </div>
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/feOpp/1.png">
+        <img class="beginner-image" src="../images/beginner/arrow.png">
+        <img class="beginner-image" src="../images/beginner/feOpp/2.png">
+      </div>
+    </div>
+
+    <!--The algorithm-->
+    <div class="beginner-description">
+      After orienting the top correctly now we can do the algorithm which goes as follows: 
+      <div class="alg-container">
+          <img class="beginner-image" src="../images/beginner/feAlg/1.png">
+      </div>
+      <div class="alg-container-scroll">
+          <div>
+            <img class="beginner-image" src="../images/beginner/feAlg/2.png">
+            <p>R</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/feAlg/3.png">
+            <p>U2</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/feAlg/4.png">
+            <p>R'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/feAlg/5.png">
+            <p>U'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/feAlg/6.png">
+            <p>R</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/feAlg/7.png">
+            <p>U'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/feAlg/8.png">
+            <p>R'</p>
+          </div>
+          <div>
+            <img class="beginner-image" src="../images/beginner/feAlg/9.png">
+            <p>U</p>
+          </div>
+      </div>
+      If all 4 edges are still not fixed, orient the top and do the algorithm again.
     </div>
     
     <!--Fixing corners-->
-    <div class="subtitle">
-      Fixing corners
+    <div class="subtitle-header">
+      <img class="beginner-image" src="../images/beginner/fc.png">
+      <div class="subtitle">
+        Fixing corners
+      </div>
     </div>
 
+    <!--What corner to align-->
     <div class="beginner-description">
-      some 3cycle corner swap alg
+      This step will put all the corners on the top on their correct places. Start by finding a correct corner piece relative to the edges. For example: 
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/fcEx/1.png">
+        <img class="beginner-image" src="../images/beginner/fcEx/2.png">
+        <img class="beginner-image" src="../images/beginner/fcEx/3.png">
+      </div>
     </div>
 
-    <!--Twisting corners-->
-    <div class="subtitle">
-      Twisting corners
-    </div>
-
+    <!--The alg-->
     <div class="beginner-description">
-      RUR'U' spam
+      After finding your corner peice (if you dont have a corner piece that is in its correct place then use any corner), rotate the top face so the corner piece is on the bottom left. Then do the following algorithm:
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/fcAlg/1.png">
+      </div>
+      <div class="alg-container-scroll">
+        <div>
+          <img class="beginner-image" src="../images/beginner/fcAlg/2.png">
+          <p>U</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/fcAlg/3.png">
+          <p>R</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/fcAlg/4.png">
+          <p>U'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/fcAlg/5.png">
+          <p>L'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/fcAlg/6.png">
+          <p>U</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/fcAlg/7.png">
+          <p>R'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/fcAlg/8.png">
+          <p>U'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/fcAlg/9.png">
+          <p>L</p>
+        </div>
+      </div>
+      If the corners are still not in the correct place, do the steps outlined above again.
     </div>
 
-    <!--Next steps-->
+    <!--Solving the cube-->
+    <div class="subtitle-header">
+      <div class="subtitle">
+        Solving the Cube
+      </div>
+      <img class="beginner-image" src="../images/beginner/sc.png">
+    </div>
+
+    <!--Rotate the cube-->
     <div class="beginner-description">
-      next steps
+      You are on the final step on solving your Rubik's cube. This last step is to twist all the corners by using the sexy moves. First step is to rotate the cube upside down so the corners are on the bottom layer.
+      <div class="alg-container">
+        <img class="beginner-image" src="../images/beginner/scFlip/1.png">
+        <img class="beginner-image" src="../images/beginner/arrow.png">
+        <img class="beginner-image" src="../images/beginner/scFlip/2.png">
+      </div>
+    </div>
+
+    <!--Spaming the sexy-->
+    <div class="beginner-description">
+      Secondly, turn the bottom layer until there is a twisted piece on the bottom right corner. Then do the sexy moves until the corner piece is twisted correctly. (It is normal for your cube to not look solved, just make sure to do the moves properly). Then repeat this for every twisted corner.
+      <div class="alg-container-scroll">
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/1.png">
+          <p> </p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/2.png">
+          <p>D'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/3.png">
+          <p>RUR'U'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/4.png">
+          <p>RUR'U' x 2</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/5.png">
+          <p>D'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/6.png">
+          <p>RUR'U'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/7.png">
+          <p>RUR'U' x 2</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/8.png">
+          <p>D'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/9.png">
+          <p>RUR'U'</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/10.png">
+          <p>RUR'U' x 2</p>
+        </div>
+        <div>
+          <img class="beginner-image" src="../images/beginner/scSolve/11.png">
+          <p>D'</p>
+        </div>
+      </div>
+    </div>
+
+    <!--Congrats-->
+    <div class="beginner-description" style="word-wrap: break-word;">
+      <img class="beginner-image" src="../images/beginner/sc.png" style="float: left;">
+      Congratulations! If you have done everything correctly, you now have solved your Rubik's cube. Its normal to for your first solves to take 5-10 minutes. The best way a beginner can improve their time is just a lot of practice. If your solves are fast enough and reach around 1-2 minutes then you are ready for learning a more advanced but faster method CFOP <a href="cfop.html">
+        <i class="fa-solid fa-link" style="font-size: 20px"></i></a>. Most top solvers use this method and can average 5 seconds. But dont expect to get this fast, the top solvers spend years dedicating their lives to the art of solving the cube. Just learn in your own pace. Happy Solving! (pls fix)
     </div>
     
     <!--Sources button-->

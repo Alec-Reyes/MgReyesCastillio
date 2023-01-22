@@ -30,6 +30,7 @@
       overflow: auto;
       box-shadow: 5px 5px 5px lightgrey;
       padding: 5%;
+      max-width: 700px;
     }
     #solve-container > h4{
       margin: 0.2em;
@@ -176,11 +177,13 @@
       <button id="play-button"></button>
     </div>
   </div>
-  <label>Moves</label><br>
-  <input type="text" id="text"><br>
-  <button id="button">Enter</button><br>
-  <button id="toggle">Enable controls</button><br>
-  <button id="clear">Reset</button>
+  <div id="prev-controls" hidden>
+    <label>Moves</label><br>
+    <input type="text" id="text"><br>
+    <button id="button">Enter</button><br>
+    <button id="toggle">Enable controls</button><br>
+    <button id="clear">Reset</button>
+  </div>
 
   <!--Recreations history-->
   <h4 id="recreations-title">Recreations</h4>
@@ -253,7 +256,7 @@
     });
   </script>
   <script type="module">
-    import {Cube, Camera, rotateCameraByMouse, convertMoves} from "../js/cube.js"
+    import {Cube, Camera, Scrambles, rotateCameraByMouse, convertMoves} from "../js/cube.js";
     var camera = {};
     var cube = {};
     var currentSolve = [];
@@ -332,9 +335,11 @@
           //starts the animation
           solve.index = 0;
           cube.setTurns([currentSolve[solve.index]]);
-          document.getElementById("moveIndex" + solve.index).style.color = "blue";
+          document.getElementById("moveIndex" + solve.index).style.backgroundColor = "blue";
+          document.getElementById("moveIndex" + solve.index).style.color = "white";
           solve.id = setInterval(function(){
             if(cube.turns.length == 0 && solve.running){
+              document.getElementById("moveIndex" + solve.index).style.backgroundColor = "";
               document.getElementById("moveIndex" + solve.index).style.color = "";
               solve.index++;
               if(solve.index >= currentSolve.length){
@@ -344,7 +349,8 @@
                 return;
               }
               cube.setTurns([currentSolve[solve.index]]);
-              document.getElementById("moveIndex" + solve.index).style.color = "blue";
+          document.getElementById("moveIndex" + solve.index).style.backgroundColor = "blue";
+              document.getElementById("moveIndex" + solve.index).style.color = "white";
             }
           }, 10);
         }else{
@@ -497,6 +503,12 @@
 
       //loads url params
       let url = new URL(window.location);
+      if(url.searchParams.has("mask")){
+          let mask = url.searchParams.get("mask");
+          if(Scrambles[mask]){
+            cube = new Cube("", Scrambles[mask]);
+          }
+        }
       if(url.searchParams.has("scr")){
         let scrambeInput = document.getElementById("scramble-input");
         scrambleInput.value = url.searchParams.get("scr");
