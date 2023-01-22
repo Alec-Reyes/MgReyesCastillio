@@ -190,43 +190,51 @@ const B = "#0000F2";
 const R = "#EE0000";
 const O = "#FFA100";
 const Y = "#FEFE00";
+const N = "#3d3d3d";
 
 //represents a rubiks cube and handles turns and moves
 export class Cube {
-  constructor(scramble) {
+  constructor(scramble, stickers) {
+    if(stickers != undefined){
+      this.prevStickers = JSON.parse(JSON.stringify(stickers));
+      this.stickers = JSON.parse(JSON.stringify(stickers));
+    }
+    else{
     //white top green front
+    this.prevStickers = null;
     this.stickers = {
-      U: [
-        [W, W, W],
-        [W, W, W],
-        [W, W, W],
-      ],
-      D: [
-        [Y, Y, Y],
-        [Y, Y, Y],
-        [Y, Y, Y],
-      ],
-      F: [
-        [G, G, G],
-        [G, G, G],
-        [G, G, G],
-      ],
-      B: [
-        [B, B, B],
-        [B, B, B],
-        [B, B, B],
-      ],
-      R: [
-        [R, R, R],
-        [R, R, R],
-        [R, R, R],
-      ],
-      L: [
-        [O, O, O],
-        [O, O, O],
-        [O, O, O],
-      ],
-    };
+        U: [
+          [W, W, W],
+          [W, W, W],
+          [W, W, W],
+        ],
+        D: [
+          [Y, Y, Y],
+          [Y, Y, Y],
+          [Y, Y, Y],
+        ],
+        F: [
+          [G, G, G],
+          [G, G, G],
+          [G, G, G],
+        ],
+        B: [
+          [B, B, B],
+          [B, B, B],
+          [B, B, B],
+        ],
+        R: [
+          [R, R, R],
+          [R, R, R],
+          [R, R, R],
+        ],
+        L: [
+          [O, O, O],
+          [O, O, O],
+          [O, O, O],
+        ],
+      };
+    }
 
     this.turns = [];
     this.rotation = 0;
@@ -569,40 +577,44 @@ export class Cube {
   //restors cube to solves state and adds the scramble
   clear(scramble){
     let cube = this;
-    //white top green front
-    this.stickers = {
-      U: [
-        [W, W, W],
-        [W, W, W],
-        [W, W, W],
-      ],
-      D: [
-        [Y, Y, Y],
-        [Y, Y, Y],
-        [Y, Y, Y],
-      ],
-      F: [
-        [G, G, G],
-        [G, G, G],
-        [G, G, G],
-      ],
-      B: [
-        [B, B, B],
-        [B, B, B],
-        [B, B, B],
-      ],
-      R: [
-        [R, R, R],
-        [R, R, R],
-        [R, R, R],
-      ],
-      L: [
-        [O, O, O],
-        [O, O, O],
-        [O, O, O],
-      ],
-    };
-
+    if(this.prevStickers == null){
+      //white top green front
+      this.stickers = {
+        U: [
+          [W, W, W],
+          [W, W, W],
+          [W, W, W],
+        ],
+        D: [
+          [Y, Y, Y],
+          [Y, Y, Y],
+          [Y, Y, Y],
+        ],
+        F: [
+          [G, G, G],
+          [G, G, G],
+          [G, G, G],
+        ],
+        B: [
+          [B, B, B],
+          [B, B, B],
+          [B, B, B],
+        ],
+        R: [
+          [R, R, R],
+          [R, R, R],
+          [R, R, R],
+        ],
+        L: [
+          [O, O, O],
+          [O, O, O],
+          [O, O, O],
+        ],
+      };
+    }else{
+      this.stickers = JSON.parse(JSON.stringify(this.prevStickers));
+    }
+    
     scramble.forEach(function(move){
       cube.turnFace(move);
     });
@@ -671,3 +683,172 @@ export function rotateCameraByMouse(camera, homePos, event){
     camera.z = r[1];
   }
 }
+
+function Scramble(){
+  this.PLL = {
+    U: [
+      [W, W, W],
+      [W, W, W],
+      [W, W, W],
+    ],
+    D: [
+      [Y, Y, Y],
+      [Y, Y, Y],
+      [Y, Y, Y],
+    ],
+    F: [
+      [G, G, G],
+      [G, G, G],
+      [G, G, G],
+    ],
+    B: [
+      [B, B, B],
+      [B, B, B],
+      [B, B, B],
+    ],
+    R: [
+      [R, R, R],
+      [R, R, R],
+      [R, R, R],
+    ],
+    L: [
+      [O, O, O],
+      [O, O, O],
+      [O, O, O],
+    ],
+  };
+
+  this.OLL = {
+    U: [
+      [W, W, W],
+      [W, W, W],
+      [W, W, W],
+    ],
+    D: [
+      [Y, Y, Y],
+      [Y, Y, Y],
+      [Y, Y, Y],
+    ],
+    F: [
+      [G, G, G],
+      [G, G, G],
+      [N, N, N],
+    ],
+    B: [
+      [B, B, B],
+      [B, B, B],
+      [N, N, N],
+    ],
+    R: [
+      [R, R, R],
+      [R, R, R],
+      [N, N, N],
+    ],
+    L: [
+      [O, O, O],
+      [O, O, O],
+      [N, N, N],
+    ],
+  };
+
+  this.F2L = {
+    U: [
+      [W, W, W],
+      [W, W, W],
+      [W, W, W],
+    ],
+    D: [
+      [N, N, N],
+      [N, N, N],
+      [N, N, N],
+    ],
+    F: [
+      [G, G, G],
+      [G, G, G],
+      [N, N, N],
+    ],
+    B: [
+      [B, B, B],
+      [B, B, B],
+      [N, N, N],
+    ],
+    R: [
+      [R, R, R],
+      [R, R, R],
+      [N, N, N],
+    ],
+    L: [
+      [O, O, O],
+      [O, O, O],
+      [N, N, N],
+    ],
+  };
+
+  this.CROSS = {
+    U: [
+      [N, W, N],
+      [W, W, W],
+      [N, W, N],
+    ],
+    D: [
+      [N, N, N],
+      [N, N, N],
+      [N, N, N],
+    ],
+    F: [
+      [N, G, N],
+      [N, G, N],
+      [N, N, N],
+    ],
+    B: [
+      [N, B, N],
+      [N, B, N],
+      [N, N, N],
+    ],
+    R: [
+      [N, R, N],
+      [N, R, N],
+      [N, N, N],
+    ],
+    L: [
+      [N, O, N],
+      [N, O, N],
+      [N, N, N],
+    ],
+  };
+
+    this.FL = {
+    U: [
+      [W, W, W],
+      [W, W, W],
+      [W, W, W],
+    ],
+    D: [
+      [N, N, N],
+      [N, N, N],
+      [N, N, N],
+    ],
+    F: [
+      [G, G, G],
+      [N, G, N],
+      [N, N, N],
+    ],
+    B: [
+      [B, B, B],
+      [N, B, N],
+      [N, N, N],
+    ],
+    R: [
+      [R, R, R],
+      [N, R, N],
+      [N, N, N],
+    ],
+    L: [
+      [O, O, O],
+      [N, O, N],
+      [N, N, N],
+    ],
+  };
+}
+
+export const Scrambles = new Scramble();
