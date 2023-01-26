@@ -55,13 +55,7 @@
       box-shadow: 5px 5px 5px lightgrey;
       padding: 5%;
       max-width: 700px;
-<<<<<<< HEAD
-<<<<<<< HEAD
       min-width: 400px;
-=======
->>>>>>> origin/main
-=======
->>>>>>> origin/main
     }
     #solve-container > h4{
       margin: 0.2em;
@@ -218,7 +212,6 @@
     <div id="title">
       Virtual Cube
     </div>
-<<<<<<< HEAD
     
     <div id="cube-row">
       <!--The canvas that renders the cube-->
@@ -238,30 +231,6 @@
     <!--THIS USES TRANSFORMS TO MOVE-->
   <div class="subtitle">Options</div>
   <div class="splide" id="options-history">
-=======
-  </div>
-  <div id="prev-controls" hidden>
-    <label>Moves</label><br>
-    <input type="text" id="text"><br>
-    <button id="button">Enter</button><br>
-    <button id="toggle">Enable controls</button><br>
-    <button id="clear">Reset</button>
-  </div>
-<<<<<<< HEAD
-=======
-  <div id="prev-controls" hidden>
-    <label>Moves</label><br>
-    <input type="text" id="text"><br>
-    <button id="button">Enter</button><br>
-    <button id="toggle">Enable controls</button><br>
-    <button id="clear">Reset</button>
-  </div>
->>>>>>> origin/main
-
-  <!--Recreations history-->
-  <h4 id="recreations-title">Recreations</h4>
-  <div class="splide" id="recreations-history">
->>>>>>> origin/main
     <div class="splide__track">
       <ul class="splide__list">
         <li class="splide__slide">
@@ -356,15 +325,7 @@
     });
   </script>
   <script type="module">
-<<<<<<< HEAD
-<<<<<<< HEAD
     import {Cube, Camera, Scrambles, rotateCameraByMouse, convertMoves, rotateCameraByTouch} from "../js/cube.js";
-=======
-    import {Cube, Camera, Scrambles, rotateCameraByMouse, convertMoves} from "../js/cube.js";
->>>>>>> origin/main
-=======
-    import {Cube, Camera, Scrambles, rotateCameraByMouse, convertMoves} from "../js/cube.js";
->>>>>>> origin/main
     var camera = {};
     var cube = {};
     var currentSolve = [];
@@ -404,49 +365,7 @@
       document.getElementById("button").onclick = function () {setTurns()};
       document.getElementById("toggle").onclick = function () {toggleControls()};
       document.getElementById("clear").onclick = function() {cube.clear(currentScramble)};
-<<<<<<< HEAD
       document.getElementById("play-button").onclick = playButtonListener;
-=======
-      document.getElementById("play-button").onclick = function() {
-        if(currentSolve.length == 0) return;
-        if(solve.id == null){
-          cube.clear(currentScramble);
-          solve.running = true;
-
-          //changes background image
-          if(solve.running) this.style.backgroundImage = "url(\"../images/pause-button.svg\")";
-          else this.style.backgroundImage = "";
-
-          //starts the animation
-          solve.index = 0;
-          cube.setTurns([currentSolve[solve.index]]);
-          document.getElementById("moveIndex" + solve.index).style.backgroundColor = "blue";
-          document.getElementById("moveIndex" + solve.index).style.color = "white";
-          solve.id = setInterval(function(){
-            if(cube.turns.length == 0 && solve.running){
-              document.getElementById("moveIndex" + solve.index).style.backgroundColor = "";
-              document.getElementById("moveIndex" + solve.index).style.color = "";
-              solve.index++;
-              if(solve.index >= currentSolve.length){
-                clearInterval(solve.id);
-                document.getElementById("play-button").style.backgroundImage = "";
-                solve.id = null;
-                return;
-              }
-              cube.setTurns([currentSolve[solve.index]]);
-          document.getElementById("moveIndex" + solve.index).style.backgroundColor = "blue";
-              document.getElementById("moveIndex" + solve.index).style.color = "white";
-            }
-          }, 10);
-        }else{
-          solve.running = !solve.running;
-
-          //chenges background image
-          if(solve.running) this.style.backgroundImage = "url(\"../images/pause-button.svg\")";
-          else this.style.backgroundImage = "";
-        }
-      }
->>>>>>> origin/main
 
       canvas.onmousemove = function(e){rotateCameraByMouse(camera, [4, 4, 0], e)};
       canvas.ontouchmove = function(e){

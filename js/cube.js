@@ -684,8 +684,6 @@ export function rotateCameraByMouse(camera, homePos, event){
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 export function rotateCameraByTouch(camera, homePos, event, prevEvent){
   if(prevEvent != null){
     //calc horizontal rot
@@ -700,10 +698,6 @@ export function rotateCameraByTouch(camera, homePos, event, prevEvent){
   }
 }
 
-=======
->>>>>>> origin/main
-=======
->>>>>>> origin/main
 function Scramble(){
   this.PLL = {
     U: [
@@ -837,15 +831,7 @@ function Scramble(){
     ],
   };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   this.FL = {
-=======
-    this.FL = {
->>>>>>> origin/main
-=======
-    this.FL = {
->>>>>>> origin/main
     U: [
       [W, W, W],
       [W, W, W],
