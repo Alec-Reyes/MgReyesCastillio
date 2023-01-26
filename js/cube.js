@@ -684,6 +684,26 @@ export function rotateCameraByMouse(camera, homePos, event){
   }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+export function rotateCameraByTouch(camera, homePos, event, prevEvent){
+  if(prevEvent != null){
+    //calc horizontal rot
+    camera.xRot = roundAngle(camera.xRot - 90 * ((prevEvent.touches[0].pageX - event.touches[0].pageX) / camera.width));
+    //calc vertical rot
+    let yRot = roundAngle(camera.yRot + 90 * ((prevEvent.touches[0].pageY - event.touches[0].pageY) / camera.height));
+    if(yRot < 90 || yRot > 270) camera.yRot = yRot;
+    let r = rotatePoint(Math.sqrt(sqDist3d([0, 0, 0], homePos)), homePos[2], camera.yRot * Math.PI / 180);
+    camera.x = Math.cos(camera.xRot * Math.PI / 180) * r[0];
+    camera.y = Math.sin(camera.xRot * Math.PI / 180) * r[0];
+    camera.z = r[1];
+  }
+}
+
+=======
+>>>>>>> origin/main
+=======
+>>>>>>> origin/main
 function Scramble(){
   this.PLL = {
     U: [
@@ -817,7 +837,15 @@ function Scramble(){
     ],
   };
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+  this.FL = {
+=======
     this.FL = {
+>>>>>>> origin/main
+=======
+    this.FL = {
+>>>>>>> origin/main
     U: [
       [W, W, W],
       [W, W, W],

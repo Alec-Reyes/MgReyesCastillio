@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>SimplyCube</title>
 		<meta charset="UTF-8">
 		<meta name="author" content="Lukas Castillo, Alec Reyes">
 		<meta name="keywords" content="Rubik's Cube, Cubing, Speedcubing">
-		<meta name="revised" content="22-09-2022">
+    <meta name="description" content="A beginners guide to solving a Rubik's Cube">
+		<meta name="revised" content="25-1-2023">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<title>CFOP - SimplyCube</title>
 
     <link rel="icon" type="image/gif" href="../images/logo.png">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="https://kit.fontawesome.com/bf1debbb54.js" crossorigin="anonymous"></script>
     
 	  <style>
       #title{
@@ -23,17 +25,34 @@
         background-color: lightblue;
         border-radius: 7px;
         font-family: 'Rubik', sans-serif;
+        box-shadow: 5px 5px 5px lightgrey;
+      }
+      .cfop-image {
+        height: 150px;
+        width: 150px;
+        margin: 0px;
       }
       .subtitle{
         text-align: center;
-        margin: auto;
+        margin: 10px;
         width:fit-content;
         padding: 10px 20px;
         font-size: 30px;
-        border-radius: 5px;
         background-color: lightblue;
         border-radius: 7px;
         font-family: 'Rubik', sans-serif;
+        box-shadow: 3px 3px 3px lightgrey;
+      }
+      .subtitle-header{
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .subtitle-header > img{
+        height: 100px;
+        width: 100px;
+        margin: 8px;
       }
       .cfop-description{
         background-color: rgb(245, 245, 245);
@@ -43,7 +62,7 @@
         margin-top: 30px;
         margin-bottom: 30px;
         width: fit-content;
-        font-size: 25px;
+        font-size: 22px;
         padding: 20px;
         border-radius: 7px;
         overflow: auto;
@@ -57,45 +76,53 @@
       .section-subtitle{
         font-size: 25px;
       }
-      .notation-image {
-        height: 150px;
-        width: fit-content;
-        margin: 0px;
-        float: left;
-      }
-      .move-content {
-        float: left;
-      }
+      
       div > img {
         width: 100%;
         height: 100%;
       }
-      .cfop-description > div{
-        overflow: auto;
-        margin: 20px 0px;
-      }
-      .cfop-description > div > ul{
-        list-style-type: none;
-        padding: 0;
-				margin: 0;
-				overflow: auto;
-      }
-      .cfop-description > div > ul > li{
-        float: left;
+      .alg-container {
         margin: auto;
-        text-align: center;
-        width: 16.6%;
+        width: fit-content;
+        max-width: 100%;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
       }
-			.cfop-description > div > ul.three-img-section{
-        width: 50%;
-				margin: 0 auto;
+      .alg-container-scroll{
+        margin: auto;
+        width: fit-content;
+        max-width: 100%;
+        overflow-x: scroll;
+        display: flex;
+        justify-content: initial;
+        flex-wrap: nowrap;
       }
-      .cfop-description > div > ul.three-img-section > li{
-        width: 33.3%;
-      }
-      .cfop-description > div > ul > li > img{
-        width: 100%;
+      a > i {
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        color: black;
         height: 100%;
+      }
+      a > i:hover {
+        color: lightgrey;
+      }
+
+      @media (max-width: 420px){
+        .subtitle{
+          font-size: 25px;
+        }
+        .cfop-description{
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 320px){
+        .subtitle{
+          font-size: 22px;
+        }
       }
     </style>
 	</head>
@@ -145,13 +172,16 @@
     </div>
 
     <!--Cross title-->
-    <div class="subtitle">
-      Cross
+    <div class="subtitle-header">
+      <div class="subtitle">
+        Cross
+      </div>
+      <img class="cfop-image" src="../images/cfop/cross.png">
     </div>
 
     <!--Tutorial on fixing the cross edges-->
     <div class="cfop-description">
-      same thing as beginner
+      This step of the c
     </div>
     
     <div class="cfop-description">
@@ -159,8 +189,11 @@
     </div>
 
     <!--F2L title-->
-    <div class="subtitle">
-      F2L
+    <div class="subtitle-header">
+      <img class="cfop-image" src="../images/cfop/f2l.png">
+      <div class="subtitle">
+        F2L
+      </div>
     </div>
 
     <!--F2L -->
@@ -173,8 +206,11 @@
     </div>
 
     <!--OLL layer title-->
-    <div class="subtitle">
-      OLL
+    <div class="subtitle-header">
+      <div class="subtitle">
+        OLL
+      </div>
+      <img class="cfop-image" src="../images/cfop/oll.png">
     </div>
 
     <!--2 look oll-->
@@ -183,8 +219,11 @@
     </div>
     
     <!--PLL layer title-->
-    <div class="subtitle">
-      PLL
+    <div class="subtitle-header">
+      <img class="cfop-image" src="../images/cfop/pll.png">
+      <div class="subtitle">
+        PLL
+      </div>
     </div>
 
     <!--2 look pll-->
