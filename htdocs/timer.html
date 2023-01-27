@@ -191,21 +191,25 @@
       background-color: rgb(245, 245, 245);
       box-shadow: 5px 5px 5px lightgrey;
     }
-    #video{
-      margin: auto;
-      text-align: center;
-      width: fit-content;
-      background-color: white;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      font-size: 1.1em;
-      box-sizing: border-box;
+    .youtube-container{
+      width: 80%;
+      max-width: 600px;
       background-color: rgb(245, 245, 245);
+      text-align: center;
+      margin: auto;
+      color: black;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-size: 25px;
+      padding: 20px;
+      border-radius: 7px;
+      overflow: auto;
       box-shadow: 5px 5px 5px lightgrey;
     }
-    #video > video{
-      border-radius: 10px;
+
+    .youtube-container > iframe{
+      aspect-ratio: 16 / 9;
+      width: 100%;
     }
   </style>
 </head>
@@ -312,12 +316,8 @@
     </div>
   </div>
 
-  <div id="video">
-  <video width="400" controls autoplay muted>
-    <source src="../videos/timer_demonstration.mp4" type="video/mp4">
-      Your browser does not support HTML video.
-    </video>
-    <p>courtesy of Lukas Castillo</p>
+  <div class="youtube-container">
+    <iframe src="https://www.youtube.com/embed/Vln3U6N3lNs?&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
 
   <!--Footer-->

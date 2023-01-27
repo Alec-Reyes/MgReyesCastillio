@@ -501,7 +501,7 @@
         }
       if(url.searchParams.has("scr")){
         let scrambeInput = document.getElementById("scramble-input");
-        scrambleInput.value = url.searchParams.get("scr");
+        scrambeInput.value = url.searchParams.get("scr");
         scrambeInput.dispatchEvent(new Event("keyup"));
       }
       if(url.searchParams.has("solve")){

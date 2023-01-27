@@ -220,13 +220,115 @@
       </div>
     </div>
 
-    <!--F2L -->
+    <!--F2L explaining-->
     <div class="cfop-description">
-      the idea
+      Unlike in beginner method which solves the first layer of the cube, F2l solves 2 layers at a time. First find an edge that belongs to the middle layer and an edge that goes on the bottom layer. both these peices have to have the same colors. If these pieces are not on the top layer, use (R U R' U) or (L' U' L U) to move them to the top.
+      <div class="alg-container-scroll">
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lTop/1.png">
+          <p> </p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lTop/2.png">
+          <p>(R U R' U')</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lTop/3.png">
+          <p>(L' U' L U)</p>
+        </div>
+      </div>
     </div>
 
+    <!--F2L Pairing-->
     <div class="cfop-description">
-      examples
+      <div class="alg-container-scroll">
+        <div>
+          <img class="cfop-image" src="../images/cfop/split.png">
+          <p>Split</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/join.png">
+          <p>Join</p>
+        </div>
+      </div>
+      Then find a way to move the pieces so its either a split or a join pair.
+      <div class="alg-container-scroll">
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lPairing/1.png">
+          <p> </p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lPairing/2.png">
+          <p>U</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lPairing/3.png">
+          <p>R</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lPairing/4.png">
+          <p>U2</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lPairing/5.png">
+          <p>R'</p>
+        </div>
+      </div>
+    </div>
+
+    <!--F2L inserting-->
+    <div class="cfop-description">
+      Finaly this step soves the pair and inserts it on the middle and bottom layer. Depending on whether you got a split or a join pair there is an algorithm to solve them. Do all of the steps above again until the 2 bottom layers are solved.
+    </div>
+
+    <!--Split-->
+    <div class="cfop-description">
+      Split
+      <div class="alg-container-scroll">
+        <div>
+          <img class="cfop-image" src="../images/cfop/split.png">
+          <p> </p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lSplit/2.png">
+          <p>R</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lSplit/3.png">
+          <p>U</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lSplit/4.png">
+          <p>R'</p>
+        </div>
+      </div>
+    </div>
+
+    <!--Join-->
+    <div class="cfop-description">
+      Join
+      <div class="alg-container-scroll">
+        <div>
+          <img class="cfop-image" src="../images/cfop/split.png">
+          <p> </p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lJoin/2.png">
+          <p>U</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lJoin/3.png">
+          <p>R</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lJoin/4.png">
+          <p>U'</p>
+        </div>
+        <div>
+          <img class="cfop-image" src="../images/cfop/f2lJoin/5.png">
+          <p>R'</p>
+        </div>
+      </div>
     </div>
 
     <!--OLL layer title-->
@@ -237,9 +339,14 @@
       <img class="cfop-image" src="../images/cfop/oll.png">
     </div>
 
-    <!--2 look oll-->
+    <!--oll-->
     <div class="cfop-description">
-      magic algs
+      This step solves the whole top face so its one solid color. There are a total of 57 cases and algorithms to memorize and can be found here: <a href="oll.html"><i class="fa-solid fa-link" style="font-size: 20px"></i></a>.
+      <div class="alg-container">
+        <img class="cfop-image" src="../images/cfop/prevOll.png">
+        <img class="cfop-image" src="../images/cfop/arrow.png">
+        <img class="cfop-image" src="../images/cfop/oll.png">
+      </div>
     </div>
     
     <!--PLL layer title-->
@@ -250,14 +357,14 @@
       </div>
     </div>
 
-    <!--2 look pll-->
+    <!--Pll-->
     <div class="cfop-description">
-      magic algs
-    </div>
-
-    <!--Next steps-->
-    <div class="cfop-description">
-      next steps
+      This step swaps the top layer pieces to solve the cube. Just like the OLL step, there are a total of 21 cases and algorithms to memorize and can be found here: <a href="pll.html"><i class="fa-solid fa-link" style="font-size: 20px"></i></a>.
+      <div class="alg-container">
+        <img class="cfop-image" src="../images/cfop/prevPll.png">
+        <img class="cfop-image" src="../images/cfop/arrow.png">
+        <img class="cfop-image" src="../images/cfop/pll.png">
+      </div>
     </div>
     
     <!--Sources button-->
